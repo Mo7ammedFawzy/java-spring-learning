@@ -41,7 +41,7 @@ core/            the shared source of truth — agent-neutral, codebase-neutral
   BOOTSTRAP.md     session-start protocol and dispatch (the entry point)
   MODE-BOUNDARY.md Work Mode vs Learning Mode
   METHODOLOGY.md   the seven steps, their gates, the hint ladder
-  CURRICULUM.md    41 topics, Java-heavy first
+  CURRICULUM.md    43 topics, Java-heavy first
   INTERVIEW-BANK.md questions with shallow / passing / follow-up answers
 labs/            optional pluggable codebase profiles (INDEX, TEMPLATE, one file per codebase)
 state/PROGRESS.md your progress, weak spots, and what to revisit

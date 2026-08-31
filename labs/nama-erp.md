@@ -41,11 +41,11 @@ honest answer is "we don't use it here, and here's what we do instead."
 | `@Value` / `@ConfigurationProperties` / profiles | `nama.properties` + a `GeneralSettings.getInstance()` singleton |
 | `@Async` / `@EnableAsync` | Raw `ExecutorService` |
 | `sealed` / `permits` — zero occurrences | Abstract base + interface hierarchies |
-| Mockito, AssertJ, `@SpringBootTest` | Hand-written fakes (see topic 38) |
+| Mockito, AssertJ, `@SpringBootTest` | Hand-written fakes (see topic 15) |
 
 ---
 
-## Track A — Java core
+## Track B — OOP and collections
 
 **04 — Classes, interfaces, abstraction**
 - `infra/domain-base/.../infra/domainbase/common/detail/EntityDetailLine.java` (42 lines) — tiny
@@ -55,8 +55,8 @@ honest answer is "we don't use it here, and here's what we do instead."
 - `infra/domain-base/.../infra/domainbase/entity/base/BaseEntity.java` (4,316) — **show the
   hierarchy, never the file.** Also a live example of what a base class becomes after 15 years.
 - `infra/domain-base/.../infra/domainbase/entity/base/EntityAction.java` (339) — `interface
-  EntityAction<T>` with ~8 `default` methods and an interface constant. Serves topics 04, 07, 21
-  and 39 at once.
+  EntityAction<T>` with ~8 `default` methods and an interface constant. Serves topics 04, 07, 40
+  and 41 at once.
 
 **Enums with behaviour (04)**
 - `infra/nama-common/.../common/constants/FileContentType.java` (92) — constant-specific class
@@ -74,6 +74,8 @@ honest answer is "we don't use it here, and here's what we do instead."
 - `infra/domain-base/.../infra/domainbase/common/processors/AbstractProcessor.java` (298) — two
   bounded params, one **recursively bounded** (`S extends IStatus<S>`). Advanced; save for after
   the basics land.
+
+## Track C — Modern Java
 
 **10 — Streams and collections**
 - `modules/basic/basic-services/.../services/base/impl/bi/EChartOptionBuilder.java` (270) —
@@ -95,7 +97,7 @@ honest answer is "we don't use it here, and here's what we do instead."
 **12 — Exceptions**
 - `kitchenapp/.../kitchen/services/KitchenAppException.java` + `KitchenUnauthorizedException.java`
   — a clean two-level `RuntimeException` hierarchy, ~40 and ~10 lines. Pair with the
-  `@RestControllerAdvice` in topic 31 to teach exception → HTTP status end to end.
+  `@RestControllerAdvice` in topic 32 to teach exception → HTTP status end to end.
 - `infra/nama-common/.../common/exceptions/NaMaServiceExcepption.java` — carries structured fault
   info. **The class name is genuinely misspelled in the codebase**; a good aside on why names are
   hard to fix once published.
@@ -107,9 +109,87 @@ honest answer is "we don't use it here, and here's what we do instead."
   `modules/basic/basic-services/.../impl/bi/datacontext/DataPointIndex.java` — compact value types.
   ~35 files use records.
 
-## Track B — JVM and concurrency
+## Track D — Testing
 
-Primary text for topics 18–21: `dev-docs/docs/java-threading-concurrency-presentation.md` (829
+**15 — Testing.** 27 test files in the entire monorepo. No Mockito, no AssertJ, no
+`@SpringBootTest`. That is itself the lesson.
+- `modules/ai/aidomain/src/test/.../remote/CustomerServerAddressTest.java` (96) — JUnit 4, pure
+  functions, behaviour-named methods (`defaultsToHttpsWhenNoSchemeIsTyped`). Best small starter.
+- `modules/supplychain/supplychaindomain/src/test/.../invrequest/cost/` — the richest example
+  here: six JUnit 5 test classes plus a hand-built `harness/` package — `InMemoryCostBackend` (a
+  hand-written fake doing exactly what Mockito would), `CostScenarioBuilder` (builder for test
+  data), `CostAssertions`, `TestRepoProvider`. A masterclass in testing without a Spring context.
+- JUnit 5 lives in `supplychaindomain` and `accountingdomain`; JUnit 4 in `domain-base` and the
+  `ai` modules. Note the JPMS run-configuration trap in `CLAUDE.md` before running any of them.
+
+## Track E — SQL and persistence
+
+**18–21 — Persistence**
+Primary text: `dev-docs/docs/hibernate-presentation.md` (921 lines), including a long walkthrough of
+this repo's own `Persister`.
+- `infra/domain-base/.../infra/domainbase/persistence/repos/GenericRepo.java` (66) — start here,
+  then `GenericRepoImpl.java` (515) for `EntityManager`, JPQL and `@Transactional`.
+- `infra/domain-base/.../persistence/repos/DecoratedGenericRepo.java` — the Decorator pattern on a
+  repository.
+- `infra/domain-base/.../infra/domainbase/common/criteria/CriteriaBuilder.java` (388) — the house
+  query builder; also the Builder anchor for topic 41.
+- Hand-written entities (not generated):
+  `modules/supplychain/supplychaindomain/.../domain/entities/SalesDocument.java`,
+  `modules/hr/hrdomain/.../domain/entities/SalarySheet.java`.
+- `infra/domain-base/.../bus/NamaTransactionTemplate.java` — programmatic transactions; set against
+  declarative `@Transactional`, and against the self-invocation trap.
+- `infra/domain-base/.../persistence/util/EntityLifeCyclerListener.java` — JPA lifecycle callbacks;
+  doubles as the Observer anchor.
+
+## Track F — Spring core
+
+
+**`cloudman/` is the laboratory.** 32 Java files, its own `pom.xml` and `application.properties`.
+
+- `cloudman/.../man/services/CloudManSecurityConfig.java` (76) — the best Spring config file here:
+  `@Configuration`, three `@Bean` methods, **method-argument injection**, the modern lambda DSL.
+- `kitchenapp/.../kitchen/KitchenApp.java` (58) — `@SpringBootApplication`, extends
+  `SpringBootServletInitializer` for WAR deployment, `@EnableScheduling`, two `@Bean`s including
+  an anonymous `WebMvcConfigurer`. The best Boot entry point to teach from.
+- `cloudman/.../man/services/InstallerService.java`, `TomcatService.java` — plain `@Service`.
+- `cloudman/.../man/services/WindowsStatusChecker.java` — `@Component` + `@Scheduled`. Only three
+  files in the repo use `@Scheduled`.
+
+**25 — Injection styles: teach this as a contrast, not a model.**
+This repo is almost entirely **field injection via `@Autowired`** —
+`cloudman/.../man/controllers/rest/CloudInstaller.java`, `CloudTomcatApi.java`,
+`CloudWindowsApi.java`, `kitchenapp/.../controllers/rest/KitchenCustomerController.java`.
+Constructor injection appears only as method injection on `@Bean` methods. Show the real code, then
+show why constructor injection is what an interviewer wants to hear — testability without a
+container, `final` fields, and circular dependencies failing fast instead of hiding.
+
+## Track G — Spring Boot and web
+
+**31–32 — Web**
+- `kitchenapp/.../kitchen/services/GlobalExceptionHandler.java` (92) — `@RestControllerAdvice`,
+  four `@ExceptionHandler` methods mapping exception types to `ResponseEntity` + status, with the
+  error DTO in the same file. Self-contained and close to ideal.
+- `cloudman/.../man/services/GlobalExceptionHandler.java` — a second, smaller one for comparison.
+- `cloudman/.../man/controllers/rest/CloudTomcatApi.java`, `CloudWindowsApi.java` — clean
+  `@RestController` endpoints.
+- `cloudman/.../man/dtos/` — 12 tiny DTOs; a whole DTO layer readable in ten minutes.
+
+## Track H — Security
+
+**33 — Security** (only `cloudman` has it)
+- `cloudman/.../man/services/CloudManSecurityConfig.java` — `SecurityFilterChain`, form login,
+  `InMemoryUserDetailsManager`, a `{noop}` password with a comment explaining why. **Also an
+  excellent security code-review exercise**: hardcoded remember-me key, `permitAll` on `/api/**`,
+  CSRF disabled. Use it that way once the concepts land.
+- `cloudman/.../man/services/ApiTokenFilter.java` (55) — `OncePerRequestFilter`; short enough to
+  read whole, and shows the chain contract (`doFilter` vs short-circuit 401).
+- `kitchenapp/.../kitchen/security/KitchenCustomerTokenInterceptor.java` — a Spring MVC
+  `HandlerInterceptor`. Filter vs interceptor is a common interview question; both are here.
+
+## Track I — JVM and concurrency
+
+
+Primary text for topics 37–40: `dev-docs/docs/java-threading-concurrency-presentation.md` (829
 lines). It already cites this codebase, **including a section named "Areas for Improvement"** —
 use those as cautionary examples, clearly labelled.
 
@@ -125,79 +205,9 @@ use those as cautionary examples, clearly labelled.
 - `infra/common-gui/.../erp/gui/server/GUIAsyncTasks.java` — async by raw `ExecutorService`.
   Contrast with `@Async`, which this repo never uses.
 
-## Track C — Spring core
+## Track J — System design and engineering judgement
 
-**`cloudman/` is the laboratory.** 32 Java files, its own `pom.xml` and `application.properties`.
-
-- `cloudman/.../man/services/CloudManSecurityConfig.java` (76) — the best Spring config file here:
-  `@Configuration`, three `@Bean` methods, **method-argument injection**, the modern lambda DSL.
-- `kitchenapp/.../kitchen/KitchenApp.java` (58) — `@SpringBootApplication`, extends
-  `SpringBootServletInitializer` for WAR deployment, `@EnableScheduling`, two `@Bean`s including
-  an anonymous `WebMvcConfigurer`. The best Boot entry point to teach from.
-- `cloudman/.../man/services/InstallerService.java`, `TomcatService.java` — plain `@Service`.
-- `cloudman/.../man/services/WindowsStatusChecker.java` — `@Component` + `@Scheduled`. Only three
-  files in the repo use `@Scheduled`.
-
-**24 — Injection styles: teach this as a contrast, not a model.**
-This repo is almost entirely **field injection via `@Autowired`** —
-`cloudman/.../man/controllers/rest/CloudInstaller.java`, `CloudTomcatApi.java`,
-`CloudWindowsApi.java`, `kitchenapp/.../controllers/rest/KitchenCustomerController.java`.
-Constructor injection appears only as method injection on `@Bean` methods. Show the real code, then
-show why constructor injection is what an interviewer wants to hear — testability without a
-container, `final` fields, and circular dependencies failing fast instead of hiding.
-
-## Track D — Spring Boot, data and web
-
-**30–31 — Web**
-- `kitchenapp/.../kitchen/services/GlobalExceptionHandler.java` (92) — `@RestControllerAdvice`,
-  four `@ExceptionHandler` methods mapping exception types to `ResponseEntity` + status, with the
-  error DTO in the same file. Self-contained and close to ideal.
-- `cloudman/.../man/services/GlobalExceptionHandler.java` — a second, smaller one for comparison.
-- `cloudman/.../man/controllers/rest/CloudTomcatApi.java`, `CloudWindowsApi.java` — clean
-  `@RestController` endpoints.
-- `cloudman/.../man/dtos/` — 12 tiny DTOs; a whole DTO layer readable in ten minutes.
-
-**32–35 — Persistence**
-Primary text: `dev-docs/docs/hibernate-presentation.md` (921 lines), including a long walkthrough of
-this repo's own `Persister`.
-- `infra/domain-base/.../infra/domainbase/persistence/repos/GenericRepo.java` (66) — start here,
-  then `GenericRepoImpl.java` (515) for `EntityManager`, JPQL and `@Transactional`.
-- `infra/domain-base/.../persistence/repos/DecoratedGenericRepo.java` — the Decorator pattern on a
-  repository.
-- `infra/domain-base/.../infra/domainbase/common/criteria/CriteriaBuilder.java` (388) — the house
-  query builder; also the Builder anchor for topic 39.
-- Hand-written entities (not generated):
-  `modules/supplychain/supplychaindomain/.../domain/entities/SalesDocument.java`,
-  `modules/hr/hrdomain/.../domain/entities/SalarySheet.java`.
-- `infra/domain-base/.../bus/NamaTransactionTemplate.java` — programmatic transactions; set against
-  declarative `@Transactional`, and against the self-invocation trap.
-- `infra/domain-base/.../persistence/util/EntityLifeCyclerListener.java` — JPA lifecycle callbacks;
-  doubles as the Observer anchor.
-
-**37 — Security** (only `cloudman` has it)
-- `cloudman/.../man/services/CloudManSecurityConfig.java` — `SecurityFilterChain`, form login,
-  `InMemoryUserDetailsManager`, a `{noop}` password with a comment explaining why. **Also an
-  excellent security code-review exercise**: hardcoded remember-me key, `permitAll` on `/api/**`,
-  CSRF disabled. Use it that way once the concepts land.
-- `cloudman/.../man/services/ApiTokenFilter.java` (55) — `OncePerRequestFilter`; short enough to
-  read whole, and shows the chain contract (`doFilter` vs short-circuit 401).
-- `kitchenapp/.../kitchen/security/KitchenCustomerTokenInterceptor.java` — a Spring MVC
-  `HandlerInterceptor`. Filter vs interceptor is a common interview question; both are here.
-
-## Track E — Practice
-
-**38 — Testing.** 27 test files in the entire monorepo. No Mockito, no AssertJ, no
-`@SpringBootTest`. That is itself the lesson.
-- `modules/ai/aidomain/src/test/.../remote/CustomerServerAddressTest.java` (96) — JUnit 4, pure
-  functions, behaviour-named methods (`defaultsToHttpsWhenNoSchemeIsTyped`). Best small starter.
-- `modules/supplychain/supplychaindomain/src/test/.../invrequest/cost/` — the richest example
-  here: six JUnit 5 test classes plus a hand-built `harness/` package — `InMemoryCostBackend` (a
-  hand-written fake doing exactly what Mockito would), `CostScenarioBuilder` (builder for test
-  data), `CostAssertions`, `TestRepoProvider`. A masterclass in testing without a Spring context.
-- JUnit 5 lives in `supplychaindomain` and `accountingdomain`; JUnit 4 in `domain-base` and the
-  `ai` modules. Note the JPMS run-configuration trap in `CLAUDE.md` before running any of them.
-
-**39 — Patterns in the wild**
+**41 — Patterns in the wild**
 | Pattern | Anchor |
 |---|---|
 | Static factory | `infra/domain-base/.../infra/domainbase/util/ResultFactory.java` — smallest, read first |
@@ -209,13 +219,6 @@ this repo's own `Persister`.
 | Singleton | `infra/nama-common/.../common/utils/GeneralSettings.java` — set against Spring's singleton beans |
 | Decorator | `.../persistence/repos/DecoratedGenericRepo.java` |
 | Adapter | `.../entity/base/DataHolderXmlAdapter.java` |
-
-**B2 — JPMS**
-- `delivery-queue/src/main/java/module-info.java` (**11 lines**) — the whole module system in one
-  screen. Start here.
-- `infra/nama-common/src/main/java/module-info.java` (89) — a real library module.
-- `infra/domain-base/src/main/java/module-info.java` (185) — `requires transitive` and
-  `opens ... to` at scale.
 
 ---
 
@@ -244,13 +247,13 @@ then run steps 2–7 on top of it rather than restating the explanation.
 
 | Topic | Assigned reading |
 |---|---|
-| 18 Threads and the JMM | `dev-docs/docs/java-threading-concurrency-presentation.md` — section 1 (JMM, happens-before, volatile vs synchronized, reordering) |
-| 20 Executors and async | same file — sections 2, 6, 7 |
-| 21 Concurrent collections, atomics, ThreadLocal | same file — sections 4, 5, 8. Note its **"Areas for Improvement"** section: cautionary examples, label them as such |
-| 32 JPA and Hibernate mapping | `dev-docs/docs/hibernate-presentation.md` — sections 1–2 |
-| 33 Persistence context and lazy loading | same file — sections 3–4 |
-| 34 Queries | same file — sections 5 and 9, plus the `Persister` walkthrough |
-| 35 Transactions | same file — section 6 |
+| 18 JPA and Hibernate mapping | `dev-docs/docs/hibernate-presentation.md` — sections 1–2 |
+| 19 Persistence context and lazy loading | same file — sections 3–4 |
+| 20 Queries | same file — sections 5 and 9, plus the `Persister` walkthrough |
+| 21 Transactions | same file — section 6 |
+| 37 Threads and the JMM | `dev-docs/docs/java-threading-concurrency-presentation.md` — section 1 (JMM, happens-before, volatile vs synchronized, reordering) |
+| 39 Executors and async | same file — sections 2, 6, 7 |
+| 40 Concurrent collections, atomics, ThreadLocal | same file — sections 4, 5, 8. Note its **"Areas for Improvement"** section: cautionary examples, label them as such |
 
 ## Coding standards
 
@@ -271,10 +274,19 @@ Use these to separate "wrong" (it breaks) from "flagged" (it works, but a review
 
 ## Bonus track
 
-Codebase-specific, not interview material. Worth doing once curriculum Track D is solid.
+Codebase-specific, not interview material. Worth doing once the Spring Boot and persistence
+tracks are solid.
 
 | # | Topic | Objective |
 |---|---|---|
 | B1 | The DSL and code generation | Reading: `dev-docs/docs/Entity-Creation-Guide.md`. Why the DSL exists, what the generators produce, the layered 5-module structure |
 | B2 | JPMS in this repo | `module-info.java`, why running tests needs "do not use module path", split packages |
 | B3 | Accounting effects | Reading: `dev-docs/docs/LEDGER_TRANSACTION_PATTERNS.md` |
+
+**B2 — JPMS**
+- `delivery-queue/src/main/java/module-info.java` (**11 lines**) — the whole module system in one
+  screen. Start here.
+- `infra/nama-common/src/main/java/module-info.java` (89) — a real library module.
+- `infra/domain-base/src/main/java/module-info.java` (185) — `requires transitive` and
+  `opens ... to` at scale.
+

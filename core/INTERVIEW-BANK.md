@@ -130,7 +130,89 @@ choose a null-checking utility over retrofitting `Optional`.
   the original exception.
 - *Then:* "Which one do you see in the stack trace, and where is the other?"
 
-## 18–21 — Concurrency
+## 15 — Testing
+
+**Q.** What is worth mocking?
+- *Shallow:* "Everything the class depends on."
+- *Passes:* Mock what is slow, non-deterministic, or outside your control — network, clock, external
+  services. Do not mock value objects or the type under test, and be wary of mocking types you do
+  not own, since the mock encodes your *belief* about their behaviour. Over-mocking produces tests
+  that pass while production breaks.
+- *Then:* "What is the difference between a stub and a mock, and which does an assertion belong on?"
+
+**Q.** `@SpringBootTest` or a slice test?
+- *Passes:* Slice (`@WebMvcTest`, `@DataJpaTest`) whenever it suffices — it boots a fraction of the
+  context and runs in a fraction of the time. Reserve full `@SpringBootTest` for wiring and
+  end-to-end checks. Note that context caching across test classes matters enormously, and that a
+  `@MockBean` in one class fragments that cache.
+- *Then:* "Why did adding one `@MockBean` make the whole suite slower?"
+
+## 18–22 — SQL and persistence
+
+**Q.** What is `LazyInitializationException` and how do you fix it?
+- *Shallow:* "Make the relationship eager."
+- *Passes:* A lazy proxy was touched after the persistence context closed — typically in a
+  controller or a serialiser, outside the transaction. Fixes in order of preference: fetch what you
+  need inside the transaction (fetch join or entity graph), or map to a DTO before returning.
+  Switching to `EAGER` fixes the symptom and creates an N+1 everywhere else.
+- *Then:* "Why is `open-session-in-view` a bad default?" (It hides the problem and holds a
+  connection for the whole request.)
+
+**Q.** Propagation `REQUIRED` vs `REQUIRES_NEW`?
+- *Passes:* `REQUIRED` joins the caller's transaction, so a rollback anywhere rolls back everything.
+  `REQUIRES_NEW` suspends it and starts an independent one — used for audit or logging writes that
+  must survive the caller's rollback. It costs a second connection and can deadlock against the
+  suspended transaction.
+- *Then:* "Default rollback rule?" (Unchecked exceptions and `Error` roll back; **checked
+  exceptions do not**, unless `rollbackFor` says so. This one catches nearly everybody.)
+
+**Q.** How do you detect and fix N+1?
+- *Passes:* Turn on SQL logging or statistics and look for one query followed by *n*; it comes from
+  lazy associations touched in a loop. Fix with a fetch join, an entity graph, or batch fetching —
+  and verify by counting queries, not by eyeballing.
+- *Then:* "What happens if you fetch-join two collections in one query?" (Cartesian product; use
+  `distinct`, batching, or separate queries.)
+
+## 23–27 — Spring core
+
+**Q.** Constructor injection or field injection?
+- *Shallow:* "Constructor injection, it's recommended."
+- *Passes:* Constructor injection makes dependencies explicit and mandatory, allows `final` fields,
+  makes the class instantiable in a plain unit test without a container, and surfaces circular
+  dependencies at startup instead of hiding them. Field injection needs reflection to test and lets
+  a class accumulate dependencies invisibly.
+- *Then:* "What does Spring do with a circular dependency under constructor injection?" (Fails fast
+  — and that is the feature.)
+
+**Q.** Default bean scope, and when is it wrong?
+- *Shallow:* "Singleton."
+- *Passes:* Singleton per container. It is wrong the moment the bean holds mutable per-request
+  state — that state is then shared across every thread. This is the most common Spring bug in
+  interviews: an instance field on a `@Service`.
+- *Then:* "How do you inject a prototype bean into a singleton correctly?" (`ObjectProvider`, lookup
+  method, or scoped proxy — not plain injection, which resolves once.)
+
+**Q.** Why does `@Transactional` sometimes do nothing?
+- *Shallow:* "The method isn't public."
+- *Passes:* Two reasons, and both are proxy consequences. Self-invocation: calling the annotated
+  method from another method of the same class goes through `this`, not the proxy, so no advice
+  runs. And non-public methods are not advised by the default proxy strategy. The fix is to move
+  the method to another bean, self-inject, or use AspectJ weaving.
+- *Then:* "JDK proxy or CGLIB — and which does Boot default to?" (CGLIB by default since Boot 2, so
+  the class must be non-final with a usable constructor.)
+
+## 30–32 — Spring Boot and web
+
+**Q.** What does `@SpringBootApplication` do?
+- *Shallow:* "It marks the main class."
+- *Passes:* It composes `@Configuration`, `@ComponentScan` (from the annotated class's package
+  down — which is why placement matters), and `@EnableAutoConfiguration`, which loads conditional
+  configuration classes registered in `META-INF/spring/...AutoConfiguration.imports` and backs off
+  wherever you have defined your own bean.
+- *Then:* "How do you find out why a bean you expected is missing?" (The auto-configuration report:
+  `--debug`, or the `ConditionEvaluationReport`.)
+
+## 37–40 — Concurrency
 
 **Q.** What does `volatile` guarantee, and what does it not?
 - *Shallow:* "It makes the variable thread-safe."
@@ -161,82 +243,3 @@ choose a null-checking utility over retrofitting `Optional`.
 - *Then:* "Which deadlocks will a thread dump *not* find?" (Lock-ordering across `ReentrantLock`
   is found; database deadlocks and semaphore/latch cycles are not.)
 
-## 22–26 — Spring core
-
-**Q.** Constructor injection or field injection?
-- *Shallow:* "Constructor injection, it's recommended."
-- *Passes:* Constructor injection makes dependencies explicit and mandatory, allows `final` fields,
-  makes the class instantiable in a plain unit test without a container, and surfaces circular
-  dependencies at startup instead of hiding them. Field injection needs reflection to test and lets
-  a class accumulate dependencies invisibly.
-- *Then:* "What does Spring do with a circular dependency under constructor injection?" (Fails fast
-  — and that is the feature.)
-
-**Q.** Default bean scope, and when is it wrong?
-- *Shallow:* "Singleton."
-- *Passes:* Singleton per container. It is wrong the moment the bean holds mutable per-request
-  state — that state is then shared across every thread. This is the most common Spring bug in
-  interviews: an instance field on a `@Service`.
-- *Then:* "How do you inject a prototype bean into a singleton correctly?" (`ObjectProvider`, lookup
-  method, or scoped proxy — not plain injection, which resolves once.)
-
-**Q.** Why does `@Transactional` sometimes do nothing?
-- *Shallow:* "The method isn't public."
-- *Passes:* Two reasons, and both are proxy consequences. Self-invocation: calling the annotated
-  method from another method of the same class goes through `this`, not the proxy, so no advice
-  runs. And non-public methods are not advised by the default proxy strategy. The fix is to move
-  the method to another bean, self-inject, or use AspectJ weaving.
-- *Then:* "JDK proxy or CGLIB — and which does Boot default to?" (CGLIB by default since Boot 2, so
-  the class must be non-final with a usable constructor.)
-
-## 29–35 — Spring Boot and data
-
-**Q.** What does `@SpringBootApplication` do?
-- *Shallow:* "It marks the main class."
-- *Passes:* It composes `@Configuration`, `@ComponentScan` (from the annotated class's package
-  down — which is why placement matters), and `@EnableAutoConfiguration`, which loads conditional
-  configuration classes registered in `META-INF/spring/...AutoConfiguration.imports` and backs off
-  wherever you have defined your own bean.
-- *Then:* "How do you find out why a bean you expected is missing?" (The auto-configuration report:
-  `--debug`, or the `ConditionEvaluationReport`.)
-
-**Q.** What is `LazyInitializationException` and how do you fix it?
-- *Shallow:* "Make the relationship eager."
-- *Passes:* A lazy proxy was touched after the persistence context closed — typically in a
-  controller or a serialiser, outside the transaction. Fixes in order of preference: fetch what you
-  need inside the transaction (fetch join or entity graph), or map to a DTO before returning.
-  Switching to `EAGER` fixes the symptom and creates an N+1 everywhere else.
-- *Then:* "Why is `open-session-in-view` a bad default?" (It hides the problem and holds a
-  connection for the whole request.)
-
-**Q.** How do you detect and fix N+1?
-- *Passes:* Turn on SQL logging or statistics and look for one query followed by *n*; it comes from
-  lazy associations touched in a loop. Fix with a fetch join, an entity graph, or batch fetching —
-  and verify by counting queries, not by eyeballing.
-- *Then:* "What happens if you fetch-join two collections in one query?" (Cartesian product; use
-  `distinct`, batching, or separate queries.)
-
-**Q.** Propagation `REQUIRED` vs `REQUIRES_NEW`?
-- *Passes:* `REQUIRED` joins the caller's transaction, so a rollback anywhere rolls back everything.
-  `REQUIRES_NEW` suspends it and starts an independent one — used for audit or logging writes that
-  must survive the caller's rollback. It costs a second connection and can deadlock against the
-  suspended transaction.
-- *Then:* "Default rollback rule?" (Unchecked exceptions and `Error` roll back; **checked
-  exceptions do not**, unless `rollbackFor` says so. This one catches nearly everybody.)
-
-## 38 — Testing
-
-**Q.** What is worth mocking?
-- *Shallow:* "Everything the class depends on."
-- *Passes:* Mock what is slow, non-deterministic, or outside your control — network, clock, external
-  services. Do not mock value objects or the type under test, and be wary of mocking types you do
-  not own, since the mock encodes your *belief* about their behaviour. Over-mocking produces tests
-  that pass while production breaks.
-- *Then:* "What is the difference between a stub and a mock, and which does an assertion belong on?"
-
-**Q.** `@SpringBootTest` or a slice test?
-- *Passes:* Slice (`@WebMvcTest`, `@DataJpaTest`) whenever it suffices — it boots a fraction of the
-  context and runs in a fraction of the time. Reserve full `@SpringBootTest` for wiring and
-  end-to-end checks. Note that context caching across test classes matters enormously, and that a
-  `@MockBean` in one class fragments that cache.
-- *Then:* "Why did adding one `@MockBean` make the whole suite slower?"
