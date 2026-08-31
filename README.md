@@ -65,8 +65,25 @@ It must return nothing.
 
 ## Install
 
-See `adapters/README.md`. Short version: copy two files to two global locations, and `/learn`
-resolves from any directory.
+Get this repo onto the machine, then run the installer from inside it:
+
+```powershell
+.\install.ps1          # Windows PowerShell
+```
+```bash
+./install.sh           # Git Bash / macOS / Linux
+```
+
+It detects where the repo lives, writes the adapters into the global agent config directories with
+that path substituted, verifies they resolve, and reports whether `java`, `claude` and `opencode`
+are present. Re-run it any time you move the repo. `--uninstall` / `-Uninstall` removes the
+adapters and touches nothing else.
+
+**Requirements:** Claude Code and/or OpenCode, plus a JDK 21+ if you want to run the exercises
+(`java`, `javac`, `jshell`). Nothing else — the system is plain markdown.
+
+The adapters are pointers back to this repo, so keep the repo where you installed it from.
+Details and manual steps: `adapters/README.md`.
 
 ## Labs
 

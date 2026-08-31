@@ -19,6 +19,16 @@ unrelated company repo.
 
 ## Install / reinstall
 
+Use the installer at the repo root — it detects the repo path and substitutes it, so the same
+checkout works on any machine at any location:
+
+```powershell
+.\install.ps1        # or  ./install.sh
+```
+
+The manual equivalent, if you prefer (note: this installs the placeholder path verbatim, so it only
+works if the repo really is at `C:/Projects/learning-system`):
+
 ```bash
 # Claude Code
 mkdir -p ~/.claude/skills/learn
