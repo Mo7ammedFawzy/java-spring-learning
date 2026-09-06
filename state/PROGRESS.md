@@ -5,19 +5,25 @@ Confidence is honest, not encouraging: `solid` / `ok` / `shaky`.
 
 ## Current
 
-Topic: *not started*
-Step: —
+Topic: 02 — Strings
+Step: not started
 
 ## Completed
 
 | # | Topic | Date | Confidence | Notes |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| 01 | Types, values and references | 2026-09-01, reviewed 2026-09-06 | solid | Review closed four of five weak spots. Exercise and task both clean on first attempt, diagnosed from symptoms with no TODOs. |
 
 ## Weak spots to revisit
 
-*(nothing yet — these accumulate from wrong answers in steps 2, 6 and 7, and get re-tested by
-`/learn review`)*
+- **Defaults to a mutable copy when exposing a collection, to avoid the throw.** Twice now framed
+  `UnsupportedOperationException` as a problem to prevent rather than the API refusing a bad caller.
+  The safe default for a getter is `List.copyOf`. Re-test by asking for the *recommendation*, not
+  the option list.
+- **Shallow copy boundary.** `new ArrayList<>(orders)` protects the list, not the orders in it.
+  Mutating an element is still visible to the caller. Never volunteered this.
+- Closed on 2026-09-06: pass-by-value vs pass-by-reference; copy vs live view (the two axes now
+  drive the choice); `Integer` cache; unboxing NPE and `getOrDefault`; rebinding a parameter.
 
 ## Notes to self
 
@@ -41,3 +47,7 @@ Step: —
   production-shaped task in a neutral domain instead. Step 4 may also skip the lab entirely when a
   synthetic example teaches the concept better; say so and move on. The learner explicitly asked
   for this (2026-09-01).
+
+- **Symptom-driven tasks land better than TODO-driven ones.** In the 01 review, the step-5 task
+  gave four bug reports and no TODOs — the learner had to work out which method each symptom came
+  from, and got all four in one attempt. Use that shape again.
