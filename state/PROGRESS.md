@@ -51,3 +51,9 @@ Step: not started
 - **Symptom-driven tasks land better than TODO-driven ones.** In the 01 review, the step-5 task
   gave four bug reports and no TODOs — the learner had to work out which method each symptom came
   from, and got all four in one attempt. Use that shape again.
+
+- **Write a study summary when a topic closes.** After step 7 (and after a review), write
+  `playground/<NN>-<topic>/SUMMARY.md` — the whole topic condensed for revision: the one-sentence
+  mental model, the rules, the decision tables, the traps, the interview answers, and a short
+  "mistakes actually made" section naming what this learner got wrong and why. Tell them the path.
+  Requested on 2026-09-06 so there is something to study from between sessions.
