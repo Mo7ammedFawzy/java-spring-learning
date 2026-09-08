@@ -2,3 +2,4 @@ playground/*
 !playground/.gitignore
 !playground/README.md
 .idea/
+!playground/*/

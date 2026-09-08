@@ -1,2 +1,5 @@
 *
 !.gitignore
+!*/
+!SUMMARY.md
+!README.md
