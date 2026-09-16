@@ -19,20 +19,21 @@ Read, in this order:
 |---|---|
 | `state/PROGRESS.md` | Where the learner is, and what they were shaky on |
 | `core/CURRICULUM.md` | The ordered topic list |
-| `core/METHODOLOGY.md` | The seven-step contract — **read before teaching your first topic** |
+| `core/METHODOLOGY.md` | The five-step contract and its time budget — **read before teaching your first topic** |
 
-Do not read the interview bank or a lab profile yet; they are needed at steps 7 and 4.
+Do not read the interview bank or a lab profile yet; they are needed at step 5 and at the optional
+real-world detour, if you take it at all.
 
 ## 2. Select a lab profile
 
 Read `labs/INDEX.md` and pick the profile whose `applies-to` directory matches the user's current
 working directory.
 
-- **A profile matches** → that codebase is the laboratory for step 4 and step 5. Read the profile
-  when you reach step 4, not before.
-- **No profile matches** → run in **codebase-free mode**: steps 4 and 5 use self-contained examples
-  you write yourself. Say once, at the start, that no lab is active, so the learner knows why the
-  real-world example is synthetic. Everything else is unchanged.
+- **A profile matches** → that codebase is available for the optional real-world detour. Read the
+  profile only if you decide to take the detour, not before.
+- **No profile matches** → run in **codebase-free mode**: a detour, if taken, uses a self-contained
+  example you write yourself. Say once, at the start, that no lab is active. Everything else is
+  unchanged.
 
 Codebase-free mode is a normal mode, not a degraded one. Never invent file paths to simulate a lab.
 
@@ -43,16 +44,17 @@ Codebase-free mode is a normal mode, not a degraded one. Never invent file paths
 | *(none)* | Report the current topic and step, then propose resuming it or starting the next topic. Do not dump the whole curriculum unless asked. |
 | a topic name or number | Resolve against `core/CURRICULUM.md` (exact → substring). Jump there even if out of order; say so if prerequisites are unmet, but honour the choice. |
 | `next` | Advance to the next uncompleted topic. |
-| `review` | Re-test the entries under **Weak spots to revisit**, skipping steps 1 and 4. |
-| a topic not in the curriculum | Teach it with the same seven steps, then add it to `core/CURRICULUM.md` under the nearest track. |
+| `review` | Re-test the entries under **Weak spots to revisit**, skipping step 1. |
+| a topic not in the curriculum | Teach it with the same five steps, then add it to `core/CURRICULUM.md` under the nearest track. |
 
 **If `state/PROGRESS.md` shows an unfinished step, resume at that step.** Do not restart the topic
 and do not re-teach step 1 — the learner already read it.
 
 ## 4. Teach
 
-Follow `core/METHODOLOGY.md` exactly: seven steps, **one step per message**, each ending only when
-its gate is met. The strict gate on steps 3 and 5 is not optional.
+Follow `core/METHODOLOGY.md` exactly: five steps, **one step per message**, 20–30 minutes for the
+whole concept, each step ending only when its gate is met. The strict gate on step 3 is not
+optional, and neither is the two-round cap on re-testing in step 2.
 
 Exercise and task code goes in `<learning-home>/playground/<NN>-<topic>/`. See
 `playground/README.md` for how the learner runs it.
@@ -63,7 +65,7 @@ and stop.
 
 ## 5. Close
 
-After step 7, update `state/PROGRESS.md`:
+After step 5, update `state/PROGRESS.md`:
 
 - Move the topic to **Completed** with today's date and a confidence of `solid`, `ok` or `shaky`
 - Add what they missed to **Weak spots to revisit** — be specific ("missed that erasure makes the
@@ -80,10 +82,12 @@ Then offer the next topic — do not start it.
 1. **Teaching the framework instead of the language.** Spring questions in interviews bottom out in
    Java — proxies are dynamic proxies, transactional self-invocation is a `this` reference, bean
    scopes are object lifetimes. Follow the question down to the Java when it goes there.
-2. **Picking a lab example that is too big.** Production files run to thousands of lines. Step 4
+2. **Picking a lab example that is too big.** Production files run to thousands of lines. A detour
    needs a readable extract of 10–40 lines, quoted. Never tell the learner to go read a huge file.
 3. **The lab codebase is not always exemplary.** Real code includes anti-patterns. A bad real
    example is excellent teaching material, but it must be labelled as such, never presented as the
    pattern to copy.
-4. **Claiming a topic is covered when only step 1 ran.** A topic is complete when steps 1–7 have all
+4. **Claiming a topic is covered when only step 1 ran.** A topic is complete when steps 1–5 have all
    happened. Half-taught topics marked done are how a learner ends up confident and wrong.
+5. **Padding the lesson back out.** The budget is the contract. Extra questions, a second exercise or
+   an unearned real-world detour turn a 25-minute lesson into an hour, and the next one gets skipped.

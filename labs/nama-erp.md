@@ -6,7 +6,7 @@ stack: Java 21, Spring Boot 3.5.8, Spring 6.2.14, Hibernate 6.6.38, Maven multi-
 
 # Codebase map — where each concept really lives
 
-Anchors for step 4 of a lesson. Every path here was verified to exist; line counts are from the
+Anchors for a lesson's optional real-world detour. Every path here was verified to exist; line counts are from the
 same check. Paths are repo-relative to `C:\Projects\8080`.
 
 **Read the file before teaching from it.** Files drift. If an anchor no longer shows what this map
@@ -243,7 +243,7 @@ use those as cautionary examples, clearly labelled.
 
 This codebase carries two substantial teaching documents that already cite its own code. Where a
 curriculum topic says "the active lab profile's text", these are it — assign the reading for step 1,
-then run steps 2–7 on top of it rather than restating the explanation.
+then run steps 2–5 on top of it rather than restating the explanation.
 
 | Topic | Assigned reading |
 |---|---|
@@ -258,7 +258,7 @@ then run steps 2–7 on top of it rather than restating the explanation.
 ## Coding standards
 
 `CLAUDE.md` at the repo root is the authority, with `UI-GUIDELINES.md` for the frontend. The rules a
-learner is most likely to be flagged for at step 6:
+learner is most likely to be flagged for when practice code is reviewed:
 
 - **Null and empty checks** go through `ObjectChecker` (`isEmptyOrNull`, `isNotEmptyOrNull`,
   `areEqual`, `getFirstNotNullObj`), and numeric/boolean data fields through `DecimalDF`,

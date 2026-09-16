@@ -1,6 +1,6 @@
 # Interview bank
 
-Questions for step 7, keyed to `core/CURRICULUM.md` topic numbers. Each entry is written as the
+Questions for the interview drill (step 5), keyed to `core/CURRICULUM.md` topic numbers. Each entry is written as the
 interviewer sees it:
 
 - **Q** — the question as asked
@@ -27,6 +27,46 @@ and add any question the user is asked in a real interview.
 - *Passes:* `true` then `false`. `Integer.valueOf` caches −128..127, so the small values are the same
   object. Above the cache, two distinct objects, and `==` compares references.
 - *Then:* "So when is `==` on boxed types ever correct?" (Essentially never — use `equals`.)
+
+## 02 — Strings
+
+**Q.** Why is `String` immutable?
+- *Shallow:* "So it's thread-safe" — or reciting "because it's `final`", which is a consequence, not a reason.
+- *Passes:* Names what immutability buys: the pool can share one object across the whole JVM safely;
+  the hash code can be cached, making strings cheap and stable `HashMap` keys; no synchronisation is
+  ever needed; and a validated value (file path, class name, SQL fragment) cannot be changed between
+  the check and the use.
+- *Then:* "What would break in a `HashMap` if a key string were mutated after insertion?" (The entry
+  is stored with the hash computed at `put` time, so the mutated key hashes elsewhere — the entry is
+  unreachable by either the old or the new text.)
+
+**Q.** `String a = "hi"; String b = new String("hi");` — how many objects, and what is `a == b`?
+- *Shallow:* "One in the pool and one in the heap" — said as if the pool were outside the heap.
+- *Passes:* Two `String` objects: the literal, interned when it is first resolved, plus the one `new`
+  allocates. `a == b` is `false`; `a == b.intern()` is `true`. The pool has lived in the heap since
+  Java 7, so heap-vs-pool is not the distinction — pooled-vs-not is.
+- *Then:* "When is `==` on strings ever the correct thing to write?" (Only when identity is genuinely
+  what you mean, which is almost never. `intern()` plus `==` is not a fix, it just relocates the bug.)
+
+**Q.** A comparison written with `==` passes every unit test and fails in production. How?
+- *Shallow:* "Strings should be compared with `equals`" — true, but it does not explain the asymmetry.
+- *Passes:* The test passes a literal, which is the same pooled object as the constant, so `==` holds.
+  Production input is built at runtime — parsed, concatenated, read from a request — so it is a
+  different object with the same characters. Bonus signal: methods like `toLowerCase` and `trim`
+  return `this` when there is nothing to change, so a literal can survive "normalisation" still
+  pooled, which is what makes the green test so convincing.
+- *Then:* "Which `final` variables are folded into the pool at compile time?" (Only constant
+  variables: `final` **and** initialised with a constant expression. A method call or `new` on the
+  right-hand side makes it a runtime value.)
+
+**Q.** What does `String.intern()` do, and when would you use it?
+- *Shallow:* "It puts the string in the pool so you can compare with `==`."
+- *Passes:* It returns the canonical pooled instance for that text. Legitimate use is memory: a few
+  distinct values repeated across millions of records. It is not a comparison strategy — correctness
+  would then depend on every future caller remembering to intern.
+- *Then:* "What is wrong with `synchronized (key.intern())` as a per-key lock?" (The pool is
+  JVM-wide, so unrelated code — a library, the framework — that interns the same text takes the same
+  monitor. Keep locks in a private map instead.)
 
 ## 03 — equals and hashCode
 

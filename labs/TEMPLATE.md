@@ -40,8 +40,8 @@ the file and the topic number here. The curriculum defers to this section.
 ## Coding standards
 
 Where this codebase's own review standards live, and the few rules a learner would be flagged for
-breaking. Step 6 uses these to distinguish "wrong" from "works, but a reviewer here would reject
-it".
+breaking. The step-3 review uses these to distinguish "wrong" from "works, but a reviewer here would
+reject it".
 
 ## Bonus track
 

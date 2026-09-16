@@ -1,10 +1,22 @@
 # The lesson contract
 
-Seven steps, in order, **one per message**. A step ends only when its gate is met. This file is the
-mechanical detail the bootstrap file summarises; when the two disagree, this one wins.
+Five steps, **one per message**, **20–30 minutes per concept**. A step ends only when its gate is
+met. This file is the mechanical detail the bootstrap file summarises; when the two disagree, this
+one wins.
 
 The governing principle: the user is not here to read explanations. They are here to be caught
 being wrong, cheaply, before an interviewer does it expensively. Every step exists to expose a gap.
+
+The second principle: **a lesson that overruns stops being a lesson.** If a concept cannot fit the
+budget below, it is two concepts. Split it and say so.
+
+| Step | What | Budget |
+|---|---|---|
+| 1 | Teach one concept | ~5 min |
+| 2 | Check understanding — 2–3 questions | ~5 min |
+| 3 | Practice — small coding exercise, reviewed briefly | ~10 min |
+| 4 | Summary card for revision | ~2 min |
+| 5 | Interview drill | ~5 min |
 
 ---
 
@@ -18,8 +30,7 @@ Contains:
 - **The mental model first** — the one sentence that makes the rest obvious. ("A generic type is
   erased to its bound at compile time, so at runtime `List<String>` and `List<Integer>` are the
   same class.")
-- **A minimal snippet** — the smallest code that shows the concept. No ERP context yet; that is
-  step 4.
+- **A minimal snippet** — the smallest code that shows the concept.
 - **The failure it prevents** — what breaks in real code when someone does not know this. This is
   what makes it stick.
 - **The boundary** — where the rule stops applying. Interviewers probe exactly here.
@@ -37,7 +48,7 @@ paraphrase a document the user can read.
 
 ## Step 2 — Check understanding
 
-Three to four questions. Mix the types deliberately:
+**Two or three** questions — no more. Mix the types deliberately:
 
 | Type | Purpose |
 |---|---|
@@ -48,15 +59,18 @@ Three to four questions. Mix the types deliberately:
 
 At least one must be predict-the-output or spot-the-bug. Recall-only questions certify nothing.
 
-When an answer is wrong: **say it is wrong, say precisely why, and re-teach that piece** before
-continuing. Do not accept a half-right answer with "close!" and move on — that is where shaky
-knowledge comes from. When an answer is right for the wrong reason, that counts as wrong.
+When an answer is wrong: **say it is wrong, say precisely why, and re-teach that piece.** Then
+re-test it **once**. An answer that is right for the wrong reason counts as wrong.
 
-**Gate:** all questions answered, and every wrong answer re-taught and re-tested.
+**If the re-test also fails, stop drilling it.** Give the correct answer, record it as a weak spot
+in `state/PROGRESS.md`, and continue. Two rounds is the cap — a third belongs in a later `review`
+session, not in this one, where it burns the whole budget on one detail.
+
+**Gate:** all questions answered, and every wrong answer re-taught and re-tested once.
 
 ---
 
-## Step 3 — Exercise, no solution
+## Step 3 — Practice, reviewed on the spot
 
 A small, self-contained task. Ten minutes, not an hour. Write the starter file to
 `<learning-home>/playground/<NN>-<topic>/` and tell the user the path and how to run it.
@@ -66,6 +80,9 @@ State:
 - The goal, in one sentence
 - The exact expected behaviour or output
 - What is out of scope (so they do not gold-plate)
+
+Prefer **symptom-driven** starters: give the bug reports and let the user find the cause, rather
+than leaving numbered TODOs on the broken lines.
 
 **The strict gate applies.** Do not show a solution until the user has attempted it or explicitly
 asked. Escalate hints one level per request:
@@ -77,90 +94,74 @@ asked. Escalate hints one level per request:
 | 3 | The structure, with the key expression left blank |
 
 "I don't know" requests level 1. A question *about* the exercise ("does the file need a package
-declaration?") is not a hint request — just answer it.
+declaration?") is not a hint request — just answer it. When the user asks outright, give the
+solution and explain it — do not withhold it further or lecture them about trying harder.
 
-When the user does ask outright, give the solution and explain it — do not withhold it further or
-lecture them about trying harder.
+**Review it in the same message as the verdict, and keep it short.** Run the code. Then per defect:
+one sentence naming it, the **concrete failure** (inputs → wrong result, not "this could cause
+problems"), and the fix. Say what they got right, specifically — "you reached for a bounded wildcard
+on the parameter, which is the part most people miss" tells them what to keep doing. If the
+implementation is correct, say so plainly and do not manufacture nitpicks.
 
-**Gate:** an attempt exists, or the user asked for the answer.
-
----
-
-## Step 4 — The same concept in this repo
-
-Open a real file from the active lab profile, read it, and quote **10–40 actual lines**. Never invent
-code and present it as being from the repo; if the mapped file has drifted, search for a current
-example and say the map needs updating.
-
-Explain:
-
-- **What it does** — briefly
-- **Why the concept is used here specifically** — the pressure that made this the right call
-- **What the alternative would have cost** — the version without the concept, and what it breaks
-- **Whether this is a good example or a cautionary one** — some of this codebase is the wrong way,
-  and saying so is part of the lesson
-
-Connect it back to the exercise: "this is the same shape as what you just wrote, at production
-scale."
-
-**Gate:** real lines shown and explained.
+**Gate:** an attempt exists (or the user asked for the answer), and it has been reviewed.
 
 ---
 
-## Step 5 — A real-world task
+## Step 4 — Summary card
 
-Modelled on the code just examined, but implemented in `playground/`. **Real repo files are never
-edited.** Give the task the shape of a ticket: what is needed and why, not step-by-step
-instructions.
+Write `<learning-home>/playground/<NN>-<topic>/SUMMARY.md` and give the user the path. This is the
+revision artefact — the thing they read on the way to an interview, so it is compressed, not prose:
 
-Good tasks look like: "here is a simplified version of the pattern in that file. It has a bug that
-only appears with two threads — find it and fix it." Or: "extend this to handle the case that class
-handles with `ObjectChecker.getFirstNotNullObj`, without using that class."
+- The mental model in one sentence
+- The rules, and any decision table worth keeping
+- The traps
+- **Mistakes actually made** — what this learner got wrong in steps 2 and 3, and why
 
-Strict gate applies here too.
-
-**Gate:** the user submits an implementation.
+**Gate:** file written, path given.
 
 ---
 
-## Step 6 — Review
+## Step 5 — Interview drill
 
-Read what they wrote. Then, per issue:
-
-- Name the defect in one sentence
-- Give the **concrete failure** — inputs → wrong result. Not "this could cause problems"
-- Show the fix
-- Classify it: **wrong** (it breaks), **fragile** (it works until it doesn't), or **flagged**
-  (it works, but a reviewer on the active lab's codebase would reject it — e.g. null checks that
-  should be `ObjectChecker`, or comments that restate the code)
-
-Then say what they got **right**, specifically. Not encouragement — information. "You reached for a
-bounded wildcard on the parameter, which is the part most people miss" tells them what to keep
-doing.
-
-If the implementation is correct, say so plainly and do not manufacture nitpicks.
-
-**Gate:** every issue named with its failure scenario.
-
----
-
-## Step 7 — Interview questions
-
-Three to five, from `core/INTERVIEW-BANK.md` for that topic. Ask them **first** and wait — this is a mock
-interview, not a reading. Then for each:
+Three to four questions from `core/INTERVIEW-BANK.md` for that topic. Ask them **first** and wait —
+this is a mock interview, not a reading. Then for each:
 
 - The **shallow answer** that sounds right and fails
 - The **answer that passes**
 - The **follow-up** the interviewer asks next, because the real signal is in the second question
 
-Where the topic touches this codebase, note it — "you have seen this in `Persister`" is a strong
-thing to be able to say in an interview, and it is true here.
+If the bank has no section for the topic, generate questions in the same shape and add them to it.
+
+Where the topic touches the active lab's codebase, note it — "you have seen this in `Persister`" is
+a strong thing to be able to say in an interview.
 
 **Gate:** answered, and passing answers shown.
 
 ---
 
-## After step 7
+## The optional real-world detour
+
+Real-codebase extracts and production-shaped tasks are **no longer part of every lesson.** They cost
+more time than any other part of the flow, and most concepts do not need them.
+
+Add one — between steps 3 and 4 — only when it clears this bar:
+
+- the concept looks materially different at production scale (threading, transactions, caching,
+  proxying), **or**
+- the active lab does it in a way that is surprising, or is a cautionary anti-pattern worth naming,
+  **or**
+- the user asks for it.
+
+Cap it at **one** extract of 10–40 real, quoted lines, or **one** short task in `playground/`. Never
+both, and never a second task in the same lesson. Say what it does, why the concept is used there,
+and whether it is exemplary or cautionary. If it is not obviously worth the ten minutes, skip it —
+skipping is the default, and it needs no justification.
+
+**Real repo files are never edited.** A lab codebase is read-only teaching material.
+
+---
+
+## After step 5
 
 Update `state/PROGRESS.md`: move the topic to Completed with a date and an honest confidence, record
 specific weak spots, set the next Current topic. Then offer the next topic — do not start it.

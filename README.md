@@ -19,20 +19,23 @@ Works the same from either agent. Also triggered by unmistakable phrasings — "
 on X", "start a lesson". A normal question ("why is this service throwing?") does **not** trigger
 it; see `core/MODE-BOUNDARY.md`.
 
-## The seven steps
+## The five steps
 
-Each topic runs the same loop, one step per message:
+Each concept runs the same loop, one step per message, **20–30 minutes end to end**:
 
-1. Teach one concept
-2. Check understanding with questions
-3. Hands-on exercise — **no solution until you attempt it**
-4. The same concept in real code from the active lab
-5. A small real-world task
-6. Review of your implementation, with each mistake and the failure it causes
-7. Interview questions, with the shallow answer, the passing answer, and the follow-up
+1. Teach one concept — ~5 min
+2. Check understanding — 2–3 questions, ~5 min
+3. Practice — a small exercise, reviewed on the spot, ~10 min. **No solution until you attempt it**
+4. Summary card — `playground/<NN>-<topic>/SUMMARY.md`, the thing you revise from, ~2 min
+5. Interview drill — 3–4 questions with the shallow answer, the passing answer, and the follow-up
 
 Strict mode is on: hints escalate in three levels, and the answer appears only after an attempt or
 an explicit "show me". Saying "show me" is not cheating — it is the mode working as configured.
+
+Two rules keep the budget honest. A wrong answer is re-taught and re-tested **once**; if it fails
+again it becomes a weak spot for a later `review` instead of eating the lesson. And real-codebase
+extracts and production-shaped tasks are **optional** — a lesson adds one only when the concept
+genuinely looks different at production scale, or you ask for it.
 
 ## Layout
 
@@ -40,7 +43,7 @@ an explicit "show me". Saying "show me" is not cheating — it is the mode worki
 core/            the shared source of truth — agent-neutral, codebase-neutral
   BOOTSTRAP.md     session-start protocol and dispatch (the entry point)
   MODE-BOUNDARY.md Work Mode vs Learning Mode
-  METHODOLOGY.md   the seven steps, their gates, the hint ladder
+  METHODOLOGY.md   the five steps, their gates and budget, the hint ladder
   CURRICULUM.md    43 topics, Java-heavy first
   INTERVIEW-BANK.md questions with shallow / passing / follow-up answers
 labs/            optional pluggable codebase profiles (INDEX, TEMPLATE, one file per codebase)
@@ -87,15 +90,15 @@ Details and manual steps: `adapters/README.md`.
 
 ## Labs
 
-A lab is a real codebase used as the laboratory for steps 4 and 5. `labs/INDEX.md` maps a working
-directory to a profile; if none matches, lessons run in **codebase-free mode** with self-contained
-examples, and say so. Add one by copying `labs/TEMPLATE.md`.
+A lab is a real codebase a lesson can draw on for its optional real-world detour. `labs/INDEX.md`
+maps a working directory to a profile; if none matches, lessons run in **codebase-free mode** with
+self-contained examples, and say so. Add one by copying `labs/TEMPLATE.md`.
 
 Currently: `nama-erp` (Java 21 / Spring Boot 3.5 / Hibernate 6 ERP monorepo at `C:\Projects\8080`).
 
 ## Maintenance
 
-- Progress is written after step 7. Grade honestly — a `solid` on a topic you fumbled makes the file
+- Progress is written after step 5. Grade honestly — a `solid` on a topic you fumbled makes the file
   worthless.
 - If a path in a lab profile has drifted, the lesson finds a current example and fixes the entry
   rather than quoting stale code.

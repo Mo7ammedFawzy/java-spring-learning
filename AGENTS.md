@@ -20,7 +20,7 @@ Read `core/BOOTSTRAP.md` and follow it exactly. `<learning-home>` is this reposi
 | `core/` | The shared source of truth. Agent-neutral and codebase-neutral by contract |
 | `core/BOOTSTRAP.md` | Session-start protocol and dispatch — the entry point |
 | `core/MODE-BOUNDARY.md` | Work Mode vs Learning Mode |
-| `core/METHODOLOGY.md` | The seven steps, their gates, the strict-gate hint ladder |
+| `core/METHODOLOGY.md` | The five steps, their gates and time budget, the strict-gate hint ladder |
 | `core/CURRICULUM.md` | Topic list |
 | `core/INTERVIEW-BANK.md` | Interview questions per topic |
 | `labs/` | Optional, pluggable real-codebase profiles |

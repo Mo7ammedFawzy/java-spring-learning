@@ -1,10 +1,11 @@
 # Lab profiles
 
-A **lab** is a real codebase used as the laboratory for steps 4 and 5 of a lesson. Labs are
+A **lab** is a real codebase a lesson can draw on for its optional real-world detour. Labs are
 optional and pluggable: the core methodology and curriculum know nothing about any of them.
 
 At session start the agent matches the user's current working directory against the `applies-to`
-values below and loads the matching profile — and only when it reaches step 4.
+values below — but it loads the matching profile only if it actually takes the detour, which most
+lessons do not.
 
 | Profile | applies-to (working directory) | Language / stack |
 |---|---|---|
@@ -12,8 +13,8 @@ values below and loads the matching profile — and only when it reaches step 4.
 
 ## No match?
 
-Run in **codebase-free mode**. Steps 4 and 5 use self-contained examples the agent writes itself,
-and it says once at the start that no lab is active. This is a fully supported mode — the system
+Run in **codebase-free mode**. A detour, if one is taken, uses a self-contained example the agent
+writes itself, and it says once at the start that no lab is active. This is a fully supported mode — the system
 works with this whole directory deleted.
 
 ## Adding a lab
