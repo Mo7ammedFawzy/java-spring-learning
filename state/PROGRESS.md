@@ -1,12 +1,16 @@
 # Progress
 
-Maintained by the `/learn` skill. Read at the start of every session, updated after step 7.
+Maintained by the `/learn` skill. Read at the start of every session, updated after step 5.
 Confidence is honest, not encouraging: `solid` / `ok` / `shaky`.
+
+**Current is one line, not a log.** It names the topic and the step in progress, plus anything
+needed to resume. Detail about what went wrong belongs under **Weak spots to revisit** when the
+topic closes.
 
 ## Current
 
-Topic: 02 — Strings
-Step: not started
+Topic: 02 — Strings (split: 02a immutability, pool, `==` vs `equals`; 02b `StringBuilder` and loop concatenation — each gets its own five steps)
+Step: 02a — steps 1–3 done (exercise `playground/02-strings/Main.java`, all checks PASS, four bugs fixed first attempt). Interview drill asked, awaiting answers; then write the summary card and close. Flow was switched to the five-step version mid-topic, so the old step 4 (real-world example) already ran as a detour. Re-test 4: L/M/N all correct including `"hi".toString()` = no (the discriminator), but skipped the rule statement and the H-vs-I question and gave no reasons for the fourth time. For close: constant-folding rule took four rounds; habit of bare answers without reasoning. Re-test 3: marked `String.valueOf("hi")` constant while marking `x.trim()` not — judges by the obvious result, not by what the expression is made of; gave no reasons again despite being asked. Re-test 2 closed stored hash (T2) and object count (T3); T1 marked `final String r = p.toLowerCase()` as constant — method call, third miss on this rule, gave no reasons. Re-test 1: closed Q2 (fix + `Objects.equals`) and intern identity; still missed `final String d = c` is not constant (needs constant initializer), mutated `HashSet` element — said `contains(p)` true, right-answer-wrong-reason on `contains(new Point(1,2))` ("new reference"), and counted `new String` twice as 2 objects not 3. First pass: Q1 said `nonFinal + "va" == "Java"` is true (constant-folding rule); Q2 found discarded trim/toUpperCase but missed `== "USD"`; Q3 thought the mutated key is findable by its new value (missed stored hash); Q4 said `new String("hi")` makes one object (missed the pooled literal). Codebase-free mode (no lab matches the learning repo).
 
 ## Completed
 
@@ -41,19 +45,18 @@ Step: not started
   words and punctuation jump to the wrong end and the sentence becomes unreadable. If a thought
   needs an English term or a code token, write that whole thought in English.
 
-- **Lab codebase: step 4 only, and optional there.** Quoting a short real extract from the active
-  lab (10–40 lines) is welcome as *illustration*. But **step 5's task is never modelled on the lab
-  codebase** — no lab domain names, no lab-flavoured tickets. Write a self-contained,
-  production-shaped task in a neutral domain instead. Step 4 may also skip the lab entirely when a
-  synthetic example teaches the concept better; say so and move on. The learner explicitly asked
-  for this (2026-09-01).
+- **Keep lessons to 20–30 minutes.** Requested on 2026-09-16: five steps, no mandatory real-world
+  task, no separate review step, no drilling one detail past two rounds. If a concept will not fit,
+  split it into two lessons rather than overrunning.
 
-- **Symptom-driven tasks land better than TODO-driven ones.** In the 01 review, the step-5 task
-  gave four bug reports and no TODOs — the learner had to work out which method each symptom came
-  from, and got all four in one attempt. Use that shape again.
+- **The real-world detour is the exception, not the routine.** Take it only when it clears the bar
+  in `core/METHODOLOGY.md`. When it is taken, a lab extract is *illustration* only — a task is never
+  modelled on the lab codebase, no lab domain names, no lab-flavoured tickets. Write a
+  self-contained task in a neutral domain instead (asked for on 2026-09-01).
 
-- **Write a study summary when a topic closes.** After step 7 (and after a review), write
-  `playground/<NN>-<topic>/SUMMARY.md` — the whole topic condensed for revision: the one-sentence
-  mental model, the rules, the decision tables, the traps, the interview answers, and a short
-  "mistakes actually made" section naming what this learner got wrong and why. Tell them the path.
-  Requested on 2026-09-06 so there is something to study from between sessions.
+- **Symptom-driven exercises land better than TODO-driven ones.** Both in the 01 review and in 02a,
+  the starter gave bug reports and no TODOs — the learner had to work out which method each symptom
+  came from, and got them all in one attempt. Use that shape.
+
+- **The summary card is step 4, and it is not optional.** Requested on 2026-09-06 so there is
+  something to study from between sessions.
