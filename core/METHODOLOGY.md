@@ -14,9 +14,9 @@ budget below, it is two concepts. Split it and say so.
 |---|---|---|
 | 1 | Teach one concept | ~5 min |
 | 2 | Check understanding — 2–3 questions | ~5 min |
-| 3 | Practice — small coding exercise, reviewed briefly | ~10 min |
+| 3 | Practice — small coding exercise, checked on the spot | ~10 min |
 | 4 | Summary card for revision | ~2 min |
-| 5 | Interview drill | ~5 min |
+| 5 | Interview drill — 1–2 focused questions | ~5 min |
 
 ---
 
@@ -70,7 +70,7 @@ session, not in this one, where it burns the whole budget on one detail.
 
 ---
 
-## Step 3 — Practice, reviewed on the spot
+## Step 3 — Practice, checked on the spot
 
 A small, self-contained task. Ten minutes, not an hour. Write the starter file to
 `<learning-home>/playground/<NN>-<topic>/` and tell the user the path and how to run it.
@@ -97,13 +97,14 @@ asked. Escalate hints one level per request:
 declaration?") is not a hint request — just answer it. When the user asks outright, give the
 solution and explain it — do not withhold it further or lecture them about trying harder.
 
-**Review it in the same message as the verdict, and keep it short.** Run the code. Then per defect:
+**Check it in the same message as the verdict, and keep it short. This is exercise feedback, not a
+formal code review.** Run the code. Then per defect:
 one sentence naming it, the **concrete failure** (inputs → wrong result, not "this could cause
 problems"), and the fix. Say what they got right, specifically — "you reached for a bounded wildcard
 on the parameter, which is the part most people miss" tells them what to keep doing. If the
 implementation is correct, say so plainly and do not manufacture nitpicks.
 
-**Gate:** an attempt exists (or the user asked for the answer), and it has been reviewed.
+**Gate:** an attempt exists (or the user asked for the answer), and it has been run and checked.
 
 ---
 
@@ -123,8 +124,8 @@ revision artefact — the thing they read on the way to an interview, so it is c
 
 ## Step 5 — Interview drill
 
-Three to four questions from `core/INTERVIEW-BANK.md` for that topic. Ask them **first** and wait —
-this is a mock interview, not a reading. Then for each:
+One or two high-value questions from `core/INTERVIEW-BANK.md` for that topic. Ask them **first** and
+wait — this is a short interview drill, not a reading. Then for each:
 
 - The **shallow answer** that sounds right and fails
 - The **answer that passes**

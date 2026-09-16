@@ -25,9 +25,9 @@ Each concept runs the same loop, one step per message, **20–30 minutes end to 
 
 1. Teach one concept — ~5 min
 2. Check understanding — 2–3 questions, ~5 min
-3. Practice — a small exercise, reviewed on the spot, ~10 min. **No solution until you attempt it**
+3. Practice — a small exercise, checked on the spot, ~10 min. **No solution until you attempt it**
 4. Summary card — `playground/<NN>-<topic>/SUMMARY.md`, the thing you revise from, ~2 min
-5. Interview drill — 3–4 questions with the shallow answer, the passing answer, and the follow-up
+5. Interview drill — 1–2 focused questions with the shallow answer, the passing answer, and the follow-up
 
 Strict mode is on: hints escalate in three levels, and the answer appears only after an attempt or
 an explicit "show me". Saying "show me" is not cheating — it is the mode working as configured.
