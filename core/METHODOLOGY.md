@@ -47,6 +47,10 @@ s = new StringBuilder().append( s ).append( "ab" ).toString()
                           └── everything built so far
 ```
 
+**Every step ships at least one view** — step 2's questions and step 5's drill included. A step that
+is pure prose is a step that will not be remembered, and this is the most-repeated request the
+learner has made about how lessons are delivered.
+
 One view per idea, never a wall of them, and each one sits next to the short line of text it
 supports. Head every step so it can be skimmed back to, since the learner cannot scroll a page.
 
