@@ -13,7 +13,7 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 02b — `StringBuilder` and when loop concatenation actually costs
+Topic: 03 — equals and hashCode
 Step: not started.
 
 ## Completed
@@ -22,6 +22,7 @@ Step: not started.
 |---|---|---|---|---|
 | 01 | Types, values and references | 2026-09-01, reviewed 2026-09-06 | solid | Review closed four of five weak spots. Exercise and task both clean on first attempt, diagnosed from symptoms with no TODOs. |
 | 02a | Strings — immutability, the pool, `==` vs `equals` | 2026-09-21 | ok | Exercise clean in one attempt. Drill: Q1 fully right with mechanism; Q2a answered the rule not the question; Q2b still ticked the blank final. |
+| 02b | Strings — `StringBuilder` and loop concatenation | 2026-09-22 | ok | Spotted the disguised `new StringBuilder(sb)` bug unprompted and fixed it. But located the cost in allocation rather than copying, and left the headline `toCsv` case untouched after writing the identical fix one method below. |
 
 ## Weak spots to revisit
 
@@ -38,11 +39,27 @@ Step: not started.
   and it was ticked as one. Re-test with blank finals specifically, not with method calls — and
   anchor it to the consequence: a constant variable's value is inlined into every class that reads it,
   so changing a library's `VERSION` and recompiling only the library leaves clients on the old value.
-- **Answers the rule instead of the question.** New in the 02a drill: asked *why the unit test is
-  green and production red*, the answer was the definition of `==`. The question had explicitly ruled
-  that out. Same shape as the articulation gap below, one level up — the fact is known, the asked
-  question is not the one answered. Re-test by asking "why does the *wrong* case work?", never
-  "what's wrong with this?".
+- **Answers the adjacent question, not the one asked. Three times now, across two lessons.**
+  02a drill: asked *why the unit test is green and production red*, answered with the definition of
+  `==` — which the question had explicitly ruled out. 02b step 2: asked why `a + b + c + d` is not
+  quadratic, answered "it's literal concatenation" — there are no literals in it. 02b drill: asked
+  the flat *"is `+` slow?"*, answered "yes of course" and then described the loop case, which is a
+  different question; "yes" commits to rewriting `prefix + "-" + id` by hand. The fact is known
+  every time; the question on the table is not the one answered. Re-test with deliberately flat or
+  inverted framings — "why does the *wrong* case work?", "is X slow?" — never "what's wrong with
+  this?", which hands over the frame.
+- **Locates cost in allocation rather than copying.** Both 02b drill answers explained the quadratic
+  blowup as "it creates new objects in the heap". Allocation in Java is a bump-pointer in the TLAB and
+  the objects die young — 20,000 of them is nothing. The cost is `append(accumulator)` **copying**
+  every character built so far, every pass: ~400 million char copies at n=10,000. Re-test by asking
+  for the cost of a loop in *characters*, and refuse "objects" as the unit.
+
+- **Cannot produce a count when a count is asked for.** 02b step 2 and its re-test both asked for
+  total characters copied across four iterations. First answer was the four resulting strings, second
+  was a bare "4". The mechanism was written correctly one question earlier, so this is not a
+  knowledge gap — the arithmetic does not come out under a direct request. Two rounds, capped.
+  Re-test with a small n and demand the per-iteration line, not the total.
+
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
   knowledge — it is articulation, which is exactly what an interview grades. Always ask for the

@@ -68,6 +68,29 @@ and add any question the user is asked in a real interview.
   JVM-wide, so unrelated code — a library, the framework — that interns the same text takes the same
   monitor. Keep locks in a private map instead.)
 
+**Q.** Is string concatenation with `+` slow in Java?
+- *Shallow:* "Yes" — which commits you to rewriting `prefix + "-" + id` by hand, and the next thing
+  on the screen will be exactly that line. "No, it is fine" is the same failure facing the other way.
+- *Passes:* Answers "where?". A single expression compiles to one builder and copies each character
+  once — already optimal, leave it. A loop is one expression *per iteration*, so each pass re-copies
+  the accumulated string: `n²/2` character copies instead of `n`. That is when the builder is
+  hoisted out of the loop. On Java 9+ `+` lowers to `invokedynamic`/`StringConcatFactory` rather
+  than a literal `StringBuilder`, but the shape is unchanged.
+- *Then:* "How many iterations before you would care?" (Thousands. n=1,000 is ~1.5 MB of copying,
+  under a millisecond; n=100,000 is ~15 GB. Scale n, not the timer.)
+
+**Q.** A colleague "fixes" a slow report with
+`sb = new StringBuilder(sb).append(row).append("
+");` inside the loop. Is it fixed?
+- *Shallow:* "Yes, it uses `StringBuilder` now." Also shallow in the other direction: "no, because
+  it allocates an object every iteration" — allocation is cheap and is not the problem.
+- *Passes:* Not fixed — the same bug in a `StringBuilder` costume. `new StringBuilder(sb)` **copies
+  the entire buffer** into a fresh one before appending, so every iteration still pays for everything
+  before it. The point of `StringBuilder` is not the type, it is that **one** buffer survives the
+  loop. Drop the reassignment.
+- *Then:* "Any reason to pre-size it?" (Yes — `new StringBuilder(expected)` skips the doubling
+  reallocations when the output size can be estimated. Default capacity is 16.)
+
 ## 03 — equals and hashCode
 
 **Q.** Why must `equals` and `hashCode` be overridden together?
