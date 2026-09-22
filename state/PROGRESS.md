@@ -13,14 +13,15 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 02 — Strings (split: 02a immutability, pool, `==` vs `equals`; 02b `StringBuilder` and loop concatenation — each gets its own five steps)
-Step: 02a — steps 1–3 done, interview drill asked and awaiting answers; then the summary card closes it.
+Topic: 02b — `StringBuilder` and when loop concatenation actually costs
+Step: not started.
 
 ## Completed
 
 | # | Topic | Date | Confidence | Notes |
 |---|---|---|---|---|
 | 01 | Types, values and references | 2026-09-01, reviewed 2026-09-06 | solid | Review closed four of five weak spots. Exercise and task both clean on first attempt, diagnosed from symptoms with no TODOs. |
+| 02a | Strings — immutability, the pool, `==` vs `equals` | 2026-09-21 | ok | Exercise clean in one attempt. Drill: Q1 fully right with mechanism; Q2a answered the rule not the question; Q2b still ticked the blank final. |
 
 ## Weak spots to revisit
 
@@ -30,18 +31,31 @@ Step: 02a — steps 1–3 done, interview drill asked and awaiting answers; then
   the option list.
 - **Shallow copy boundary.** `new ArrayList<>(orders)` protects the list, not the orders in it.
   Mutating an element is still visible to the caller. Never volunteered this.
-- **Compile-time constant rule (02a, took four rounds).** Judges by the obvious result rather than
-  what the expression is made of — marked `String.valueOf("hi")` and `p.toLowerCase()` as constants.
-  A constant variable is `final` **and** initialised with a constant expression; any method call or
-  `new` makes it a runtime value. Re-test with a mixed list and demand the reason for each.
-- **Answers arrive without reasoning.** Four times in 02a, gave a bare yes/no or a fix with no *why*,
-  including when the reason was explicitly requested. The fixes were right, so the gap is not
+- **Constant variable — the *declarator* condition. Three rounds now, still open.** The method-call
+  half has landed (`p.toLowerCase()` and `String.valueOf("HI")` both correctly rejected in the 02a
+  drill). The half that keeps failing is the third condition: a constant variable must be initialised
+  **in its own declarator**. A blank `static final String t;` assigned in a static block is *not* one,
+  and it was ticked as one. Re-test with blank finals specifically, not with method calls — and
+  anchor it to the consequence: a constant variable's value is inlined into every class that reads it,
+  so changing a library's `VERSION` and recompiling only the library leaves clients on the old value.
+- **Answers the rule instead of the question.** New in the 02a drill: asked *why the unit test is
+  green and production red*, the answer was the definition of `==`. The question had explicitly ruled
+  that out. Same shape as the articulation gap below, one level up — the fact is known, the asked
+  question is not the one answered. Re-test by asking "why does the *wrong* case work?", never
+  "what's wrong with this?".
+- **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
+  for a reason for each of five items, including the unticked ones, and got one line. The gap is not
   knowledge — it is articulation, which is exactly what an interview grades. Always ask for the
   reason, and do not accept the answer alone.
 - Closed on 2026-09-06: pass-by-value vs pass-by-reference; copy vs live view (the two axes now
   drive the choice); `Integer` cache; unboxing NPE and `getOrDefault`; rebinding a parameter.
 
 ## Notes to self
+
+- **The interactive lesson page is gone.** Asked for on 2026-09-21, removed on 2026-09-22: the round
+  trip was slow and cost a publish per step, and the terminal is cheap and fast. The rule now lives
+  in `core/METHODOLOGY.md` § *Delivery* — do not restate it here. Two published pages from those two
+  days still exist in the artifact gallery (topics 02a and 02b); they are dead and can be deleted.
 
 - **Teaching language: English + light Egyptian Arabic.** Mix a little Egyptian dialect into the
   conversational layer — framing, encouragement, corrections: "خلينا نشوف", "واضح كده؟", "برافو",

@@ -32,6 +32,15 @@ Each concept runs the same loop, one step per message, **20–30 minutes end to 
 Strict mode is on: hints escalate in three levels, and the answer appears only after an attempt or
 an explicit "show me". Saying "show me" is not cheating — it is the mode working as configured.
 
+## Where a lesson is read
+
+In the terminal. A step is delivered in the console and answered in the console — tables, fenced
+snippets and small ASCII sketches rather than paragraphs, because a step cannot be scrolled back to.
+
+Two things are files rather than messages: step 3's exercise code in `playground/<NN>-<topic>/`,
+because it compiles and runs, and the step-4 summary card in `SUMMARY.md`, because it is what you
+revise from offline.
+
 Two rules keep the budget honest. A wrong answer is re-taught and re-tested **once**; if it fails
 again it becomes a weak spot for a later `review` instead of eating the lesson. And real-codebase
 extracts and production-shaped tasks are **optional** — a lesson adds one only when the concept

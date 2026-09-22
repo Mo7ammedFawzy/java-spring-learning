@@ -20,6 +20,42 @@ budget below, it is two concepts. Split it and say so.
 
 ---
 
+## Delivery
+
+A lesson happens in the console. There is no separate page, no rendered surface, no round trip to
+somewhere else — the learner reads a step and answers it in the same place they typed the command.
+
+Console prose is the weakest part of that. **Show the shape instead of describing it**, and reach
+for the smallest view that makes the point:
+
+| Form | Use it for |
+|---|---|
+| A table | Anything with two or more axes — options against reasons, a decision matrix, a cost comparison |
+| A fenced block | Every snippet, always |
+| A `diff` block | When the point is what *changes* and the surrounding shape already exists |
+| Pseudocode | Logic or an algorithm, stripped of syntax |
+| A call tree | Runtime control flow, and what calls what |
+| A shallow file tree | Where responsibility lives |
+| An ASCII sketch with leader lines | Memory shape — what a reference points at, what a loop copies each pass |
+
+A worked example of the last one, from the topic on string concatenation:
+
+```text
+s = new StringBuilder().append( s ).append( "ab" ).toString()
+                          ▲            ▲
+                          │            └── always 2 chars
+                          └── everything built so far
+```
+
+One view per idea, never a wall of them, and each one sits next to the short line of text it
+supports. Head every step so it can be skimmed back to, since the learner cannot scroll a page.
+
+Two things still leave the console, and both are files, not surfaces: step 3's exercise code in
+`playground/<NN>-<topic>/`, because it has to compile and run, and step 4's `SUMMARY.md`,
+because it is the offline revision artefact.
+
+---
+
 ## Step 1 — Teach one concept
 
 **One** concept. Not "collections" — `HashMap` resizing, or the `equals`/`hashCode` contract. If the
