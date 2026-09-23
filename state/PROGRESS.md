@@ -13,8 +13,10 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 03 — equals and hashCode
-Step: not started.
+Topic: 03a — equals and hashCode: the contract, and how breaking it corrupts a `HashMap`
+Step: 3 in progress. Starter written to `playground/03a-equals-hashcode/Ledger.java`, run and
+confirmed failing 3 of 4 checks; awaiting the learner's attempt. Steps 1 and 2 are done — do not
+re-teach them. (03 was split: 03b covers inheritance, symmetry and `instanceof` vs `getClass()`.)
 
 ## Completed
 
@@ -59,6 +61,15 @@ Step: not started.
   was a bare "4". The mechanism was written correctly one question earlier, so this is not a
   knowledge gap — the arithmetic does not come out under a direct request. Two rounds, capped.
   Re-test with a small n and demand the per-iteration line, not the total.
+
+- **Names the wrong method as the one that failed. Two rounds, capped in 03a step 2.** Asked why
+  `map.get(t)` returns null after a hashed field was mutated, answered "equals is wrong" twice —
+  `equals` is never reached there, the hash sends the probe to an empty bucket. And the mirror case,
+  `get(new Tag("java"))`, was called a hit both times: right bucket, but the stored key now disagrees,
+  so `equals` is what fails. Re-test by handing a failing lookup and asking **which of the two methods
+  was the one that failed, and whether the other one even ran** — never "what's wrong with this?".
+  Related: a bucket was described as a slot holding one entry (`HashSet` of two equal-hash items
+  answered as size 1). That half closed on the re-test.
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
