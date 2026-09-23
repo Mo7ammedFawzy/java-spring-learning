@@ -13,8 +13,8 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 04 — Classes, interfaces, abstraction (first topic with open `SOURCES.md` rows; 03b has none
-and waits). Step: not started.
+Topic: 04a — Abstract class vs interface (04 split: 04b composition + OOP rows 1–2, 04c
+constructors rows 32–35). Step: 1 delivered, resume at step 2.
 
 ## Completed
 
