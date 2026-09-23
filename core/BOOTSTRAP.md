@@ -20,6 +20,7 @@ Read, in this order:
 | `state/PROGRESS.md` | Where the learner is, and what they were shaky on |
 | `core/CURRICULUM.md` | The ordered topic list |
 | `core/METHODOLOGY.md` | The five-step contract and its time budget — **read before teaching your first topic** |
+| `state/SOURCES.md` | The priority source checklist, if it exists — it decides the next topic |
 
 Do not read the interview bank or a lab profile yet; they are needed at step 5 and at the optional
 real-world detour, if you take it at all.
@@ -43,9 +44,13 @@ Codebase-free mode is a normal mode, not a degraded one. Never invent file paths
 |---|---|
 | *(none)* | Report the current topic and step, then propose resuming it or starting the next topic. Do not dump the whole curriculum unless asked. |
 | a topic name or number | Resolve against `core/CURRICULUM.md` (exact → substring). Jump there even if out of order; say so if prerequisites are unmet, but honour the choice. |
-| `next` | Advance to the next uncompleted topic. |
+| `next` | Advance to the next topic (see **The next topic** below). |
 | `review` | Re-test the entries under **Weak spots to revisit**, skipping step 1. |
 | a topic not in the curriculum | Teach it with the same five steps, then add it to `core/CURRICULUM.md` under the nearest track. |
+
+**The next topic.** While `state/SOURCES.md` has an open row, the next topic is the first topic in
+`core/CURRICULUM.md` row order that has an open row there — topics with none wait, even if they come
+earlier. With no open rows, or no such file, it is the next uncompleted topic.
 
 **If `state/PROGRESS.md` shows an unfinished step, resume at that step.** Do not restart the topic
 and do not re-teach step 1 — the learner already read it.
@@ -70,6 +75,9 @@ After step 5, update `state/PROGRESS.md`:
 - Move the topic to **Completed** with today's date and a confidence of `solid`, `ok` or `shaky`
 - Add what they missed to **Weak spots to revisit** — be specific ("missed that erasure makes the
   overload ambiguous", not "generics")
+- In `state/SOURCES.md`, tick every row mapped to this topic with the topic and date. A row is
+  ticked only when its topic closes, never after step 1 alone — that tick is what stops the same
+  concept being taught twice
 - Set **Current** to the next topic
 
 Grade honestly. A `solid` on a topic the learner fumbled makes the whole file worthless, and they

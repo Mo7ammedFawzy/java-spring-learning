@@ -25,6 +25,8 @@ Read `core/BOOTSTRAP.md` and follow it exactly. `<learning-home>` is this reposi
 | `core/INTERVIEW-BANK.md` | Interview questions per topic |
 | `labs/` | Optional, pluggable real-codebase profiles |
 | `state/PROGRESS.md` | Learner state |
+| `state/SOURCES.md` | Priority checklist: every question in the `sources/` PDFs, mapped to a topic |
+| `sources/` | Interview-prep PDFs the learner wants finished first |
 | `playground/` | Learner's exercise code (gitignored) |
 | `adapters/` | Thin per-agent entry points — pointers only, never methodology |
 

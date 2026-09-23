@@ -103,3 +103,6 @@ Step: not started.
 
 - **The summary card is step 4, and it is not optional.** Requested on 2026-09-06 so there is
   something to study from between sessions.
+
+- **The interview PDFs in `sources/` take priority.** Added on 2026-09-23 — the learner wants them
+  finished first. `state/SOURCES.md` maps every question to a topic and decides what comes next.

@@ -164,7 +164,8 @@ revision artefact — the thing they read on the way to an interview, so it is c
 
 ## Step 5 — Interview drill
 
-One or two high-value questions from `core/INTERVIEW-BANK.md` for that topic. Ask them **first** and
+One or two high-value questions from `core/INTERVIEW-BANK.md` for that topic — or an open row in
+`state/SOURCES.md` mapped to it, which is preferred when one exists. Ask them **first** and
 wait — this is a short interview drill, not a reading. Then for each:
 
 - The **shallow answer** that sounds right and fails

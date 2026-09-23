@@ -9,7 +9,8 @@ persistence, then Spring. The JVM and concurrency deep-dive sits late by design:
 material here and the weakest prerequisite for everything else, so it should not gate progress
 through the rest.
 
-Work top to bottom by default. Jumping is allowed — `/learn <topic>` goes straight there — but if a
+Work top to bottom by default — **row order, not number order**: topics added later take the next
+free number but sit in the row where they belong. Jumping is allowed — `/learn <topic>` goes straight there — but if a
 topic's prerequisites are unmet the lesson says so first. Where this ordering deliberately places a
 topic ahead of something it leans on, the row carries an explicit *prereq* note.
 
@@ -32,7 +33,7 @@ Legend: **★** asked in almost every interview · **☆** asked at senior level
 
 | # | Topic | Objective |
 |---|---|---|
-| 04 | Classes, interfaces, abstraction ★ | Abstract class vs interface, default and static interface methods, when a base class earns its place, composition over inheritance |
+| 04 | Classes, interfaces, abstraction ★ | Abstract class vs interface, default and static interface methods, when a base class earns its place, composition over inheritance, constructors — the default one, why they are not inherited, why they cannot be `final`, `static` or `abstract` |
 | 05 | Polymorphism and dispatch | Overriding vs overloading, dynamic dispatch, why overload resolution is a compile-time decision, covariant returns |
 | 06 | Access, static, final | Encapsulation, static initialisation order, `final` on fields/params/classes, static nested vs inner classes and the hidden outer reference |
 | 07 | Generics and erasure ★ | Type parameters, bounded types, PECS and wildcards, what erasure removes, why you cannot create a generic array, bridge methods |
@@ -60,6 +61,8 @@ Legend: **★** asked in almost every interview · **☆** asked at senior level
 | # | Topic | Objective |
 |---|---|---|
 | 16 | SQL fundamentals ★ | `SELECT` and the logical order of evaluation, the join types and what each does to row counts, `GROUP BY`/`HAVING` vs `WHERE`, subqueries vs joins, set operations, and three-valued logic — why `NULL = NULL` is not true and what that does to `NOT IN` |
+| 44 | Schema design and DDL ★ | Keys and constraints (primary, foreign, unique, `NOT NULL`, `DEFAULT`), normalisation and when to denormalise, `CHAR` vs `VARCHAR`, auto-increment, `DELETE` vs `TRUNCATE` vs `DROP`, the SQL command families, OLTP vs OLAP |
+| 45 | Advanced SQL and the classic query puzzles ★ | CTEs and recursive queries, temporary tables, window functions and `ROW_NUMBER`/`RANK`/`DENSE_RANK`, `CASE`, pivot, views, stored procedures vs functions, triggers, cursors, dynamic SQL and injection — then the puzzles interviewers set: Nth highest salary, duplicates, delete duplicates |
 | 17 | Indexes, execution plans and isolation ★ | What an index is and what it costs on write, composite indexes and leftmost-prefix, why a function on an indexed column kills it, reading an execution plan, and the four isolation levels with the anomalies each permits, plus locking and database deadlocks |
 | 18 | JPA and Hibernate mapping ★ | Reading: the active lab profile's persistence text, if it declares one. Entities, ids, relationships, the owning side, `@MappedSuperclass` |
 | 19 | Persistence context and lazy loading ★ | Reading: same text, persistence-context sections. Entity states, the first-level cache, `LazyInitializationException`, dirty checking |
@@ -85,13 +88,14 @@ Legend: **★** asked in almost every interview · **☆** asked at senior level
 |---|---|---|
 | 30 | Spring Boot auto-configuration ★ | What `@SpringBootApplication` unpacks to, starters, conditional configuration, how to see and override what Boot decided |
 | 31 | REST controllers ★ | `@RestController`, mapping and binding, `@RequestBody`/`@PathVariable`/`@RequestParam`, status codes, content negotiation, DTOs vs entities |
+| 46 | The Spring MVC request pipeline ☆ | `DispatcherServlet`, handler mapping and adapters, view resolution, interceptors vs servlet filters and where each runs |
 | 32 | Error handling ★ | `@ControllerAdvice`, `@ExceptionHandler`, designing an error contract, what must never leak into a response |
 
 ## Track H — Security
 
 | # | Topic | Objective |
 |---|---|---|
-| 33 | Spring Security basics ☆ | The filter chain, authentication vs authorisation, method security, common misconfigurations |
+| 33 | Spring Security basics ☆ | The filter chain, authentication vs authorisation, method security, common misconfigurations, JWT and stateless auth, password hashing and salting |
 
 ## Track I — JVM, memory and concurrency
 
@@ -99,7 +103,7 @@ Legend: **★** asked in almost every interview · **☆** asked at senior level
 |---|---|---|
 | 34 | JVM memory model ★ | Heap, stack, metaspace, what lives where, `OutOfMemoryError` vs `StackOverflowError`, reading a stack trace properly |
 | 35 | Garbage collection ★ | Generational collection, what makes an object unreachable, why finalizers are gone, GC pauses as a production symptom |
-| 36 | Class loading ☆ | Loaders and delegation, static init timing, `NoClassDefFoundError` vs `ClassNotFoundException` |
+| 36 | Class loading ☆ | Loaders and delegation, static init timing, `NoClassDefFoundError` vs `ClassNotFoundException`, reflection and what it costs |
 | 37 | Threads and the Java Memory Model ★ | Reading: the active lab profile's concurrency text, if it declares one. Visibility, happens-before, volatile vs synchronized, instruction reordering |
 | 38 | Synchronisation and locks ★ | `synchronized` mechanics, `ReentrantLock`, deadlock and how to prove one from a thread dump, race conditions |
 | 39 | Executors and async ★ | Reading: same text, executor sections. Thread pools and sizing, correct shutdown, `CompletableFuture` composition, rejection policies |
