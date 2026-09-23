@@ -46,7 +46,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 33 | Why constructors are not inherited | 04 | ☐ |
 | 34 | What does a constructor return? | 04 | ☐ |
 | 35 | Why constructors cannot be final, static or abstract | 04 | ☐ |
-| 36 | `equals()` vs `==` for any object (02a covered Strings only) | 03 | ☐ |
+| 36 | `equals()` vs `==` for any object (02a covered Strings only) | 03 | ✅ 03a, 2026-09-23 |
 | 37 | join(), sleep(), wait() | 37 | ☐ |
 | 38 | Achieving thread safety | 38 | ☐ |
 | 39 | Comparable vs Comparator | 09 | ☐ |

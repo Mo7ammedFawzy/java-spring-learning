@@ -13,10 +13,8 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 03a — equals and hashCode: the contract, and how breaking it corrupts a `HashMap`
-Step: 3 in progress. Starter written to `playground/03a-equals-hashcode/Ledger.java`, run and
-confirmed failing 3 of 4 checks; awaiting the learner's attempt. Steps 1 and 2 are done — do not
-re-teach them. (03 was split: 03b covers inheritance, symmetry and `instanceof` vs `getClass()`.)
+Topic: 04 — Classes, interfaces, abstraction (first topic with open `SOURCES.md` rows; 03b has none
+and waits). Step: not started.
 
 ## Completed
 
@@ -25,6 +23,7 @@ re-teach them. (03 was split: 03b covers inheritance, symmetry and `instanceof` 
 | 01 | Types, values and references | 2026-09-01, reviewed 2026-09-06 | solid | Review closed four of five weak spots. Exercise and task both clean on first attempt, diagnosed from symptoms with no TODOs. |
 | 02a | Strings — immutability, the pool, `==` vs `equals` | 2026-09-21 | ok | Exercise clean in one attempt. Drill: Q1 fully right with mechanism; Q2a answered the rule not the question; Q2b still ticked the blank final. |
 | 02b | Strings — `StringBuilder` and loop concatenation | 2026-09-22 | ok | Spotted the disguised `new StringBuilder(sb)` bug unprompted and fixed it. But located the cost in allocation rather than copying, and left the headline `toCsv` case untouched after writing the identical fix one method below. |
+| 03a | equals and hashCode — the contract, and how breaking it corrupts a `HashMap` | 2026-09-23 | shaky | Step 2 capped at two rounds. Needed a full Arabic step-by-step re-teach before step 3; Report B then took two wrong tries and two hints. Drill: Q1 right on `==` but opened with "`equals` compares values"; Q2 called `equals` without `hashCode` "not a bug". |
 
 ## Weak spots to revisit
 
@@ -70,6 +69,18 @@ re-teach them. (03 was split: 03b covers inheritance, symmetry and `instanceof` 
   was the one that failed, and whether the other one even ran** — never "what's wrong with this?".
   Related: a bucket was described as a slot holding one entry (`HashSet` of two equal-hash items
   answered as size 1). That half closed on the re-test.
+
+- **Calls a broken `equals`/`hashCode` contract "not a bug". 03a drill.** Asked flat "is overriding
+  `equals` without `hashCode` a bug?", answered "not a bug, it creates mini buckets", framing a
+  correctness failure as a storage detail. It is a bug: equal objects get different identity hashes,
+  so a `HashSet` keeps duplicates and `map.get(equalKey)` returns `null`. This happened one step
+  after fixing exactly that in `Sku`. Same pattern as the flat "is `+` slow?" in 02b. Re-test flat.
+- **"`equals` compares values" as a blanket rule. 03a drill.** `Object.equals` is `==`. It compares
+  values only when the class overrides it. The follow-up "depends on Point's equals" rescued it, but
+  the opening line is the one an interviewer writes down.
+- **Renaming a hashed key: did not reach remove-then-put unaided. 03a step 3.** First renamed to the
+  same name, then `put` the new key and left the old entry orphaned. Needed hints on left-to-right
+  argument evaluation, and that a fresh equal key finds the stored entry.
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
