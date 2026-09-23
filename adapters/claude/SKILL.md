@@ -21,6 +21,9 @@ C:/Projects/learning-system
 1. Read `C:/Projects/learning-system/core/BOOTSTRAP.md`.
 2. Follow it exactly, treating `<learning-home>` as the path above.
 3. Pass the user's argument (the topic, `next`, `review`, or nothing) to its dispatch table.
+4. Before the first lesson message, invoke the `show-me` skill. Its views are how this agent
+   delivers the forms listed in `core/METHODOLOGY.md` § *Delivery*. Skip its HTML-artifact step:
+   lessons stay in the console.
 
 If that file cannot be found, say so and stop — do not improvise a lesson from memory, and do not
 fall back to teaching without the shared methodology.
