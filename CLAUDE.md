@@ -51,3 +51,24 @@ RTL embedding controls — prefix `U+202B` (RLE), suffix `U+202C` (PDF):
 ```
 
 `U+2067` (RLI) … `U+2069` (PDI) works equally well. Apply per line, not per block.
+
+### Teaching language
+
+Arabic for the room, English for the material — and more Arabic than feels natural in English prose.
+Framing, encouragement, corrections and the nudge at the end of a step go in light Egyptian dialect.
+Code, technical terms (reference, heap, bucket, proxy, bean, erasure) and the reasoning for *why*
+something breaks stay English: that is the vocabulary an interview is conducted in.
+
+**A sentence worth memorising is given twice — the English line, then the Arabic line directly
+underneath it.** Never on the same line: a mixed right-to-left line scrambles in the terminal, with
+words and punctuation jumping to the wrong end. One line is either pure Arabic, with no English word,
+no backtick and no trailing English punctuation, or pure English.
+
+```
+A HashMap never searches — hashCode picks the bucket, equals picks the entry.
+‫الهاش ماب مابيدورش، الهاش كود بيختار المكان والإيكوالز بيختار العنصر.‬
+```
+
+The Arabic half is transliterated where a term has no natural translation, so the line stays pure
+Arabic. The English half is where the exact terms live — the Arabic is the memory hook, not the
+source of truth.
