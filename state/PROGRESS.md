@@ -128,3 +128,6 @@ constructors rows 32–35). Step: 1 delivered, resume at step 2.
 
 - **The interview PDFs in `sources/` take priority.** Added on 2026-09-23 — the learner wants them
   finished first. `state/SOURCES.md` maps every question to a topic and decides what comes next.
+  **The PDF also decides the lesson content, not only the topic** (asked for on 2026-09-24). Before
+  step 2, open the mapped question in the PDF (`pdftotext -layout`) and build steps 2 and 5 from
+  what it actually asks and claims. Anything beyond the PDF is a follow-up, never the core.
