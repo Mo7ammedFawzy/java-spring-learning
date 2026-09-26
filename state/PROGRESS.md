@@ -14,7 +14,7 @@ task log or require a real-world exercise or formal code review to mark it compl
 ## Current
 
 Topic: 04a — Abstract class vs interface (04 split: 04b composition + OOP rows 1–2, 04c
-constructors rows 32–35). Step: 1 delivered, resume at step 2.
+constructors rows 32–35). Step: 2 closed, resume at step 3.
 
 ## Completed
 
@@ -81,6 +81,13 @@ constructors rows 32–35). Step: 1 delivered, resume at step 2.
 - **Renaming a hashed key: did not reach remove-then-put unaided. 03a step 3.** First renamed to the
   same name, then `put` the new key and left the old entry orphaned. Needed hints on left-to-right
   argument evaluation, and that a fresh equal key finds the stored entry.
+
+- **`private` interface methods: read as `default`. Two rounds, capped in 04a step 2.** Knew Java 9
+  added `private` methods, yet said `(b)` compiles "but I don't know why", then on the re-test called
+  `private String wrap(...)` "a default method" and said an implementor can call it. It cannot:
+  `private` is visible only inside the interface body; it exists so defaults share a helper without
+  leaking it into every implementor's API. Re-test by asking who can call a given interface member.
+  Diamond fix syntax closed on the re-test (`A.super.who()` inside the override).
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
