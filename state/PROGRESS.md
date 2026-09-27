@@ -13,8 +13,8 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 04a — Abstract class vs interface (04 split: 04b composition + OOP rows 1–2, 04c
-constructors rows 32–35). Step: 2 closed, resume at step 3.
+Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: not started. 04c
+(constructors, rows 32–35) follows.
 
 ## Completed
 
@@ -24,6 +24,7 @@ constructors rows 32–35). Step: 2 closed, resume at step 3.
 | 02a | Strings — immutability, the pool, `==` vs `equals` | 2026-09-21 | ok | Exercise clean in one attempt. Drill: Q1 fully right with mechanism; Q2a answered the rule not the question; Q2b still ticked the blank final. |
 | 02b | Strings — `StringBuilder` and loop concatenation | 2026-09-22 | ok | Spotted the disguised `new StringBuilder(sb)` bug unprompted and fixed it. But located the cost in allocation rather than copying, and left the headline `toCsv` case untouched after writing the identical fix one method below. |
 | 03a | equals and hashCode — the contract, and how breaking it corrupts a `HashMap` | 2026-09-23 | shaky | Step 2 capped at two rounds. Needed a full Arabic step-by-step re-teach before step 3; Report B then took two wrong tries and two hints. Drill: Q1 right on `==` but opened with "`equals` compares values"; Q2 called `equals` without `hashCode` "not a bug". |
+| 04a | Abstract class vs interface | 2026-09-27 | ok | Step 2 capped on `private` interface methods. Step 3: first put the counter in `FileSink`, corrected without a hint, then clean fix (abstract hooks, own field per class) with the right reason. Drill: Q1 right; Q2 listed state, constructors, visibility but missed `final` methods. |
 
 ## Weak spots to revisit
 
@@ -88,6 +89,12 @@ constructors rows 32–35). Step: 2 closed, resume at step 3.
   `private` is visible only inside the interface body; it exists so defaults share a helper without
   leaking it into every implementor's API. Re-test by asking who can call a given interface member.
   Diamond fix syntax closed on the re-test (`A.super.who()` inside the override).
+  04a drill: now knows `private` exists and breaks "all methods are public"; "who can call it" was not re-tested.
+
+- **Abstract class vs interface: missed `final` as a reason. 04a drill.** Listed state, constructors
+  and visibility, but not that an abstract class can make a template method `final`; an interface
+  `default` can always be overridden, so the interface cannot lock its algorithm. Re-test by asking
+  how to stop an implementor from overriding `export()`.
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not

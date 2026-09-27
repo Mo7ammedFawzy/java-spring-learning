@@ -17,7 +17,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 4 | Is Java pass-by-value? | 01 | ✅ 01, 2026-09-06 |
 | 5 | Is Java purely object-oriented? | 01 | ✅ 01, 2026-09-06 |
 | 6 | Wrapper classes, autoboxing and unboxing | 01 | ✅ 01, 2026-09-06 |
-| 7 | Abstract class vs interface | 04 | ☐ |
+| 7 | Abstract class vs interface | 04 | ✅ 04a, 2026-09-27 |
 | 8 | Collections — Set and List | 08 | ☐ |
 | 9 | Map implementations | 08 | ☐ |
 | 10 | HashMap vs HashSet vs Hashtable | 08 | ☐ |
