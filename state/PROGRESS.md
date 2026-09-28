@@ -13,7 +13,7 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: not started. 04c
+Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: 2 done, resume at step 3. 04c
 (constructors, rows 32–35) follows.
 
 ## Completed
@@ -95,6 +95,18 @@ Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: no
   and visibility, but not that an abstract class can make a template method `final`; an interface
   `default` can always be overridden, so the interface cannot lock its algorithm. Re-test by asking
   how to stop an implementor from overriding `export()`.
+
+- **Reachability: did not answer whether a leaked part is GC-eligible. Two rounds, capped in 04b step 2.**
+  `Engine e = new Car().getEngine();` then asked if the `Engine` can be collected, answered "idk".
+  It cannot: `e` still references it. The `Car` is collectable and the `Engine` is not, which is
+  why a getter turns composition into aggregation. The fix half was right (defensive copy
+  `return new Engine(engine)`). Also first said a leaking getter was still composition because
+  `new` happened inside. Re-test by asking which object outlives which.
+- **Inheritance: is-a is not enough. Two rounds, capped in 04b step 2.** Gave only "use it when
+  is-a holds", then "I don't know" for the second condition. `CountingSet extends HashSet` is a
+  valid is-a and still counts double. The missing condition is that the parent is **designed and
+  documented for extension** (it says which methods call which, as `AbstractList` does), or that
+  you own it. Re-test flat: "`X` is a `Y`, so should `X extends Y`?"
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
