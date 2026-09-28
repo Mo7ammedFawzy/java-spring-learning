@@ -46,7 +46,8 @@ function Install-Adapter {
     $dir = Split-Path -Parent $Dest
     if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
 
-    $content = (Get-Content $Source -Raw).Replace($placeholder, $repoFwd)
+    # -Encoding UTF8 on read too: Windows PowerShell 5.1 reads BOM-less UTF-8 as ANSI and mangles em-dashes
+    $content = (Get-Content $Source -Raw -Encoding UTF8).Replace($placeholder, $repoFwd)
     # -Encoding utf8 so the em-dashes in the adapter text survive
     $content | Out-File -FilePath $Dest -Encoding utf8 -NoNewline
     Write-Host "installed  $Dest"
