@@ -73,8 +73,10 @@ and stop.
 After step 5, update `state/PROGRESS.md`:
 
 - Move the topic to **Completed** with today's date and a confidence of `solid`, `ok` or `shaky`
-- Add what they missed to **Weak spots to revisit** — be specific ("missed that erasure makes the
-  overload ambiguous", not "generics")
+- Add what they missed to **Weak spots to revisit** as named misconceptions, in the line format
+  that file's header gives — be specific ("missed that erasure makes the overload ambiguous", not
+  "generics")
+- Update `Held` on the entry the warm-up tested. At `Held: 2/2` move it to the "Closed on …" line
 - In `state/SOURCES.md`, tick every row mapped to this topic with the topic and date. A row is
   ticked only when its topic closes, never after step 1 alone — that tick is what stops the same
   concept being taught twice
@@ -85,7 +87,7 @@ will walk into an interview trusting it.
 
 Then offer the next topic — do not start it.
 
-## Four traps
+## Five traps
 
 1. **Teaching the framework instead of the language.** Spring questions in interviews bottom out in
    Java — proxies are dynamic proxies, transactional self-invocation is a `this` reference, bean

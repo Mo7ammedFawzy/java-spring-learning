@@ -8,7 +8,9 @@ interviewer sees it:
 - **Passes** — what a strong candidate says
 - **Then** — the follow-up, because the real signal is in the second question
 
-Ask the questions first and wait for answers. Only then reveal Shallow/Passes/Then. This file is a
+Ask the questions first and wait for answers. Only then reveal Shallow/Passes/Then. Which question
+opens, and whether a probe comes before the reveal, adapts to the learner — see step 5 in
+`core/METHODOLOGY.md`. This file is a
 starting set, not a ceiling — generate more in the same shape when a topic needs deeper drilling,
 and add any question the user is asked in a real interview.
 

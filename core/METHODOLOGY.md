@@ -18,6 +18,28 @@ budget below, it is two concepts. Split it and say so.
 | 4 | Summary card for revision | ~2 min |
 | 5 | Interview drill — 1–2 focused questions | ~5 min |
 
+**Steps are gates, not a script.** The five gates are fixed; how each step is delivered adapts to
+the concept and to the answers so far. If step 2 is answered right, with reasons, first try, skip
+re-teaching and make step 3 the harder variant. If step 2 needed its re-test, step 3 stays at the
+base level. Adapting moves time between steps — it never adds any.
+
+---
+
+## Interaction formats
+
+Shapes for the existing step-2 questions, step-3 task and step-5 drill — not extra steps. Use the
+ones that fit the concept; never all of them in one lesson.
+
+| Format | Shape | Best for |
+|---|---|---|
+| Prediction | Snippet → "what prints?" — asked before it is explained | Concepts with a surprising output |
+| Trap Card | One plausible line → "safe or trap, and why?" | A fast check on a boundary |
+| Battle | Two versions side by side → "which wins, and when does the other one win?" | Choice topics — abstract class vs interface, `ArrayList` vs `LinkedList` |
+| Debugger | Wrong output or stack trace plus code → "which line, which method failed?" | "What breaks" topics; step 3 when the concept is about reading code, not writing it |
+| Teach-back | "Explain it to a junior in two sentences" | Articulation — closes step 2 or the drill |
+
+Prediction and Debugger both satisfy step 2's predict-or-spot-the-bug rule.
+
 ---
 
 ## Delivery
@@ -63,7 +85,8 @@ because it is the offline revision artefact.
 ## Step 1 — Teach one concept
 
 **One** concept. Not "collections" — `HashMap` resizing, or the `equals`/`hashCode` contract. If the
-explanation needs more than about 400 words, the topic is too big; split it and say so.
+explanation needs more than about 250 words, the topic is too big; split it and say so. Prefer a
+small example over a longer explanation: every explanation ends in the code it explains.
 
 **Before teaching, list the source rows mapped to the lesson.** Each one is either covered by this
 step 1 or moved now to the topic that will teach it. A row left mapped but untaught gets drilled in
@@ -79,8 +102,18 @@ Contains:
   what makes it stick.
 - **The boundary** — where the rule stops applying. Interviewers probe exactly here.
 
-Does **not** contain: questions, exercises, or a preview of the answer. End the message after the
-explanation.
+Does **not** contain: questions on this concept, exercises, or a preview of the answer — with two
+exceptions:
+
+- **Prediction opener (optional).** When the concept has a surprising output, open with the snippet
+  and "what prints?", and wait. The explanation then resolves the learner's answer. When used, step 2
+  drops to two questions, which pays the time back.
+- **Warm-up (always, when a weak spot is open).** The last line of the message is one flat
+  reinforcement question from **Weak spots to revisit** in `state/PROGRESS.md`, asked in that entry's
+  own "Re-test" framing. Pick an open entry that touches today's topic first, else the one re-tested
+  least recently. The reply to step 1 is otherwise empty, so this costs no round trip. Give the
+  verdict in one line at the top of step 2: right → `Held` goes up by one; wrong → the correct answer
+  in one line, entry stays open. No re-teach here — that is what `review` is for.
 
 For topics with existing repo documentation (see the active lab profile), step 1 becomes: name the
 sections to read, give the mental model and the boundary yourself, then move to step 2. Do not
@@ -102,6 +135,11 @@ paraphrase a document the user can read.
 | Spot-the-bug | Confirms they can apply it under noise |
 
 At least one must be predict-the-output or spot-the-bug. Recall-only questions certify nothing.
+If an open weak spot touches this topic, one of the two or three questions targets it — it counts
+toward the cap, it is not an extra question.
+
+A wrong answer is recorded as a **named misconception** — a short, specific label ("`final` freezes
+the object"), not "got it wrong". That label is what later warm-ups and drills are built from.
 
 When an answer is wrong: **say it is wrong, say precisely why, and re-teach that piece.** Then
 re-test it **once**. An answer that is right for the wrong reason counts as wrong.
@@ -155,12 +193,20 @@ implementation is correct, say so plainly and do not manufacture nitpicks.
 ## Step 4 — Summary card
 
 Write `<learning-home>/playground/<NN>-<topic>/SUMMARY.md` and give the user the path. This is the
-revision artefact — the thing they read on the way to an interview, so it is compressed, not prose:
+revision artefact — the thing they read on the way to an interview, so it is a card, not notes.
+About 25 lines at most:
 
-- The mental model in one sentence
-- The rules, and any decision table worth keeping
-- The traps
-- **Mistakes actually made** — what this learner got wrong in steps 2 and 3, and why
+```markdown
+# NN — Topic
+**Mental model:** one sentence
+**Key rule:** the rule — plus one table or view, only if it earns its place
+**Classic trap:** a 1–4 line snippet, and what it really does
+**Interview answer (30 s):** 2–3 sentences, the passing version
+**My mistake:** what I got wrong in this lesson → the correction
+```
+
+If nothing was missed, "My mistake" says so in one line. Cards written before this format stay as
+they are.
 
 **Gate:** file written, path given.
 
@@ -174,6 +220,15 @@ wait — this is a short interview drill, not a reading.
 
 **Drill only what steps 1–3 taught.** A mapped row the lesson did not cover is not drilled and not
 ticked. Move it to the topic that will teach it.
+
+**The drill adapts to the learner:**
+
+- **Pick by performance.** Steps 2–3 clean → open with the bank's *Then* or a senior-level variant.
+  Shaky → the base question.
+- **Probe before revealing.** A shallow answer gets **one** probe — "why?", or the counter-case that
+  breaks it. A passing answer escalates to the *Then*. One probe per question at most, then reveal.
+- **Frame against open meta weak spots.** If the learner tends to answer the adjacent question, ask
+  it flat or inverted. If answers arrive without reasoning, say up front that the reason is graded.
 
 Then for each:
 

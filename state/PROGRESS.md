@@ -11,6 +11,10 @@ topic closes.
 a weak spot. Record the next topic, confidence, and specific gap; do not turn each lesson into a
 task log or require a real-world exercise or formal code review to mark it complete.
 
+**Weak spot line format** (new entries; older ones without `Held` count as `0/2`):
+`- **<misconception label>** (topic, date). Why it is wrong. Re-test: <framing>. Held: n/2`
+Each lesson's warm-up re-tests one entry; two holds in a row closes it.
+
 ## Current
 
 Topic: 04c — Constructors (SOURCES rows 32–35). Step: not started.
