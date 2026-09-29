@@ -38,8 +38,6 @@ Three layers, separated so two agents cannot drift apart:
 - `adapters/` — per-agent entry points. Pointers only. Copying a rule out of `core/` into an adapter
   is the bug this layer exists to prevent.
 
-State lives in `state/PROGRESS.md`; learner exercise code in `playground/` (gitignored).
-
 ## Arabic text output
 
 The Claude Code remote client does not set RTL paragraph direction, so Arabic lines start from the

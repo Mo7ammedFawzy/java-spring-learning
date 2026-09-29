@@ -1,0 +1,23 @@
+{
+  "outputStyle": "Learning",
+  "skillOverrides": {
+    "codebase-design": "off",
+    "diagnosing-bugs": "off",
+    "find-skills": "off",
+    "prototype": "off",
+    "research": "off",
+    "resolving-merge-conflicts": "off",
+    "tdd": "off",
+    "wizard": "off",
+    "writing-for-agents": "off",
+    "grill-me": "off",
+    "improve-codebase-architecture": "off",
+    "to-questionnaire": "off",
+    "triage": "off",
+    "wait-what": "off",
+    "wayfinder": "off"
+  },
+  "enabledPlugins": {
+    "ui-ux-pro-max@ui-ux-pro-max-skill": false
+  }
+}
