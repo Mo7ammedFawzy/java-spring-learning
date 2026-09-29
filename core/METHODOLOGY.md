@@ -65,6 +65,10 @@ because it is the offline revision artefact.
 **One** concept. Not "collections" — `HashMap` resizing, or the `equals`/`hashCode` contract. If the
 explanation needs more than about 400 words, the topic is too big; split it and say so.
 
+**Before teaching, list the source rows mapped to the lesson.** Each one is either covered by this
+step 1 or moved now to the topic that will teach it. A row left mapped but untaught gets drilled in
+step 5 on material the learner never saw.
+
 Contains:
 
 - **The mental model first** — the one sentence that makes the rest obvious. ("A generic type is
