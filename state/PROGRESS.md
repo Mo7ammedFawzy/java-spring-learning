@@ -13,8 +13,7 @@ task log or require a real-world exercise or formal code review to mark it compl
 
 ## Current
 
-Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: 2 done, resume at step 3. 04c
-(constructors, rows 32–35) follows.
+Topic: 04c — Constructors (SOURCES rows 32–35). Step: not started.
 
 ## Completed
 
@@ -25,6 +24,7 @@ Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: 2 
 | 02b | Strings — `StringBuilder` and loop concatenation | 2026-09-22 | ok | Spotted the disguised `new StringBuilder(sb)` bug unprompted and fixed it. But located the cost in allocation rather than copying, and left the headline `toCsv` case untouched after writing the identical fix one method below. |
 | 03a | equals and hashCode — the contract, and how breaking it corrupts a `HashMap` | 2026-09-23 | shaky | Step 2 capped at two rounds. Needed a full Arabic step-by-step re-teach before step 3; Report B then took two wrong tries and two hints. Drill: Q1 right on `==` but opened with "`equals` compares values"; Q2 called `equals` without `hashCode` "not a bug". |
 | 04a | Abstract class vs interface | 2026-09-27 | ok | Step 2 capped on `private` interface methods. Step 3: first put the counter in `FileSink`, corrected without a hint, then clean fix (abstract hooks, own field per class) with the right reason. Drill: Q1 right; Q2 listed state, constructors, visibility but missed `final` methods. |
+| 04b | Composition over inheritance + OOP | 2026-09-29 | shaky | Step 2: Set size wrong, leaking getter called composition; two re-tests capped (GC reachability, "designed for extension"). Step 3: one level-1 hint, composition fix right first try, then closed two leaks (`public` field, `public final`). Why `ArrayList` skipped the limit: "return type boolean". Drill: Q2 passed with the right conditions. (Q1 on the four OOP concepts was drilled without being taught — not graded; SOURCES row 1 moved to 05.) |
 
 ## Weak spots to revisit
 
@@ -107,6 +107,12 @@ Topic: 04b — Composition over inheritance + OOP (SOURCES rows 1–2). Step: 2 
   valid is-a and still counts double. The missing condition is that the parent is **designed and
   documented for extension** (it says which methods call which, as `AbstractList` does), or that
   you own it. Re-test flat: "`X` is a `Y`, so should `X extends Y`?"
+
+- **Wrong reason for a bypassed override. 04b step 3.** Said `ArrayList.addAll` skipped the `add`
+  override because of "a different method with return type boolean". It copies the array with
+  `System.arraycopy` and never calls `add`. Self-use goes either way (`HashSet` calls it).
+- **`final` read as protection. 04b step 3.** Fixed a leaking `public` field by adding `final`.
+  `final` freezes the reference, not the object; `cart.list.addAll(...)` still worked.
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not

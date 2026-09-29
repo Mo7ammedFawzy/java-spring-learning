@@ -11,8 +11,8 @@ the lesson teaches the mechanism, the PDF supplies the question.
 
 | # | Question | Topic | Done |
 |---|---|---|---|
-| 1 | OOP — the four concepts | 04 | ☐ |
-| 2 | Inheritance, association, composition, aggregation | 04 | ☐ |
+| 1 | OOP — the four concepts | 05 | ☐ |
+| 2 | Inheritance, association, composition, aggregation | 04 | ✅ 04b, 2026-09-29 |
 | 3 | Overriding vs overloading (runtime vs compile time) | 05 | ☐ |
 | 4 | Is Java pass-by-value? | 01 | ✅ 01, 2026-09-06 |
 | 5 | Is Java purely object-oriented? | 01 | ✅ 01, 2026-09-06 |

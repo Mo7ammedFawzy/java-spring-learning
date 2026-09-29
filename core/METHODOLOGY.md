@@ -166,7 +166,12 @@ revision artefact — the thing they read on the way to an interview, so it is c
 
 One or two high-value questions from `core/INTERVIEW-BANK.md` for that topic — or an open row in
 `state/SOURCES.md` mapped to it, which is preferred when one exists. Ask them **first** and
-wait — this is a short interview drill, not a reading. Then for each:
+wait — this is a short interview drill, not a reading.
+
+**Drill only what steps 1–3 taught.** A mapped row the lesson did not cover is not drilled and not
+ticked. Move it to the topic that will teach it.
+
+Then for each:
 
 - The **shallow answer** that sounds right and fails
 - The **answer that passes**
