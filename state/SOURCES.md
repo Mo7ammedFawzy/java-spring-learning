@@ -42,10 +42,10 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 29 | Running code before `main` | 06 | ☐ |
 | 30 | Varargs | 05 | ☐ |
 | 31 | `static public void` instead of `public static void` | 06 | ☐ |
-| 32 | Purpose of the default constructor | 04 | ☐ |
-| 33 | Why constructors are not inherited | 04 | ☐ |
-| 34 | What does a constructor return? | 04 | ☐ |
-| 35 | Why constructors cannot be final, static or abstract | 04 | ☐ |
+| 32 | Purpose of the default constructor | 04 | ✅ 04c, 2026-09-30 |
+| 33 | Why constructors are not inherited | 04 | ✅ 04c, 2026-09-30 |
+| 34 | What does a constructor return? | 04 | ✅ 04c, 2026-09-30 |
+| 35 | Why constructors cannot be final, static or abstract | 04 | ✅ 04c, 2026-09-30 |
 | 36 | `equals()` vs `==` for any object (02a covered Strings only) | 03 | ✅ 03a, 2026-09-23 |
 | 37 | join(), sleep(), wait() | 37 | ☐ |
 | 38 | Achieving thread safety | 38 | ☐ |

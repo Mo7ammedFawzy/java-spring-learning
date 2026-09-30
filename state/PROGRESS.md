@@ -17,7 +17,7 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 04c — Constructors (SOURCES rows 32–35). Step: not started.
+Topic: 05 — Polymorphism and dispatch (SOURCES rows 1, 3, 26, 30). Step: not started.
 
 ## Completed
 
@@ -29,6 +29,7 @@ Topic: 04c — Constructors (SOURCES rows 32–35). Step: not started.
 | 03a | equals and hashCode — the contract, and how breaking it corrupts a `HashMap` | 2026-09-23 | shaky | Step 2 capped at two rounds. Needed a full Arabic step-by-step re-teach before step 3; Report B then took two wrong tries and two hints. Drill: Q1 right on `==` but opened with "`equals` compares values"; Q2 called `equals` without `hashCode` "not a bug". |
 | 04a | Abstract class vs interface | 2026-09-27 | ok | Step 2 capped on `private` interface methods. Step 3: first put the counter in `FileSink`, corrected without a hint, then clean fix (abstract hooks, own field per class) with the right reason. Drill: Q1 right; Q2 listed state, constructors, visibility but missed `final` methods. |
 | 04b | Composition over inheritance + OOP | 2026-09-29 | shaky | Step 2: Set size wrong, leaking getter called composition; two re-tests capped (GC reachability, "designed for extension"). Step 3: one level-1 hint, composition fix right first try, then closed two leaks (`public` field, `public final`). Why `ArrayList` skipped the limit: "return type boolean". Drill: Q2 passed with the right conditions. (Q1 on the four OOP concepts was drilled without being taught — not graded; SOURCES row 1 moved to 05.) |
+| 04c | Constructors | 2026-09-30 | shaky | Mechanics good, articulation not. Step 2: Q1 called the hidden `super()` failure a "missing field", then passed the re-test with reasons. Step 3 clean first try, and did not add a no-arg constructor to the parent. Drill: both questions failed after one probe ("why not inherited", "what does a constructor return"). |
 
 ## Weak spots to revisit
 
@@ -99,6 +100,19 @@ Topic: 04c — Constructors (SOURCES rows 32–35). Step: not started.
   and visibility, but not that an abstract class can make a template method `final`; an interface
   `default` can always be overridden, so the interface cannot lock its algorithm. Re-test by asking
   how to stop an implementor from overriding `export()`.
+  04c warm-up: said `final` (right), but also offered `private`/`static`, which break a public
+  template method. Gave the interface reason as "only signatures" rather than "`final` is not allowed
+  on an interface method, so a `default` can always be overridden". Held: 0/2
+
+- **Constructors not inherited: gave the consequence as the reason. 04c drill.** Said "because they
+  can't be overridden". That follows from not being inherited; it is not why. If `Employee(String)`
+  were inherited, `new Manager("Sara")` would build a `Manager` whose own fields (`reports`) nobody
+  initialised. Each class must initialise its own part. "I don't know" after the probe. Re-test by
+  asking what an object built through an inherited parent constructor would look like. Held: 0/2
+- **"A constructor returns the new instance". 04c drill.** A constructor returns nothing, not even
+  `void`. It runs on an object `new` already allocated, and `new` returns the reference. This was
+  drawn in step 1. It also answered part two of the question instead of part one (see the
+  adjacent-question entry). Re-test flat: "what does a constructor return?" Held: 0/2
 
 - **Reachability: did not answer whether a leaked part is GC-eligible. Two rounds, capped in 04b step 2.**
   `Engine e = new Car().getEngine();` then asked if the `Engine` can be collected, answered "idk".
