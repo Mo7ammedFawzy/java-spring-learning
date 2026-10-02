@@ -17,7 +17,7 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). Step: 3 set, awaiting attempt at base level (IDE scratches, `learn/05a-overriding-overloading/Main.java`). Step 2: Q1 and Q2 wrong, re-test A passed, re-test B output right but reason missed (weak spot recorded), Q3 right. Warm-up (`final` on a template method) failed again: offered `static`/`private`, gave "interface methods are public" as the reason — stays 0/2. Rows 1 and 30 wait for 05b.
+Topic: 05b — Dynamic dispatch, the four OOP concepts, varargs (SOURCES rows 1, 30). Step: not started.
 
 ## Completed
 
@@ -30,6 +30,7 @@ Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). St
 | 04a | Abstract class vs interface | 2026-09-27 | ok | Step 2 capped on `private` interface methods. Step 3: first put the counter in `FileSink`, corrected without a hint, then clean fix (abstract hooks, own field per class) with the right reason. Drill: Q1 right; Q2 listed state, constructors, visibility but missed `final` methods. |
 | 04b | Composition over inheritance + OOP | 2026-09-29 | shaky | Step 2: Set size wrong, leaking getter called composition; two re-tests capped (GC reachability, "designed for extension"). Step 3: one level-1 hint, composition fix right first try, then closed two leaks (`public` field, `public final`). Why `ArrayList` skipped the limit: "return type boolean". Drill: Q2 passed with the right conditions. (Q1 on the four OOP concepts was drilled without being taught — not graded; SOURCES row 1 moved to 05.) |
 | 04c | Constructors | 2026-09-30 | shaky | Mechanics good, articulation not. Step 2: Q1 called the hidden `super()` failure a "missing field", then passed the re-test with reasons. Step 3 clean first try, and did not add a no-arg constructor to the parent. Drill: both questions failed after one probe ("why not inherited", "what does a constructor return"). |
+| 05a | Overriding vs overloading, static hiding | 2026-10-02 | ok | Step 2: Q1 and Q2 wrong, re-test A passed, re-test B output right but reason missed, Q3 right. Step 3: one level-1 hint, then all three reports fixed, with B moved onto the receiver rather than `instanceof`; `equals(Object)` cast without a type check. Drill: both passed with the mechanism (declared type, compile time), no probe needed. Never said the word "hiding". |
 
 ## Weak spots to revisit
 
@@ -102,7 +103,9 @@ Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). St
   how to stop an implementor from overriding `export()`.
   04c warm-up: said `final` (right), but also offered `private`/`static`, which break a public
   template method. Gave the interface reason as "only signatures" rather than "`final` is not allowed
-  on an interface method, so a `default` can always be overridden". Held: 0/2
+  on an interface method, so a `default` can always be overridden".
+  05a warm-up: failed again, offered `static`/`private` and gave "interface methods are public" as
+  the reason. Held: 0/2
 
 - **Constructors not inherited: gave the consequence as the reason. 04c drill.** Said "because they
   can't be overridden". That follows from not being inherited; it is not why. If `Employee(String)`
@@ -137,7 +140,15 @@ Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). St
   re-test got the output (`prod`) but said the method "only exists in `Config`" while `TestConfig`
   declares its own `env()`. The reason is binding: the compiler turns `env()` inside `Config` into
   `Config.env()`, and a static call is never dispatched. Re-test by asking why the subclass's
-  static method was *not* picked. Held: 0/2
+  static method was *not* picked.
+  05a drill (2026-10-02): asked in that framing, gave the binding reason unaided ("the compiler
+  picks the declared type and ignores the actual object"). Not counted as a hold: same sitting as
+  the hint table and the card. Did not use the word "hiding". Held: 0/2
+- **`equals(Object)` that casts without a type check. 05a step 3** (05a, 2026-10-02). Wrote
+  `Tag tag = (Tag) obj;` then a null check, so `new Tag("java").equals("java")` throws
+  `ClassCastException` where the contract wants `false`. Also left `@Override` off `equals` while
+  adding it to the other two fixes. Re-test: hand over an `equals` and ask what it returns for a
+  `String` argument. Held: 0/2
 - **`@Override` read as a marker for the reader. 05a step 2.** It is a compiler check: no overridden
   method, no compile. Closed on the re-test (said adding it to a static method is a compile error).
 

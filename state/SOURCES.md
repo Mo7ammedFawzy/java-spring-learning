@@ -13,7 +13,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 |---|---|---|---|
 | 1 | OOP — the four concepts | 05 | ☐ |
 | 2 | Inheritance, association, composition, aggregation | 04 | ✅ 04b, 2026-09-29 |
-| 3 | Overriding vs overloading (runtime vs compile time) | 05 | ☐ |
+| 3 | Overriding vs overloading (runtime vs compile time) | 05 | ✅ 05a, 2026-10-02 |
 | 4 | Is Java pass-by-value? | 01 | ✅ 01, 2026-09-06 |
 | 5 | Is Java purely object-oriented? | 01 | ✅ 01, 2026-09-06 |
 | 6 | Wrapper classes, autoboxing and unboxing | 01 | ✅ 01, 2026-09-06 |
@@ -36,7 +36,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 23 | SOLID principles | 42 | ☐ |
 | 24 | static keyword; can static methods be overridden? | 06 | ☐ |
 | 25 | Static initialisation blocks | 06 | ☐ |
-| 26 | Can static methods be overridden? (hiding) | 05 | ☐ |
+| 26 | Can static methods be overridden? (hiding) | 05 | ✅ 05a, 2026-10-02 |
 | 27 | Is String a data type? | 02 | ✅ 02a, 2026-09-21 |
 | 28 | String vs StringBuffer vs StringBuilder | 02 | ✅ 02b, 2026-09-22 |
 | 29 | Running code before `main` | 06 | ☐ |
