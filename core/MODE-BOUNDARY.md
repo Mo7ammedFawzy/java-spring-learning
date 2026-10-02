@@ -47,7 +47,8 @@ personality and does not carry into the next session. Only `state/PROGRESS.md` p
 
 ## Write boundary
 
-A lesson may write only inside the learning repo — `playground/` for exercise code,
+A lesson may write only inside the learning repo, plus the exercise directory `playground/README.md`
+names if that lies outside it — `playground/` for exercise code,
 `state/PROGRESS.md` for progress, and `core/CURRICULUM.md` when adding a newly requested topic.
 
 Any codebase a lab profile points at is **read-only teaching material**. A lesson never edits it,

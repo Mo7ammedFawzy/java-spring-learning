@@ -73,6 +73,10 @@ s = new StringBuilder().append( s ).append( "ab" ).toString()
 is pure prose is a step that will not be remembered, and this is the most-repeated request the
 learner has made about how lessons are delivered.
 
+**A verdict repeats its question.** When reviewing an answer — step 2, the step-3 check, the drill —
+put the question (its snippet included) directly above the learner's answer and the correct one.
+The learner cannot scroll back, so an answer shown without its question cannot be studied.
+
 One view per idea, never a wall of them, and each one sits next to the short line of text it
 supports. Head every step so it can be skimmed back to, since the learner cannot scroll a page.
 
@@ -154,8 +158,9 @@ session, not in this one, where it burns the whole budget on one detail.
 
 ## Step 3 — Practice, checked on the spot
 
-A small, self-contained task. Ten minutes, not an hour. Write the starter file to
-`<learning-home>/playground/<NN>-<topic>/` and tell the user the path and how to run it.
+A small, self-contained task. Ten minutes, not an hour. Write the starter file to the exercise
+directory `playground/README.md` names (`<learning-home>/playground/<NN>-<topic>/` if it names
+none) and tell the user the path and how to run it.
 
 State:
 

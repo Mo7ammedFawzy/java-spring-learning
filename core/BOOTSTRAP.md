@@ -61,10 +61,11 @@ Follow `core/METHODOLOGY.md` exactly: five steps, **one step per message**, 20â€
 whole concept, each step ending only when its gate is met. The strict gate on step 3 is not
 optional, and neither is the two-round cap on re-testing in step 2.
 
-Exercise and task code goes in `<learning-home>/playground/<NN>-<topic>/`. See
-`playground/README.md` for how the learner runs it.
+Exercise and task code goes in the exercise directory `playground/README.md` names â€”
+`<learning-home>/playground/<NN>-<topic>/` if it names none. That file also says how the learner
+runs it.
 
-**Never edit a file outside `<learning-home>` during a lesson.** Files in a lab codebase are
+**Never edit a file outside `<learning-home>` and that exercise directory during a lesson.** Files in a lab codebase are
 read-only teaching material. If a lesson would benefit from changing that code, describe the change
 and stop.
 
