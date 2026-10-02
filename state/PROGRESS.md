@@ -169,6 +169,18 @@ Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). St
   words and punctuation jump to the wrong end and the sentence becomes unreadable. If a thought
   needs an English term or a code token, write that whole thought in English.
 
+- **A sentence worth memorising is given twice** — the English line, then the Arabic line directly
+  underneath it, never on the same line:
+
+  ```
+  A HashMap never searches — hashCode picks the bucket, equals picks the entry.
+  ‫الهاش ماب مابيدورش، الهاش كود بيختار المكان والإيكوالز بيختار العنصر.‬
+  ```
+
+  The Arabic half is transliterated where a term has no natural translation, so the line stays pure
+  Arabic. The English half is where the exact terms live — the Arabic is the memory hook, not the
+  source of truth.
+
 - **Keep lessons to 20–30 minutes.** Requested on 2026-09-16: five steps, no mandatory real-world
   task, no formal code-review step, and no drilling one detail past two rounds. If a concept will
   not fit, split it into two lessons rather than overrunning.

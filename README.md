@@ -1,8 +1,8 @@
 # Learning System
 
 A Java + Spring Boot mentoring and interview-coaching system, shared across coding agents. One
-methodology, one curriculum, one progress file — usable from Claude Code and OpenCode, with real
-codebases plugged in as optional "labs".
+methodology, one curriculum, one progress file — usable from Claude Code, OpenCode and Codex, with
+real codebases plugged in as optional "labs".
 
 Independent of any company codebase: delete `labs/` and the system still works.
 
@@ -15,7 +15,7 @@ Independent of any company codebase: delete `labs/` and the system still works.
 /learn review          re-test only the things you were shaky on
 ```
 
-Works the same from either agent. Also triggered by unmistakable phrasings — "teach me X", "quiz me
+Works the same from every agent. Also triggered by unmistakable phrasings — "teach me X", "quiz me
 on X", "start a lesson". A normal question ("why is this service throwing?") does **not** trigger
 it; see `core/MODE-BOUNDARY.md`.
 
@@ -64,13 +64,14 @@ adapters/        thin per-agent entry points — pointers only
 ## Architecture in one rule
 
 **Methodology lives in exactly one place.** `core/` never names an agent or a company codebase.
-Agent-specific plumbing lives in `adapters/`; codebase-specific facts live in `labs/`. Both agents
-read the same `core/`, which is why they cannot drift apart.
+Agent-specific plumbing lives in `adapters/`; codebase-specific facts live in `labs/`. Every agent
+reads the same `core/`, which is why they cannot drift apart. Project rules follow the same shape:
+`AGENTS.md` is the one rule file, and `CLAUDE.md` only imports it.
 
 The grep test that enforces it — run after editing `core/`:
 
 ```bash
-grep -rniE 'claude|opencode|anthropic|8080|namasoft|\bnama\b|dev-docs|\bskill\b' core/
+grep -rniE 'claude|opencode|codex|anthropic|8080|namasoft|\bnama\b|dev-docs|\bskill\b' core/
 ```
 
 It must return nothing.
@@ -87,11 +88,11 @@ Get this repo onto the machine, then run the installer from inside it:
 ```
 
 It detects where the repo lives, writes the adapters into the global agent config directories with
-that path substituted, verifies they resolve, and reports whether `java`, `claude` and `opencode`
-are present. Re-run it any time you move the repo. `--uninstall` / `-Uninstall` removes the
+that path substituted, verifies they resolve, and reports whether `java`, `claude`, `opencode`
+and `codex` are present. Re-run it any time you move the repo. `--uninstall` / `-Uninstall` removes the
 adapters and touches nothing else.
 
-**Requirements:** Claude Code and/or OpenCode, plus a JDK 21+ if you want to run the exercises
+**Requirements:** Claude Code, OpenCode and/or Codex, plus a JDK 21+ if you want to run the exercises
 (`java`, `javac`, `jshell`). Nothing else — the system is plain markdown.
 
 The adapters are pointers back to this repo, so keep the repo where you installed it from.
