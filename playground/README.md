@@ -3,7 +3,8 @@
 Scratch space for Learning Mode exercises. One directory per lesson: `NN-topic/`, e.g.
 `07-generics/`.
 
-Nothing here is committed — this directory carries a `.gitignore` of `*`. Delete anything freely.
+Only `SUMMARY.md` cards and this file are committed — the `.gitignore` here ignores everything
+else, so scratch code can be deleted freely.
 
 ## Where exercise code goes
 

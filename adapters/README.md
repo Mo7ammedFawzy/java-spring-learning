@@ -53,8 +53,8 @@ one your build reads, delete the other.
 
 ## Moving the learning repo
 
-The absolute path appears in exactly **one** line per adapter (the fenced `Learning home:` block).
-Edit those lines, reinstall with the commands above, done.
+The absolute path appears twice per adapter: the fenced `Learning home:` block and step 1. The
+installer rewrites both — re-run it rather than editing by hand.
 
 ## Verifying an install
 
@@ -63,10 +63,13 @@ test -f ~/.claude/skills/learn/SKILL.md && echo "claude adapter installed"
 test -f ~/.config/opencode/commands/learn.md && echo "opencode adapter installed"
 test -f ~/.codex/skills/learn/SKILL.md && echo "codex adapter installed"
 
-# installed copies must be byte-identical to canonical
-diff -q adapters/claude/SKILL.md   ~/.claude/skills/learn/SKILL.md
-diff -q adapters/opencode/learn.md ~/.config/opencode/commands/learn.md
-diff -q adapters/codex/SKILL.md    ~/.codex/skills/learn/SKILL.md
+# installed copies must match canonical once the repo path is substituted
+here="$(cygpath -m "$PWD" 2>/dev/null || pwd)"
+for p in claude/SKILL.md:.claude/skills/learn/SKILL.md \
+         opencode/learn.md:.config/opencode/commands/learn.md \
+         codex/SKILL.md:.codex/skills/learn/SKILL.md; do
+  sed "s|C:/Projects/learning-system|$here|g" "adapters/${p%%:*}" | diff -q - "$HOME/${p#*:}"
+done
 ```
 
 In Claude Code and Codex the skill is picked up on the next session start. In OpenCode the command

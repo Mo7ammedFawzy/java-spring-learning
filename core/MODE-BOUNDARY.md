@@ -1,7 +1,7 @@
 # Mode boundary — Work Mode vs Learning Mode
 
-Two modes exist, and they must not blur. This file is the single definition both agents read, so
-neither can drift from the other.
+Two modes exist, and they must not blur. This file is the single definition every agent reads, so
+none can drift from the others.
 
 ## Work Mode is the default
 

@@ -150,14 +150,10 @@ Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). St
 
 ## Notes to self
 
-- **The interactive lesson page is gone.** Asked for on 2026-09-21, removed on 2026-09-22: the round
-  trip was slow and cost a publish per step, and the terminal is cheap and fast. The rule now lives
-  in `core/METHODOLOGY.md` § *Delivery* — do not restate it here. Two published pages from those two
-  days still exist in the artifact gallery (topics 02a and 02b); they are dead and can be deleted.
-
-- **Teaching language: English + light Egyptian Arabic.** Mix a little Egyptian dialect into the
-  conversational layer — framing, encouragement, corrections: "خلينا نشوف", "واضح كده؟", "برافو",
-  "غلط، وهقولك ليه". Keep it light seasoning, not every sentence.
+- **Teaching language: English + light Egyptian Arabic.** Arabic for the room — and more Arabic
+  than feels natural in English prose. Framing, encouragement, corrections and the nudge at the end
+  of a step go in light Egyptian dialect: "خلينا نشوف", "واضح كده؟", "برافو",
+  "غلط، وهقولك ليه".
   **Technical content stays English**: code, terms (reference, heap, proxy, bean, erasure), the
   step-1 explanation, and the reasoning for *why* something breaks. That is the exact vocabulary
   needed in the interview itself, so it never gets translated.

@@ -81,8 +81,8 @@ One view per idea, never a wall of them, and each one sits next to the short lin
 supports. Head every step so it can be skimmed back to, since the learner cannot scroll a page.
 
 Two things still leave the console, and both are files, not surfaces: step 3's exercise code in
-`playground/<NN>-<topic>/`, because it has to compile and run, and step 4's `SUMMARY.md`,
-because it is the offline revision artefact.
+the exercise directory `playground/README.md` names, because it has to compile and run, and step
+4's `SUMMARY.md`, because it is the offline revision artefact.
 
 ---
 
@@ -252,8 +252,8 @@ a strong thing to be able to say in an interview.
 
 ## The optional real-world detour
 
-Real-codebase extracts and production-shaped tasks are **no longer part of every lesson.** They cost
-more time than any other part of the flow, and most concepts do not need them.
+Real-codebase extracts and production-shaped tasks are **optional.** They cost more time than any
+other part of the flow, and most concepts do not need them.
 
 Add one — between steps 3 and 4 — only when it clears this bar:
 
@@ -263,8 +263,8 @@ Add one — between steps 3 and 4 — only when it clears this bar:
   **or**
 - the user asks for it.
 
-Cap it at **one** extract of 10–40 real, quoted lines, or **one** short task in `playground/`. Never
-both, and never a second task in the same lesson. Say what it does, why the concept is used there,
+Cap it at **one** extract of 10–40 real, quoted lines, or **one** short task in the exercise
+directory. Never both, and never a second task in the same lesson. Say what it does, why the concept is used there,
 and whether it is exemplary or cautionary. If it is not obviously worth the ten minutes, skip it —
 skipping is the default, and it needs no justification.
 
