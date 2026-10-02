@@ -110,6 +110,24 @@ and add any question the user is asked in a real interview.
   answer is to make the class `final`, or use composition, and cite Bloch's item on it.
 - *Then:* "Which does `AbstractList` use, and why can it get away with it?"
 
+## 05 — Polymorphism and dispatch
+
+**Q.** Can a static method be overridden?
+- *Shallow:* "No, because static belongs to the class" — true, and it does not explain why
+  `parentRef.staticMethod()` on a subclass object runs the parent's version.
+- *Passes:* No, it is *hidden*. A static call is bound by the compiler to the declared type of the
+  reference and is never dispatched, so the object's real class is not consulted at all.
+- *Then:* "What happens if you put `@Override` on the subclass's static method?" (Compile error —
+  there is nothing to override. Same if an instance method tries to override a static one.)
+
+**Q.** `print(Object)` and `print(String)` both exist. `Object o = "hi"; print(o);` — which runs?
+- *Shallow:* "`print(String)`, because it's really a String" — or the bare definition "overloading
+  is compile time" with no prediction.
+- *Passes:* `print(Object)`. The compiler chooses among overloads from the *declared* type of the
+  argument and writes that choice into the bytecode; the runtime type of the argument is never used.
+- *Then:* "How do you make the behaviour follow the runtime type?" (Move it into an instance method
+  overridden on the receiver — or cast, which only moves the decision to whoever writes the cast.)
+
 ## 07 — Generics
 
 **Q.** What is type erasure, and what does it cost you?
