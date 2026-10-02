@@ -24,6 +24,7 @@ $repoFwd = $repo -replace '\\', '/'
 $placeholder = 'C:/Projects/learning-system'
 
 $claudeDst = Join-Path $HOME '.claude\skills\learn\SKILL.md'
+$codexDst  = Join-Path $HOME '.codex\skills\learn\SKILL.md'
 # OpenCode's documented folder is "commands"; some builds read "command". Both get the
 # same ~25-line pointer so /learn resolves either way. This duplicates a pointer, never content.
 $openDsts = @(
@@ -32,7 +33,7 @@ $openDsts = @(
 )
 
 if ($Uninstall) {
-    foreach ($f in @($claudeDst) + $openDsts) {
+    foreach ($f in @($claudeDst, $codexDst) + $openDsts) {
         if (Test-Path $f) { Remove-Item $f -Force; Write-Host "removed  $f" }
     }
     Write-Host "`nUninstalled. This repo was not touched." -ForegroundColor Green
@@ -57,6 +58,7 @@ Write-Host "Learning System" -ForegroundColor Cyan
 Write-Host "repo: $repoFwd`n"
 
 Install-Adapter -Source (Join-Path $repo 'adapters\claude\SKILL.md')   -Dest $claudeDst
+Install-Adapter -Source (Join-Path $repo 'adapters\codex\SKILL.md')    -Dest $codexDst
 foreach ($d in $openDsts) {
     Install-Adapter -Source (Join-Path $repo 'adapters\opencode\learn.md') -Dest $d
 }
@@ -64,7 +66,7 @@ foreach ($d in $openDsts) {
 # --- verify the installed copies actually point back here ---
 Write-Host ""
 $bad = @()
-foreach ($f in @($claudeDst) + $openDsts) {
+foreach ($f in @($claudeDst, $codexDst) + $openDsts) {
     if (-not (Select-String -Path $f -SimpleMatch "$repoFwd/core/BOOTSTRAP.md" -Quiet)) { $bad += $f }
 }
 if ($bad) {
@@ -85,6 +87,7 @@ if ($java) {
 }
 if (Get-Command claude   -ErrorAction SilentlyContinue) { Write-Host "  claude   found" } else { Write-Host "  claude   not on PATH" -ForegroundColor Yellow }
 if (Get-Command opencode -ErrorAction SilentlyContinue) { Write-Host "  opencode found" } else { Write-Host "  opencode not on PATH" -ForegroundColor Yellow }
+if (Get-Command codex    -ErrorAction SilentlyContinue) { Write-Host "  codex    found" } else { Write-Host "  codex    not on PATH" -ForegroundColor Yellow }
 
 $labRoot = 'C:\Projects\8080'
 if (Test-Path $labRoot) {

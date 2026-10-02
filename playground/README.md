@@ -5,6 +5,18 @@ Scratch space for Learning Mode exercises. One directory per lesson: `NN-topic/`
 
 Nothing here is committed — this directory carries a `.gitignore` of `*`. Delete anything freely.
 
+## Where exercise code goes
+
+**Step-3 exercise code goes in the IDE's scratches, not here** (asked for on 2026-10-01), so it
+opens and runs in the IDE with one click:
+
+```
+%APPDATA%\JetBrains\IntelliJIdea2026.2\scratches\learn\<NN>-<topic>\Main.java
+```
+
+The version in that path changes with the IDE — list `%APPDATA%\JetBrains\` and use the newest.
+`SUMMARY.md` still goes here, in `playground/<NN>-<topic>/`, because it is tracked.
+
 ## Running code
 
 Verified on this machine: **JDK 25** at `C:\Program Files\Java\jdk-25.0.4.1`, with `java`, `javac`

@@ -17,7 +17,7 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 05 — Polymorphism and dispatch (SOURCES rows 1, 3, 26, 30). Step: not started.
+Topic: 05a — Overriding vs overloading, static hiding (SOURCES rows 3, 26). Step: 3 set, awaiting attempt at base level (IDE scratches, `learn/05a-overriding-overloading/Main.java`). Step 2: Q1 and Q2 wrong, re-test A passed, re-test B output right but reason missed (weak spot recorded), Q3 right. Warm-up (`final` on a template method) failed again: offered `static`/`private`, gave "interface methods are public" as the reason — stays 0/2. Rows 1 and 30 wait for 05b.
 
 ## Completed
 
@@ -132,6 +132,15 @@ Topic: 05 — Polymorphism and dispatch (SOURCES rows 1, 3, 26, 30). Step: not s
 - **`final` read as protection. 04b step 3.** Fixed a leaking `public` field by adding `final`.
   `final` freezes the reference, not the object; `cart.list.addAll(...)` still worked.
 
+- **Static hiding explained as "not overridden". Two rounds, capped in 05a step 2.** First called an
+  instance method calling a static one a compile error (the restriction runs the other way). On the
+  re-test got the output (`prod`) but said the method "only exists in `Config`" while `TestConfig`
+  declares its own `env()`. The reason is binding: the compiler turns `env()` inside `Config` into
+  `Config.env()`, and a static call is never dispatched. Re-test by asking why the subclass's
+  static method was *not* picked. Held: 0/2
+- **`@Override` read as a marker for the reader. 05a step 2.** It is a compiler check: no overridden
+  method, no compile. Closed on the re-test (said adding it to a static method is a compile error).
+
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
   knowledge — it is articulation, which is exactly what an interview grades. Always ask for the
@@ -159,6 +168,18 @@ Topic: 05 — Polymorphism and dispatch (SOURCES rows 1, 3, 26, 30). Step: not s
   punctuation — or pure English. Mixed right-to-left lines get visually scrambled in the terminal:
   words and punctuation jump to the wrong end and the sentence becomes unreadable. If a thought
   needs an English term or a code token, write that whole thought in English.
+
+- **A sentence worth memorising is given twice** — the English line, then the Arabic line directly
+  underneath it, never on the same line:
+
+  ```
+  A HashMap never searches — hashCode picks the bucket, equals picks the entry.
+  ‫الهاش ماب مابيدورش، الهاش كود بيختار المكان والإيكوالز بيختار العنصر.‬
+  ```
+
+  The Arabic half is transliterated where a term has no natural translation, so the line stays pure
+  Arabic. The English half is where the exact terms live — the Arabic is the memory hook, not the
+  source of truth.
 
 - **Keep lessons to 20–30 minutes.** Requested on 2026-09-16: five steps, no mandatory real-world
   task, no formal code-review step, and no drilling one detail past two rounds. If a concept will

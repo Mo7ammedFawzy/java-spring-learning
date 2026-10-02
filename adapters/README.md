@@ -1,7 +1,7 @@
 # Adapters
 
 An adapter is a **pointer**, not a lesson. Each one carries only its agent's trigger metadata plus
-"read `core/BOOTSTRAP.md` and follow it". That is what guarantees both agents behave identically:
+"read `core/BOOTSTRAP.md` and follow it". That is what guarantees every agent behaves identically:
 there is exactly one copy of the methodology, and no adapter contains enough to diverge from it.
 
 If you ever find yourself explaining a teaching step inside an adapter, stop — it belongs in
@@ -13,6 +13,7 @@ If you ever find yourself explaining a teaching step inside an adapter, stop —
 |---|---|---|
 | Claude Code | `adapters/claude/SKILL.md` | `~/.claude/skills/learn/SKILL.md` |
 | OpenCode | `adapters/opencode/learn.md` | `~/.config/opencode/commands/learn.md` |
+| Codex | `adapters/codex/SKILL.md` | `~/.codex/skills/learn/SKILL.md` |
 
 Installed globally, so `/learn` resolves from **any** directory — including while working inside an
 unrelated company repo.
@@ -38,6 +39,10 @@ cp /c/Projects/learning-system/adapters/claude/SKILL.md ~/.claude/skills/learn/S
 mkdir -p ~/.config/opencode/commands ~/.config/opencode/command
 cp /c/Projects/learning-system/adapters/opencode/learn.md ~/.config/opencode/commands/learn.md
 cp /c/Projects/learning-system/adapters/opencode/learn.md ~/.config/opencode/command/learn.md
+
+# Codex
+mkdir -p ~/.codex/skills/learn
+cp /c/Projects/learning-system/adapters/codex/SKILL.md ~/.codex/skills/learn/SKILL.md
 ```
 
 **Why OpenCode gets two directories.** The documented path is `commands/` (plural), but published
@@ -49,21 +54,23 @@ one your build reads, delete the other.
 ## Moving the learning repo
 
 The absolute path appears in exactly **one** line per adapter (the fenced `Learning home:` block).
-Edit those two lines, reinstall with the commands above, done.
+Edit those lines, reinstall with the commands above, done.
 
 ## Verifying an install
 
 ```bash
 test -f ~/.claude/skills/learn/SKILL.md && echo "claude adapter installed"
 test -f ~/.config/opencode/commands/learn.md && echo "opencode adapter installed"
+test -f ~/.codex/skills/learn/SKILL.md && echo "codex adapter installed"
 
 # installed copies must be byte-identical to canonical
 diff -q adapters/claude/SKILL.md   ~/.claude/skills/learn/SKILL.md
 diff -q adapters/opencode/learn.md ~/.config/opencode/commands/learn.md
+diff -q adapters/codex/SKILL.md    ~/.codex/skills/learn/SKILL.md
 ```
 
-In Claude Code the skill is picked up on the next session start. In OpenCode the command appears as
-`/learn` in the TUI.
+In Claude Code and Codex the skill is picked up on the next session start. In OpenCode the command
+appears as `/learn` in the TUI.
 
 ## Adding a third agent
 

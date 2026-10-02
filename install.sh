@@ -22,12 +22,13 @@ fi
 PLACEHOLDER='C:/Projects/learning-system'
 
 CLAUDE_DST="$HOME/.claude/skills/learn/SKILL.md"
+CODEX_DST="$HOME/.codex/skills/learn/SKILL.md"
 # OpenCode's documented folder is "commands"; some builds read "command". Both get the same
 # ~25-line pointer so /learn resolves either way. Duplicates a pointer, never content.
 OPEN_DSTS=("$HOME/.config/opencode/commands/learn.md" "$HOME/.config/opencode/command/learn.md")
 
 if [ "${1:-}" = "--uninstall" ]; then
-  for f in "$CLAUDE_DST" "${OPEN_DSTS[@]}"; do
+  for f in "$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"; do
     [ -f "$f" ] && rm -f "$f" && echo "removed  $f"
   done
   echo; echo "Uninstalled. This repo was not touched."
@@ -47,6 +48,7 @@ echo "repo: $REPO"
 echo
 
 install_adapter "$REPO/adapters/claude/SKILL.md" "$CLAUDE_DST"
+install_adapter "$REPO/adapters/codex/SKILL.md"  "$CODEX_DST"
 for d in "${OPEN_DSTS[@]}"; do
   install_adapter "$REPO/adapters/opencode/learn.md" "$d"
 done
@@ -54,7 +56,7 @@ done
 # --- verify the installed copies actually point back here ---
 echo
 fail=0
-for f in "$CLAUDE_DST" "${OPEN_DSTS[@]}"; do
+for f in "$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"; do
   grep -qF "$REPO/core/BOOTSTRAP.md" "$f" || { echo "FAILED - does not point at this repo: $f" >&2; fail=1; }
 done
 [ "$fail" -eq 0 ] || exit 1
@@ -70,6 +72,7 @@ else
 fi
 command -v claude   >/dev/null 2>&1 && echo "  claude   found"   || echo "  claude   not on PATH"
 command -v opencode >/dev/null 2>&1 && echo "  opencode found"   || echo "  opencode not on PATH"
+command -v codex    >/dev/null 2>&1 && echo "  codex    found"   || echo "  codex    not on PATH"
 
 if [ -d "/c/Projects/8080" ] || [ -d "C:/Projects/8080" ]; then
   echo "  lab      nama-erp available"
