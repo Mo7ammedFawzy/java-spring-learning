@@ -128,6 +128,23 @@ and add any question the user is asked in a real interview.
 - *Then:* "How do you make the behaviour follow the runtime type?" (Move it into an instance method
   overridden on the receiver — or cast, which only moves the decision to whoever writes the cast.)
 
+**Q.** What are the four OOP concepts?
+- *Shallow:* Four names, with encapsulation defined as "private fields with getters and setters".
+- *Passes:* Encapsulation: state is private and the class enforces its own rules on every change.
+  Abstraction: callers see what, not how. Inheritance: a subclass reuses a parent. Polymorphism: one
+  call site runs different bodies, because the JVM picks an overridden method from the object's
+  actual class at runtime.
+- *Then:* "Is a class with a private field and a plain `setX` encapsulated?" (No — an unchecked
+  setter is a public field with extra typing. The class must guard the invariant.)
+
+**Q.** `log(String...)` and `log(String, String)` both exist. Which does `log("x", "y")` run?
+- *Shallow:* "The varargs one, it matches first" — or anything that depends on declaration order.
+- *Passes:* `log(String, String)`. Resolution runs in three phases and stops at the first that finds
+  a match: exact or widening, then boxing, then varargs. Varargs is the last resort, and the order
+  of the methods in the file is irrelevant. A varargs parameter is an array the compiler builds.
+- *Then:* "What is `Arrays.asList(new int[]{1, 2, 3}).size()`?" (1 — an `int[]` is one object, so it
+  becomes a single element of a `List<int[]>`.)
+
 ## 07 — Generics
 
 **Q.** What is type erasure, and what does it cost you?

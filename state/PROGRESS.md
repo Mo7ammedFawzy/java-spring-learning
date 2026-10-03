@@ -17,7 +17,7 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 05b — Dynamic dispatch, the four OOP concepts, varargs (SOURCES rows 1, 30). Step: not started.
+Topic: 06 — Access, static, final (SOURCES rows 24, 25, 29, 31). Step: not started.
 
 ## Completed
 
@@ -31,6 +31,7 @@ Topic: 05b — Dynamic dispatch, the four OOP concepts, varargs (SOURCES rows 1,
 | 04b | Composition over inheritance + OOP | 2026-09-29 | shaky | Step 2: Set size wrong, leaking getter called composition; two re-tests capped (GC reachability, "designed for extension"). Step 3: one level-1 hint, composition fix right first try, then closed two leaks (`public` field, `public final`). Why `ArrayList` skipped the limit: "return type boolean". Drill: Q2 passed with the right conditions. (Q1 on the four OOP concepts was drilled without being taught — not graded; SOURCES row 1 moved to 05.) |
 | 04c | Constructors | 2026-09-30 | shaky | Mechanics good, articulation not. Step 2: Q1 called the hidden `super()` failure a "missing field", then passed the re-test with reasons. Step 3 clean first try, and did not add a no-arg constructor to the parent. Drill: both questions failed after one probe ("why not inherited", "what does a constructor return"). |
 | 05a | Overriding vs overloading, static hiding | 2026-10-02 | ok | Step 2: Q1 and Q2 wrong, re-test A passed, re-test B output right but reason missed, Q3 right. Step 3: one level-1 hint, then all three reports fixed, with B moved onto the receiver rather than `instanceof`; `equals(Object)` cast without a type check. Drill: both passed with the mechanism (declared type, compile time), no probe needed. Never said the word "hiding". |
+| 05b | Dynamic dispatch, the four OOP concepts, varargs | 2026-10-03 | ok | Dispatch and encapsulation landed, varargs resolution did not. Step 2: one of three right; re-tests on dispatch and encapsulation passed with reasons, varargs capped. Step 3: all three reports fixed first try, no hints, validation shared by constructor and setter; `@Override` left off. Drill: Q1 passed after one probe; Q2 failed, answer flipped when the declarations were swapped. |
 
 ## Weak spots to revisit
 
@@ -143,7 +144,10 @@ Topic: 05b — Dynamic dispatch, the four OOP concepts, varargs (SOURCES rows 1,
   static method was *not* picked.
   05a drill (2026-10-02): asked in that framing, gave the binding reason unaided ("the compiler
   picks the declared type and ignores the actual object"). Not counted as a hold: same sitting as
-  the hint table and the card. Did not use the word "hiding". Held: 0/2
+  the hint table and the card. Did not use the word "hiding".
+  05b warm-up: failed. Said `show()` is not overridden so `Config`'s body calls `Config`'s `env()`,
+  with no mention of `static` or compile-time binding; then predicted `prod` for the instance
+  version too. Held: 0/2
 - **`equals(Object)` that casts without a type check. 05a step 3** (05a, 2026-10-02). Wrote
   `Tag tag = (Tag) obj;` then a null check, so `new Tag("java").equals("java")` throws
   `ClassCastException` where the contract wants `false`. Also left `@Override` off `equals` while
@@ -151,6 +155,22 @@ Topic: 05b — Dynamic dispatch, the four OOP concepts, varargs (SOURCES rows 1,
   `String` argument. Held: 0/2
 - **`@Override` read as a marker for the reader. 05a step 2.** It is a compiler check: no overridden
   method, no compile. Closed on the re-test (said adding it to a static method is a compile error).
+
+- **Overload resolution read as declaration order** (05b, 2026-10-03). Three misses: `f(5)` with
+  `f(Integer)` and `f(int...)` answered "varargs, closest type"; `g(7)` right but because "an `int`
+  is an object"; in the drill `log("x", "y")` answered varargs, then "two" once the declarations
+  were swapped, and confirmed "first in the file". Order in the file never matters. The compiler
+  runs three phases and stops at the first with a match: exact/widening, then boxing, then varargs.
+  And `7` reaches `g(Object)` by boxing to `Integer`; a primitive is never an object. Re-test: swap
+  two overloads and ask whether the output changes. Held: 0/2
+- **`@Override` left off a real override. 05a and 05b step 3** (05b, 2026-10-03). Knows it is a
+  compiler check, does not write it. Rename the parent method and the subclass method silently
+  stops overriding. Re-test: hand over a subclass and ask what is missing. Held: 0/2
+- **"A call inside a parent method stays in the parent". 05b step 2.** Predicted `prod` for an
+  inherited `show()` calling an overridden instance `env()`. Unqualified `env()` is `this.env()`.
+  Closed on the re-test and in the exercise.
+- **"`private` plus getter and setter is encapsulation". 05b step 2.** Closed on the re-test, the
+  exercise and the drill probe (said the setter needs a guard).
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not

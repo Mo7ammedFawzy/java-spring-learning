@@ -11,7 +11,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 
 | # | Question | Topic | Done |
 |---|---|---|---|
-| 1 | OOP — the four concepts | 05 | ☐ |
+| 1 | OOP — the four concepts | 05 | ✅ 05b, 2026-10-03 |
 | 2 | Inheritance, association, composition, aggregation | 04 | ✅ 04b, 2026-09-29 |
 | 3 | Overriding vs overloading (runtime vs compile time) | 05 | ✅ 05a, 2026-10-02 |
 | 4 | Is Java pass-by-value? | 01 | ✅ 01, 2026-09-06 |
@@ -40,7 +40,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 27 | Is String a data type? | 02 | ✅ 02a, 2026-09-21 |
 | 28 | String vs StringBuffer vs StringBuilder | 02 | ✅ 02b, 2026-09-22 |
 | 29 | Running code before `main` | 06 | ☐ |
-| 30 | Varargs | 05 | ☐ |
+| 30 | Varargs | 05 | ✅ 05b, 2026-10-03 |
 | 31 | `static public void` instead of `public static void` | 06 | ☐ |
 | 32 | Purpose of the default constructor | 04 | ✅ 04c, 2026-09-30 |
 | 33 | Why constructors are not inherited | 04 | ✅ 04c, 2026-09-30 |
