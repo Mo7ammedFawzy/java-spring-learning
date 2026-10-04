@@ -44,21 +44,28 @@ Codebase-free mode is a normal mode, not a degraded one. Never invent file paths
 |---|---|
 | *(none)* | Report the current topic and step, then propose resuming it or starting the next topic. Do not dump the whole curriculum unless asked. |
 | a topic name or number | Resolve against `core/CURRICULUM.md` (exact → substring). Jump there even if out of order; say so if prerequisites are unmet, but honour the choice. |
-| `next` | Advance to the next topic (see **The next topic** below). |
+| `next` | Give **the review reminder** below if it is due, then advance to the next topic (see **The next topic** below). |
 | `review` | Re-test the entries under **Weak spots to revisit**, skipping step 1. |
+| `review` + a topic | Quick review of that completed topic, skipping step 1: 2–3 questions from its `SUMMARY.md` and its open weak spots, verdicts, done. About five minutes. |
 | a topic not in the curriculum | Teach it with the same five steps, then add it to `core/CURRICULUM.md` under the nearest track. |
 
 **The next topic.** While `state/SOURCES.md` has an open row, the next topic is the first topic in
 `core/CURRICULUM.md` row order that has an open row there — topics with none wait, even if they come
 earlier. With no open rows, or no such file, it is the next uncompleted topic.
 
+**The review reminder.** When the learner asks for the next topic and two or more topics have been
+completed since `Last review` in `state/PROGRESS.md`, say so in one line before anything else and
+suggest a quick review of one older topic — the completed one reviewed least recently. It is a
+reminder, not a gate: if they decline, start the next topic and do not ask again this session. Any
+`review` session sets `Last review` to its date when it ends.
+
 **If `state/PROGRESS.md` shows an unfinished step, resume at that step.** Do not restart the topic
 and do not re-teach step 1 — the learner already read it.
 
 ## 4. Teach
 
-Follow `core/METHODOLOGY.md` exactly: five steps, **one step per message**, 20–30 minutes for the
-whole concept, each step ending only when its gate is met. The strict gate on step 3 is not
+Follow `core/METHODOLOGY.md` exactly: the session-opener warm-up question first, then five steps,
+**one step per message**, 20–30 minutes for the whole concept, each step ending only when its gate is met. The strict gate on step 3 is not
 optional, and neither is the two-round cap on re-testing in step 2.
 
 Exercise and task code goes in the exercise directory `playground/README.md` names —

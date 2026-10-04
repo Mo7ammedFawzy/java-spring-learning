@@ -86,6 +86,23 @@ the exercise directory `playground/README.md` names, because it has to compile a
 
 ---
 
+## Session opener — warm-up
+
+**Every session opens with one review question, alone in the first message, before any step** —
+a new topic and a resumed one alike. A `review` session skips it: it is all re-test already. About
+a minute; it is not a sixth step and has no re-test round.
+
+- **Source.** An open entry under **Weak spots to revisit** in `state/PROGRESS.md`, asked flat in
+  that entry's own "Re-test" framing. Pick one that touches today's topic first, else the one
+  re-tested least recently. With no open entry, ask one question from the `SUMMARY.md` of the most
+  recently completed topic.
+- **Shape.** One question with its view, the reason asked for, then wait.
+- **Verdict.** One line at the top of the next message, above the step it opens: right → `Held`
+  goes up by one; wrong → the correct answer in one line, entry stays open. No re-teach here — that
+  is what `review` is for.
+
+---
+
 ## Step 1 — Teach one concept
 
 **One** concept. Not "collections" — `HashMap` resizing, or the `equals`/`hashCode` contract. If the
@@ -106,18 +123,12 @@ Contains:
   what makes it stick.
 - **The boundary** — where the rule stops applying. Interviewers probe exactly here.
 
-Does **not** contain: questions on this concept, exercises, or a preview of the answer — with two
-exceptions:
+Does **not** contain: questions on this concept, exercises, or a preview of the answer — with one
+exception:
 
 - **Prediction opener (optional).** When the concept has a surprising output, open with the snippet
   and "what prints?", and wait. The explanation then resolves the learner's answer. When used, step 2
   drops to two questions, which pays the time back.
-- **Warm-up (always, when a weak spot is open).** The last line of the message is one flat
-  reinforcement question from **Weak spots to revisit** in `state/PROGRESS.md`, asked in that entry's
-  own "Re-test" framing. Pick an open entry that touches today's topic first, else the one re-tested
-  least recently. The reply to step 1 is otherwise empty, so this costs no round trip. Give the
-  verdict in one line at the top of step 2: right → `Held` goes up by one; wrong → the correct answer
-  in one line, entry stays open. No re-teach here — that is what `review` is for.
 
 For topics with existing repo documentation (see the active lab profile), step 1 becomes: name the
 sections to read, give the mental model and the boundary yourself, then move to step 2. Do not

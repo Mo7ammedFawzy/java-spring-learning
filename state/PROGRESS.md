@@ -19,6 +19,8 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 Topic: 06 — Access, static, final (SOURCES rows 24, 25, 29, 31). Step: not started.
 
+Last review: 2026-09-06 (topic 01).
+
 ## Completed
 
 | # | Topic | Date | Confidence | Notes |
