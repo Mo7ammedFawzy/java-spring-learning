@@ -17,7 +17,7 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 06 — Access, static, final (SOURCES rows 24, 25, 29, 31). Step: not started.
+Topic: 08a — List and Set, backing structure and Big O (SOURCES rows 8, 22; rows 9, 10 wait for 08b — maps). Step: 5 (drill) next; step 3 done (A and B first try, C after one level-1 hint, fixed by copying into an `ArrayList` rather than for-each), card written. Step 2: Q1 wrong (LinkedHashSet read as LinkedList; HashSet order called known), re-test capped on "`contains` walks the links". Warm-up 2026-10-05 held on "names the wrong method" (→ 1/2 at close). (06b — `final`, nested classes — has no source rows and waits behind the PDFs.)
 
 Last review: 2026-09-06 (topic 01).
 
@@ -34,6 +34,7 @@ Last review: 2026-09-06 (topic 01).
 | 04c | Constructors | 2026-09-30 | shaky | Mechanics good, articulation not. Step 2: Q1 called the hidden `super()` failure a "missing field", then passed the re-test with reasons. Step 3 clean first try, and did not add a no-arg constructor to the parent. Drill: both questions failed after one probe ("why not inherited", "what does a constructor return"). |
 | 05a | Overriding vs overloading, static hiding | 2026-10-02 | ok | Step 2: Q1 and Q2 wrong, re-test A passed, re-test B output right but reason missed, Q3 right. Step 3: one level-1 hint, then all three reports fixed, with B moved onto the receiver rather than `instanceof`; `equals(Object)` cast without a type check. Drill: both passed with the mechanism (declared type, compile time), no probe needed. Never said the word "hiding". |
 | 05b | Dynamic dispatch, the four OOP concepts, varargs | 2026-10-03 | ok | Dispatch and encapsulation landed, varargs resolution did not. Step 2: one of three right; re-tests on dispatch and encapsulation passed with reasons, varargs capped. Step 3: all three reports fixed first try, no hints, validation shared by constructor and setter; `@Override` left off. Drill: Q1 passed after one probe; Q2 failed, answer flipped when the declarations were swapped. |
+| 06a | `static` and class initialisation | 2026-10-04 | ok | Step 2: one of three right (static vs instance access); both re-tests passed with reasons. Step 3: all three reports fixed first try, no hints, told "per class" from "per object" in both directions; dropped `private` from `Ticket.next`. Drill: both base answers passed, both probes failed (first use of the main class; said static binding happens at runtime). |
 
 ## Weak spots to revisit
 
@@ -149,7 +150,11 @@ Last review: 2026-09-06 (topic 01).
   the hint table and the card. Did not use the word "hiding".
   05b warm-up: failed. Said `show()` is not overridden so `Config`'s body calls `Config`'s `env()`,
   with no mention of `static` or compile-time binding; then predicted `prod` for the instance
-  version too. Held: 0/2
+  version too.
+  06a warm-up (2026-10-04): not held. Gave the rule's name ("static cannot be overridden") rather
+  than the binding, but got the instance version right this time. 06a drill: said "declared type
+  `A`" unaided, then on the probe said the choice is made "at runtime, I think" and still did not
+  produce the word "hiding". Re-test: ask *when* the choice is made. Held: 0/2
 - **`equals(Object)` that casts without a type check. 05a step 3** (05a, 2026-10-02). Wrote
   `Tag tag = (Tag) obj;` then a null check, so `new Tag("java").equals("java")` throws
   `ClassCastException` where the contract wants `false`. Also left `@Override` off `equals` while
@@ -173,6 +178,18 @@ Last review: 2026-09-06 (topic 01).
   Closed on the re-test and in the exercise.
 - **"`private` plus getter and setter is encapsulation". 05b step 2.** Closed on the re-test, the
   exercise and the drill probe (said the setter needs a guard).
+
+- **Class loading and initialisation treated as one thing** (06a, 2026-10-04). Drill probe: asked
+  what the first use of `Main` is under `java Main`, answered with a different trigger (a
+  non-constant static field read) and "first use means the class needs to load at runtime". The
+  launcher initialises the main class before calling `main`; loading alone runs no static code.
+  Also said "the compiler initialises statics" in step 2: the JVM does. Re-test flat: "a static
+  block runs when the class is loaded — true?" Held: 0/2
+- **"Static initialisation re-runs on every use". 06a step 2.** Predicted a second line for a
+  second `new`, and `init` twice. Closed on the re-test and in the exercise.
+- **"Reading a constant triggers initialisation". 06a step 2.** Closed on the re-test (`MAX`
+  inlined, `MIN = Integer.parseInt("1")` not). The blank-final half of the constant-variable entry
+  above was not re-tested in isolation.
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not

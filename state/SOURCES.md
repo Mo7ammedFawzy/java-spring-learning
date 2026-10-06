@@ -34,14 +34,14 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 21 | Reflection | 36 | ☐ |
 | 22 | Big O notation | 08 | ☐ |
 | 23 | SOLID principles | 42 | ☐ |
-| 24 | static keyword; can static methods be overridden? | 06 | ☐ |
-| 25 | Static initialisation blocks | 06 | ☐ |
+| 24 | static keyword; can static methods be overridden? | 06 | ✅ 06a, 2026-10-04 |
+| 25 | Static initialisation blocks | 06 | ✅ 06a, 2026-10-04 |
 | 26 | Can static methods be overridden? (hiding) | 05 | ✅ 05a, 2026-10-02 |
 | 27 | Is String a data type? | 02 | ✅ 02a, 2026-09-21 |
 | 28 | String vs StringBuffer vs StringBuilder | 02 | ✅ 02b, 2026-09-22 |
-| 29 | Running code before `main` | 06 | ☐ |
+| 29 | Running code before `main` | 06 | ✅ 06a, 2026-10-04 |
 | 30 | Varargs | 05 | ✅ 05b, 2026-10-03 |
-| 31 | `static public void` instead of `public static void` | 06 | ☐ |
+| 31 | `static public void` instead of `public static void` | 06 | ✅ 06a, 2026-10-04 |
 | 32 | Purpose of the default constructor | 04 | ✅ 04c, 2026-09-30 |
 | 33 | Why constructors are not inherited | 04 | ✅ 04c, 2026-09-30 |
 | 34 | What does a constructor return? | 04 | ✅ 04c, 2026-09-30 |

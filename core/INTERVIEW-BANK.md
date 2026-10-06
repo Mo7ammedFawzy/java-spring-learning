@@ -145,6 +145,24 @@ and add any question the user is asked in a real interview.
 - *Then:* "What is `Arrays.asList(new int[]{1, 2, 3}).size()`?" (1 — an `int[]` is one object, so it
   becomes a single element of a `List<int[]>`.)
 
+## 06 — Access, static, final
+
+**Q.** How do you run code before `main`, and when exactly does it run?
+- *Shallow:* "A static block, it runs when the class is loaded."
+- *Passes:* A static block or a static field initialiser. They run at class *initialisation*, which
+  the JVM does once, on the first active use — `new`, a static method call, a non-constant static
+  field access, or being the class the launcher starts. Loading alone runs nothing.
+- *Then:* "Two static fields and a static block: in what order?" (Defaults first, then textual
+  order, top to bottom — so a singleton built on line 1 sees the default of a field on line 2.)
+
+**Q.** Does reading a `static final` field initialise its class?
+- *Shallow:* "Yes, any static access does."
+- *Passes:* Not if it is a constant variable — a `static final` primitive or `String` initialised in
+  its declarator with a constant expression. The compiler inlines the value into the caller, so the
+  class is never touched. A blank `static final` assigned in a static block is not one.
+- *Then:* "What does inlining cost you?" (Change the constant, recompile only the library, and
+  clients keep the old value.)
+
 ## 07 — Generics
 
 **Q.** What is type erasure, and what does it cost you?
