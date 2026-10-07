@@ -17,7 +17,7 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 08a — List and Set, backing structure and Big O (SOURCES rows 8, 22; rows 9, 10 wait for 08b — maps). Step: 5 (drill) next; step 3 done (A and B first try, C after one level-1 hint, fixed by copying into an `ArrayList` rather than for-each), card written. Step 2: Q1 wrong (LinkedHashSet read as LinkedList; HashSet order called known), re-test capped on "`contains` walks the links". Warm-up 2026-10-05 held on "names the wrong method" (→ 1/2 at close). (06b — `final`, nested classes — has no source rows and waits behind the PDFs.)
+Topic: 08b — Maps: `HashMap` internals, `LinkedHashMap`, `TreeMap`, `Hashtable` (SOURCES rows 9, 10). Step: not started. (06b — `final`, nested classes — has no source rows and waits behind the PDFs.)
 
 Last review: 2026-09-06 (topic 01).
 
@@ -35,6 +35,7 @@ Last review: 2026-09-06 (topic 01).
 | 05a | Overriding vs overloading, static hiding | 2026-10-02 | ok | Step 2: Q1 and Q2 wrong, re-test A passed, re-test B output right but reason missed, Q3 right. Step 3: one level-1 hint, then all three reports fixed, with B moved onto the receiver rather than `instanceof`; `equals(Object)` cast without a type check. Drill: both passed with the mechanism (declared type, compile time), no probe needed. Never said the word "hiding". |
 | 05b | Dynamic dispatch, the four OOP concepts, varargs | 2026-10-03 | ok | Dispatch and encapsulation landed, varargs resolution did not. Step 2: one of three right; re-tests on dispatch and encapsulation passed with reasons, varargs capped. Step 3: all three reports fixed first try, no hints, validation shared by constructor and setter; `@Override` left off. Drill: Q1 passed after one probe; Q2 failed, answer flipped when the declarations were swapped. |
 | 06a | `static` and class initialisation | 2026-10-04 | ok | Step 2: one of three right (static vs instance access); both re-tests passed with reasons. Step 3: all three reports fixed first try, no hints, told "per class" from "per object" in both directions; dropped `private` from `Ticket.next`. Drill: both base answers passed, both probes failed (first use of the main class; said static binding happens at runtime). |
+| 08a | List and Set, backing structure and Big O | 2026-10-07 | shaky | Sets landed, the headline list question did not. Step 2: Q1 wrong (`LinkedHashSet` read as `LinkedList`, `HashSet` order called known), re-test capped on "`contains` walks the links". Step 3: A and B first try, C after one level-1 hint, fixed by copying into an `ArrayList` rather than for-each. Drill: Q1 (`ArrayList` vs `LinkedList` middle insert) failed, still O(1) for `LinkedList` after the probe; Q2 passed (O(n²), `HashSet`, bucket reason), its *Then* got "slower" with no Big O. |
 
 ## Weak spots to revisit
 
@@ -80,12 +81,15 @@ Last review: 2026-09-06 (topic 01).
   was the one that failed, and whether the other one even ran** — never "what's wrong with this?".
   Related: a bucket was described as a slot holding one entry (`HashSet` of two equal-hash items
   answered as size 1). That half closed on the re-test.
+  08a warm-up (2026-10-05): held. Held: 1/2
 
 - **Calls a broken `equals`/`hashCode` contract "not a bug". 03a drill.** Asked flat "is overriding
   `equals` without `hashCode` a bug?", answered "not a bug, it creates mini buckets", framing a
   correctness failure as a storage detail. It is a bug: equal objects get different identity hashes,
   so a `HashSet` keeps duplicates and `map.get(equalKey)` returns `null`. This happened one step
   after fixing exactly that in `Sku`. Same pattern as the flat "is `+` slow?" in 02b. Re-test flat.
+  08a warm-up (2026-10-07): held. Said yes, size 2, different identity hashes so `equals` never
+  runs, and gave the fix. Held: 1/2
 - **"`equals` compares values" as a blanket rule. 03a drill.** `Object.equals` is `==`. It compares
   values only when the class overrides it. The follow-up "depends on Point's equals" rescued it, but
   the opening line is the one an interviewer writes down.
@@ -190,6 +194,21 @@ Last review: 2026-09-06 (topic 01).
 - **"Reading a constant triggers initialisation". 06a step 2.** Closed on the re-test (`MAX`
   inlined, `MIN = Integer.parseInt("1")` not). The blank-final half of the constant-variable entry
   above was not re-tested in isolation.
+
+- **"`LinkedList` inserts in the middle in O(1)"** (08a, 2026-10-07). Drill: answered O(1) for
+  `linkedList.add(500_000, x)`, and again after a probe that drew the walk. The link itself is
+  O(1), reaching the node is an O(n) walk, so the call is O(n). O(1) holds only at the two ends or
+  at an iterator already standing there. Also gave O(1) for the `ArrayList` middle insert one line
+  after writing that it is O(n); corrected on the probe. Re-test: ask what `add(i, x)` does
+  *before* it links the node. Held: 0/2
+- **Gives "slower" where a Big O is asked** (08a, 2026-10-07). Constant `hashCode`: said all keys
+  share one bucket and it gets slower, no complexity. It is O(log n) once the bucket treeifies
+  (O(n) before Java 8, or under 8 entries). Same family as the count entry above. Re-test: demand
+  the O-term, refuse an adjective. Held: 0/2
+- **`LinkedHashSet` read as a `LinkedList`; `HashSet` order called known** (08a, 2026-10-05, step
+  2). "Linked" buys insertion order on a hash table, not list costs; `HashSet` promises no order.
+  Not re-tested since. The capped "`contains` walks the links" closed in the drill ("searches the
+  bucket, not the index"). Re-test: ask the cost of `contains` on a `LinkedHashSet`. Held: 0/2
 
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not

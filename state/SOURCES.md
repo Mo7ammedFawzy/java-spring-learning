@@ -18,7 +18,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 5 | Is Java purely object-oriented? | 01 | ✅ 01, 2026-09-06 |
 | 6 | Wrapper classes, autoboxing and unboxing | 01 | ✅ 01, 2026-09-06 |
 | 7 | Abstract class vs interface | 04 | ✅ 04a, 2026-09-27 |
-| 8 | Collections — Set and List | 08 | ☐ |
+| 8 | Collections — Set and List | 08 | ✅ 08a, 2026-10-07 |
 | 9 | Map implementations | 08 | ☐ |
 | 10 | HashMap vs HashSet vs Hashtable | 08 | ☐ |
 | 11 | Immutable vs mutable classes, making a class immutable | 14 | ☐ |
@@ -32,7 +32,7 @@ the lesson teaches the mechanism, the PDF supplies the question.
 | 19 | Garbage collector and the heap generations | 35 | ☐ |
 | 20 | Java 8 — lambdas, streams (intermediate vs terminal) | 10 | ☐ |
 | 21 | Reflection | 36 | ☐ |
-| 22 | Big O notation | 08 | ☐ |
+| 22 | Big O notation | 08 | ✅ 08a, 2026-10-07 |
 | 23 | SOLID principles | 42 | ☐ |
 | 24 | static keyword; can static methods be overridden? | 06 | ✅ 06a, 2026-10-04 |
 | 25 | Static initialisation blocks | 06 | ✅ 06a, 2026-10-04 |
