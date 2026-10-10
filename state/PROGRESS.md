@@ -48,6 +48,18 @@ lesson.
 
 | # | Topic | Date | Quiz |
 |---|---|---|---|
+| R01 | JSX | 2026-10-10 | Partial: found two of three (single root, statement in braces), missed `class` |
+| R02 | Components and props | 2026-10-10 | Miss: no prediction, and the proposed fix mutated the prop then set the same object |
+| R03 | State with `useState` | 2026-10-10 | Miss: answered for the clicked counter, not the second one |
+| R04 | The render model | 2026-10-10 | Partial: screen value right with the snapshot reason, log value never given |
+| R05 | Updating state: immutability and batching | 2026-10-10 | Miss: "I don't know" on `setTodos(todos.sort(f))`; updater queue right |
+| R06 | Events and controlled inputs | 2026-10-10 | Partial: `onClick={save()}` right with the fix, the input half not answered |
+| R07 | Lists, keys and conditional rendering | 2026-10-10 | Miss: "I don't know" on `key={index}` |
+| R08 | Purity and Strict Mode | 2026-10-10 | Miss: "I don't know" on module-level vs local mutation |
+| R09 | Structuring and lifting state | 2026-10-10 | Miss: saw `remove` skips the total, but gave the correct total (20) not the shown one (30), and fixed it with another setter |
+| R10 | `useReducer` | 2026-10-10 | Miss: "I don't know" on two dispatches then a log |
+| R11 | Context | 2026-10-10 | Miss: said a consumer reading only `theme` does not re-render when `user` changes |
+| R12 | Refs | 2026-10-10 | Miss: "I don't know" on a ref shown in JSX |
 
 ## Weak spots to revisit
 
@@ -222,6 +234,38 @@ lesson.
   Not re-tested since. The capped "`contains` walks the links" closed in the drill ("searches the
   bucket, not the index"). Re-test: ask the cost of `contains` on a `LinkedHashSet`. Held: 0/2
 
+- **"Mutate it, then call the setter with it"** (R05/R02 scratch, 2026-10-10). Asked to predict a
+  component that multiplies `item.price` in its body, proposed `item.price = …; setItem(item)` as
+  the fix. Same reference, so React skips the render, and a child has no setter for a prop anyway.
+  The fix is a calculation during render, or a callback prop and a copy in the parent. Re-test:
+  hand over a mutate-then-set and ask whether the screen updates. Held: 0/2
+  Practice task (2026-10-10, after the scratch): fixed sort, the prop mutation and the controlled
+  input unaided, but the nested update took two attempts (`find` + `qty++` + same array, then
+  `[...items]` with the object still shared) and then the solution. `map` + spread on the matching
+  element was copied, not reached. Derived `status` also needed the solution.
+- **Does not know `sort` mutates and returns the same array** (R05 scratch, 2026-10-10). "I don't
+  know" on `setTodos(todos.sort(byDate))`. Same reference in, same reference out, no render; use
+  `toSorted` or sort a copy. Re-test: ask which array methods are safe to pass straight to a
+  setter (`map`/`filter` yes, `sort`/`reverse`/`push`/`splice` no). Held: 0/2
+- **State per instance never stated** (R03 scratch, 2026-10-10). Two `<Counter />` side by side,
+  asked what the *second* shows after three clicks on the first, answered that the counter
+  increases three times. The second shows 0: each instance has its own state. Re-test: same
+  snippet, ask for both numbers. Held: 0/2
+- **Drops one half of a two-part question** (R01/R04/R06 scratch, 2026-10-10). Three times in one
+  quiz: gave the screen value but not the log (`0`); explained `onClick={save()}` but not the
+  input (`value` without `onChange` is read-only); found two JSX problems of three (`class`).
+  Same family as the adjacent-question entry. Re-test: two-part questions, and refuse a one-part
+  answer. Held: 0/2
+
+- **Stores a derived value in state and syncs it by hand** (R09 scratch, 2026-10-10). Twice in one
+  day: the cart's `status` string, then a `total` beside `items`, fixed by adding a second
+  `setTotal` in `remove` rather than deleting the state. Anything computable from state is a plain
+  expression in render, React's `computed`. Re-test: hand over two states and ask which one should
+  not exist. Held: 0/2
+- **"A context consumer re-renders only for the field it reads"** (R11 scratch, 2026-10-10). That is
+  Vue's injected ref. A context consumer re-renders whenever the provided value changes, whatever
+  it destructures. Re-test: one context with two fields, ask who re-renders. Held: 0/2
+
 - **Answers arrive without reasoning.** Four times in 02a step 2, and again in the drill: Q2b asked
   for a reason for each of five items, including the unticked ones, and got one line. The gap is not
   knowledge — it is articulation, which is exactly what an interview grades. Always ask for the
@@ -257,6 +301,11 @@ lesson.
   The Arabic half is transliterated where a term has no natural translation, so the line stays pure
   Arabic. The English half is where the exact terms live — the Arabic is the memory hook, not the
   source of truth.
+
+- **Scratch is information only: no quiz.** Asked for on 2026-10-10, after two batches where the
+  quiz came back mostly "I don't know": "just tell me the info in a good way". The goal is to get
+  productive on a real React project quickly. Teach the batch, write the cheat sheet, record the
+  rows under Scratched with `—` in the Quiz column, and stop. Questions belong to `/learn`.
 
 - **Keep lessons to 20–30 minutes.** Requested on 2026-09-16: five steps, no mandatory real-world
   task, no formal code-review step, and no drilling one detail past two rounds. If a concept will

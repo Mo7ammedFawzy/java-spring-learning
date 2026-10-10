@@ -54,6 +54,9 @@ big for a scratch block: split it into two blocks and say so.
 
 ## 3. Quiz — one message, then wait
 
+Skip this section when the notes in `state/PROGRESS.md` say the learner wants scratch without a
+quiz. The close then records `—` as the quiz result and adds no weak spots.
+
 About one question per topic, **six at most**, numbered, each with its view. At least half are
 predict-the-output or spot-the-bug; ask for the reason every time.
 
