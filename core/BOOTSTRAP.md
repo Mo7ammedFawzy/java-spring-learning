@@ -27,7 +27,8 @@ the rules below run on what follows it (`scratch react hooks` → the `react` tr
 - **The argument is a topic ID or name** → the track whose curriculum contains it. If a name
   matches in more than one track, ask which.
 - **No argument, `next` or `review` alone** → the track of the lesson finished or left open most
-  recently. With no argument, report the **Current** line of every track before proposing one.
+  recently. With no argument, report the **Current** line of every track, each with its bar from
+  `progress.ps1`, before proposing one.
 
 Then read, in this order:
 
