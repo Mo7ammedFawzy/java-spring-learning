@@ -41,6 +41,14 @@ Last review: 2026-09-06 (topic 01).
 | 06a | `static` and class initialisation | 2026-10-04 | ok | Step 2: one of three right (static vs instance access); both re-tests passed with reasons. Step 3: all three reports fixed first try, no hints, told "per class" from "per object" in both directions; dropped `private` from `Ticket.next`. Drill: both base answers passed, both probes failed (first use of the main class; said static binding happens at runtime). |
 | 08a | List and Set, backing structure and Big O | 2026-10-07 | shaky | Sets landed, the headline list question did not. Step 2: Q1 wrong (`LinkedHashSet` read as `LinkedList`, `HashSet` order called known), re-test capped on "`contains` walks the links". Step 3: A and B first try, C after one level-1 hint, fixed by copying into an `ArrayList` rather than for-each. Drill: Q1 (`ArrayList` vs `LinkedList` middle insert) failed, still O(1) for `LinkedList` after the probe; Q2 passed (O(n²), `HashSet`, bucket reason), its *Then* got "slower" with no Big O. |
 
+## Scratched
+
+Fast batch pass only (`/scratch`): seen once, quizzed once, not practised. Still open for a full
+lesson.
+
+| # | Topic | Date | Quiz |
+|---|---|---|---|
+
 ## Weak spots to revisit
 
 - **Defaults to a mutable copy when exposing a collection, to avoid the throw.** Twice now framed

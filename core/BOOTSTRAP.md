@@ -19,7 +19,8 @@ curriculum declares an ID prefix, so a topic ID alone identifies its track. (The
 "Track A", "Track RB" headings inside a curriculum are sections of that one topic list, not
 tracks in this sense.)
 
-Read `state/PROGRESS.md` first, then pick the track:
+Read `state/PROGRESS.md` first, then pick the track. A leading `scratch` is set aside first and
+the rules below run on what follows it (`scratch react hooks` → the `react` track, scope `hooks`):
 
 - **The argument's first word names a track directory** (`react`, `react hooks`) → that track; the
   rest of the argument is the topic.
@@ -64,6 +65,7 @@ Codebase-free mode is a normal mode, not a degraded one. Never invent file paths
 | `next` | Give **the review reminder** below if it is due, then advance to the next topic (see **The next topic** below). |
 | `review` | Re-test the entries under **Weak spots to revisit**, skipping step 1. |
 | `review` + a topic | Quick review of that completed topic, skipping step 1: 2–3 questions from its `SUMMARY.md` and its open weak spots, verdicts, done. About five minutes. |
+| `scratch`, with or without a scope | A fast batch pass over several topics. Read `core/SCRATCH.md` and follow it in place of sections 4 and 5 below. From `core/METHODOLOGY.md` only the *Delivery* section applies. |
 | a topic not in the curriculum | Teach it with the same five steps, then add it to the track's `CURRICULUM.md` under the nearest section, with the next free ID. |
 
 **The next topic** is always chosen inside the active track. While `state/SOURCES.md` has an open
@@ -126,6 +128,7 @@ Then offer the next topic — do not start it.
    example is excellent teaching material, but it must be labelled as such, never presented as the
    pattern to copy.
 4. **Claiming a topic is covered when only step 1 ran.** A topic is complete when steps 1–5 have all
-   happened. Half-taught topics marked done are how a learner ends up confident and wrong.
+   happened. Half-taught topics marked done are how a learner ends up confident and wrong. A
+   scratched topic is listed under **Scratched**, never under **Completed**.
 5. **Padding the lesson back out.** The budget is the contract. Extra questions, a second exercise or
    an unearned real-world detour turn a 25-minute lesson into an hour, and the next one gets skipped.

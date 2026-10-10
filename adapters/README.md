@@ -14,8 +14,15 @@ If you ever find yourself explaining a teaching step inside an adapter, stop —
 | Claude Code | `adapters/claude/SKILL.md` | `~/.claude/skills/learn/SKILL.md` |
 | OpenCode | `adapters/opencode/learn.md` | `~/.config/opencode/commands/learn.md` |
 | Codex | `adapters/codex/SKILL.md` | `~/.codex/skills/learn/SKILL.md` |
+| Claude Code | `adapters/claude/scratch.md` | `~/.claude/skills/scratch/SKILL.md` |
+| OpenCode | `adapters/opencode/scratch.md` | `~/.config/opencode/commands/scratch.md` |
+| Codex | `adapters/codex/scratch.md` | `~/.codex/skills/scratch/SKILL.md` |
 
-Installed globally, so `/learn` resolves from **any** directory — including while working inside an
+The `scratch` adapters are the same pointer with one difference: they hand the bootstrap the
+argument `scratch <scope>`, which its dispatch table sends to `core/SCRATCH.md`. The manual and
+verify snippets below show `/learn` only; the installer handles both.
+
+Installed globally, so `/learn` and `/scratch` resolve from **any** directory — including while working inside an
 unrelated company repo.
 
 ## Install / reinstall

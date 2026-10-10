@@ -35,8 +35,18 @@ $openDsts = @(
     (Join-Path $HOME '.config\opencode\command\learn.md')
 )
 
+# /scratch - the fast batch pass. Same pointer shape, same bootstrap.
+$scratchClaudeDst = Join-Path $HOME '.claude\skills\scratch\SKILL.md'
+$scratchCodexDst  = Join-Path $HOME '.codex\skills\scratch\SKILL.md'
+$scratchOpenDsts = @(
+    (Join-Path $HOME '.config\opencode\commands\scratch.md'),
+    (Join-Path $HOME '.config\opencode\command\scratch.md')
+)
+
+$allDsts = @($claudeDst, $codexDst) + $openDsts + @($scratchClaudeDst, $scratchCodexDst) + $scratchOpenDsts
+
 if ($Uninstall) {
-    foreach ($f in @($claudeDst, $codexDst) + $openDsts) {
+    foreach ($f in $allDsts) {
         if (Test-Path $f) { Remove-Item $f -Force; Write-Host "removed  $f" }
     }
     Write-Host "`nUninstalled. This repo was not touched." -ForegroundColor Green
@@ -66,11 +76,16 @@ if (-not $Check) {
     foreach ($d in $openDsts) {
         Install-Adapter -Source (Join-Path $repo 'adapters\opencode\learn.md') -Dest $d
     }
+    Install-Adapter -Source (Join-Path $repo 'adapters\claude\scratch.md') -Dest $scratchClaudeDst
+    Install-Adapter -Source (Join-Path $repo 'adapters\codex\scratch.md')  -Dest $scratchCodexDst
+    foreach ($d in $scratchOpenDsts) {
+        Install-Adapter -Source (Join-Path $repo 'adapters\opencode\scratch.md') -Dest $d
+    }
 
     # --- verify the installed copies actually point back here ---
     Write-Host ""
     $bad = @()
-    foreach ($f in @($claudeDst, $codexDst) + $openDsts) {
+    foreach ($f in $allDsts) {
         if (-not (Select-String -Path $f -SimpleMatch "$repoFwd/core/BOOTSTRAP.md" -Quiet)) { $bad += $f }
     }
     if ($bad) {
@@ -109,4 +124,4 @@ if (Test-Path $labRoot) {
     Write-Host "  lab      nama-erp not present - lessons run in codebase-free mode (this is fine)"
 }
 
-Write-Host "`nDone. Start a new agent session and type /learn" -ForegroundColor Green
+Write-Host "`nDone. Start a new agent session and type /learn or /scratch" -ForegroundColor Green

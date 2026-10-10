@@ -22,6 +22,7 @@ Read `core/BOOTSTRAP.md` and follow it exactly. `<learning-home>` is this reposi
 | `core/BOOTSTRAP.md` | Session-start protocol and dispatch — the entry point |
 | `core/MODE-BOUNDARY.md` | Work Mode vs Learning Mode |
 | `core/METHODOLOGY.md` | The five steps, their gates and time budget, the strict-gate hint ladder |
+| `core/SCRATCH.md` | The `/scratch` contract — a fast batch pass over several topics, one quiz at the end, no exercise |
 | `core/<track>/CURRICULUM.md` | A track's topic list. Declares the track's topic-ID prefix (`java`: none, `react`: `R`) |
 | `core/<track>/INTERVIEW-BANK.md` | Interview questions per topic of that track |
 | `labs/` | Optional, pluggable real-codebase profiles. `labs/INDEX.md` maps a working directory to a profile; no match means codebase-free mode |
@@ -66,7 +67,7 @@ after editing an adapter's description, since the installed copy is what an agen
 Create `core/<name>/CURRICULUM.md` (declare an ID prefix no other track uses, and link the official
 documentation each topic is taught from) and `core/<name>/INTERVIEW-BANK.md`, add a `Current` line
 to `state/PROGRESS.md`, a run section to `playground/README.md`, and the technology's name to the
-three adapter descriptions. Nothing in the shared `core/` files changes.
+adapter descriptions (`learn` and `scratch`, for each agent). Nothing in the shared `core/` files changes.
 
 ## Arabic text output
 

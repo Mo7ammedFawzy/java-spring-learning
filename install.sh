@@ -29,8 +29,16 @@ CODEX_DST="$HOME/.codex/skills/learn/SKILL.md"
 # ~25-line pointer so /learn resolves either way. Duplicates a pointer, never content.
 OPEN_DSTS=("$HOME/.config/opencode/commands/learn.md" "$HOME/.config/opencode/command/learn.md")
 
+# /scratch — the fast batch pass. Same pointer shape, same bootstrap.
+SCRATCH_CLAUDE_DST="$HOME/.claude/skills/scratch/SKILL.md"
+SCRATCH_CODEX_DST="$HOME/.codex/skills/scratch/SKILL.md"
+SCRATCH_OPEN_DSTS=("$HOME/.config/opencode/commands/scratch.md" "$HOME/.config/opencode/command/scratch.md")
+
+ALL_DSTS=("$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"
+          "$SCRATCH_CLAUDE_DST" "$SCRATCH_CODEX_DST" "${SCRATCH_OPEN_DSTS[@]}")
+
 if [ "${1:-}" = "--uninstall" ]; then
-  for f in "$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"; do
+  for f in "${ALL_DSTS[@]}"; do
     [ -f "$f" ] && rm -f "$f" && echo "removed  $f"
   done
   echo; echo "Uninstalled. This repo was not touched."
@@ -55,11 +63,16 @@ if [ "${1:-}" != "--check" ]; then
   for d in "${OPEN_DSTS[@]}"; do
     install_adapter "$REPO/adapters/opencode/learn.md" "$d"
   done
+  install_adapter "$REPO/adapters/claude/scratch.md" "$SCRATCH_CLAUDE_DST"
+  install_adapter "$REPO/adapters/codex/scratch.md"  "$SCRATCH_CODEX_DST"
+  for d in "${SCRATCH_OPEN_DSTS[@]}"; do
+    install_adapter "$REPO/adapters/opencode/scratch.md" "$d"
+  done
 
   # --- verify the installed copies actually point back here ---
   echo
   fail=0
-  for f in "$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"; do
+  for f in "${ALL_DSTS[@]}"; do
     grep -qF "$REPO/core/BOOTSTRAP.md" "$f" || { echo "FAILED - does not point at this repo: $f" >&2; fail=1; }
   done
   [ "$fail" -eq 0 ] || exit 1
@@ -93,4 +106,4 @@ else
 fi
 
 echo
-echo "Done. Start a new agent session and type /learn"
+echo "Done. Start a new agent session and type /learn or /scratch"

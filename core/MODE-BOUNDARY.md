@@ -15,9 +15,11 @@ withhold answers, or turn a task into an exercise.
 
 Learning Mode starts only on:
 
-- the explicit learning command (`/learn`, with or without a topic), or
+- the explicit learning command (`/learn`, with or without a topic),
+- the explicit fast-pass command (`/scratch`, with or without a scope), or
 - an unmistakable request to be taught — "teach me generics", "quiz me on Spring beans", "teach me
-  React hooks", "start a lesson", "continue my lesson", "test me on X".
+  React hooks", "start a lesson", "continue my lesson", "test me on X", "give me a crash course on
+  collections".
 
 That is the whole list. In particular, these do **not** enter Learning Mode:
 
