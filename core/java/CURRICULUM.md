@@ -1,5 +1,7 @@
 # Curriculum — Java + Spring Boot to interview strength
 
+**ID prefix: none.** Topics are bare numbers, `01`, `02`, …
+
 Ordered **Java first**: the language before any framework, because Spring questions in interviews
 bottom out in Java, and a candidate strong in Java can reason about a framework they have not
 memorised. The reverse is not true.
@@ -14,8 +16,8 @@ free number but sit in the row where they belong. Jumping is allowed — `/learn
 topic's prerequisites are unmet the lesson says so first. Where this ordering deliberately places a
 topic ahead of something it leans on, the row carries an explicit *prereq* note.
 
-Codebase anchors for each topic live in `references/codebase-map.md`. Where a topic has existing
-repo documentation, it is named here and becomes the assigned reading for step 1.
+Codebase anchors for each topic live in the active lab profile, if there is one. Where a topic has
+existing repo documentation, it is named here and becomes the assigned reading for step 1.
 
 Legend: **★** asked in almost every interview · **☆** asked at senior level
 

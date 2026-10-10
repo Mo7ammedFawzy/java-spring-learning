@@ -1,6 +1,6 @@
-# Interview bank
+# Interview bank — Java + Spring Boot
 
-Questions for the interview drill (step 5), keyed to `core/CURRICULUM.md` topic numbers. Each entry is written as the
+Questions for the interview drill (step 5), keyed to `core/java/CURRICULUM.md` topic numbers. Each entry is written as the
 interviewer sees it:
 
 - **Q** — the question as asked

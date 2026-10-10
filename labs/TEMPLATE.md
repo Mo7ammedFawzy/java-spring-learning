@@ -1,6 +1,7 @@
 ---
 lab: <short-name>
 applies-to: <absolute path of the codebase's root working directory>
+track: <the directory name under core/ this lab serves, e.g. java>
 stack: <language, framework and major library versions>
 ---
 

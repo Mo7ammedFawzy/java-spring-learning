@@ -81,7 +81,7 @@ One view per idea, never a wall of them, and each one sits next to the short lin
 supports. Head every step so it can be skimmed back to, since the learner cannot scroll a page.
 
 Two things still leave the console, and both are files, not surfaces: step 3's exercise code in
-the exercise directory `playground/README.md` names, because it has to compile and run, and step
+the exercise directory `playground/README.md` names, because it has to run, and step
 4's `SUMMARY.md`, because it is the offline revision artefact.
 
 ---
@@ -93,9 +93,11 @@ a new topic and a resumed one alike. A `review` session skips it: it is all re-t
 a minute; it is not a sixth step and has no re-test round.
 
 - **Source.** An open entry under **Weak spots to revisit** in `state/PROGRESS.md`, asked flat in
-  that entry's own "Re-test" framing. Pick one that touches today's topic first, else the one
-  re-tested least recently. With no open entry, ask one question from the `SUMMARY.md` of the most
-  recently completed topic.
+  that entry's own "Re-test" framing. Use only entries from today's track, plus the cross-topic
+  ones about the learner — a question from another track is a context switch, not a warm-up. Pick
+  one that touches today's topic first, else the one re-tested least recently. With no open entry,
+  ask one question from the `SUMMARY.md` of the most recently completed topic in that track; with
+  none of those either, skip the warm-up.
 - **Shape.** One question with its view, the reason asked for, then wait.
 - **Verdict.** One line at the top of the next message, above the step it opens: right → `Held`
   goes up by one; wrong → the correct answer in one line, entry stays open. No re-teach here — that
@@ -125,7 +127,14 @@ Contains:
 - **One primary source** — the single most authoritative place the rule is written down: the
   language specification chapter, the class's Javadoc, or the framework reference section. One
   line, last in the step. Name the document and the chapter or class by title; give a section
-  number only if you are certain of it — a wrong citation is worse than none.
+  number only if you are certain of it — a wrong citation is worse than none. Where the curriculum
+  row ends with a *Read:* link, that page is the primary source: teach from it and cite it.
+
+**Bridge from what the learner already knows.** If `state/LEARNER.md` lists an equivalent of
+today's concept at production strength — the curriculum row may name it — open from that
+equivalent in one or two lines and spend the step on where the two differ. Do not re-explain the
+part that transfers. The profile is self-reported: if step 2 shows the equivalent is not as solid
+as claimed, teach it plainly and record the gap as a weak spot.
 
 Does **not** contain: questions on this concept, exercises, or a preview of the answer — with one
 exception:
@@ -235,7 +244,7 @@ they are.
 
 ## Step 5 — Interview drill
 
-One or two high-value questions from `core/INTERVIEW-BANK.md` for that topic — or an open row in
+One or two high-value questions from the track's `core/<track>/INTERVIEW-BANK.md` for that topic — or an open row in
 `state/SOURCES.md` mapped to it, which is preferred when one exists. Ask them **first** and
 wait — this is a short interview drill, not a reading.
 

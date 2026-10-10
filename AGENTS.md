@@ -1,7 +1,8 @@
 # Agent instructions for this repository
 
-This repo is a **Learning System**: a Java + Spring Boot mentoring and interview-coaching
-methodology, shared across agents. It contains no application code.
+This repo is a **Learning System**: a mentoring and interview-coaching methodology, shared across
+agents, with one **track** per technology — currently Java + Spring Boot (`core/java/`) and React
+(`core/react/`). It contains no application code.
 
 ## Default behaviour
 
@@ -21,11 +22,12 @@ Read `core/BOOTSTRAP.md` and follow it exactly. `<learning-home>` is this reposi
 | `core/BOOTSTRAP.md` | Session-start protocol and dispatch — the entry point |
 | `core/MODE-BOUNDARY.md` | Work Mode vs Learning Mode |
 | `core/METHODOLOGY.md` | The five steps, their gates and time budget, the strict-gate hint ladder |
-| `core/CURRICULUM.md` | Topic list |
-| `core/INTERVIEW-BANK.md` | Interview questions per topic |
+| `core/<track>/CURRICULUM.md` | A track's topic list. Declares the track's topic-ID prefix (`java`: none, `react`: `R`) |
+| `core/<track>/INTERVIEW-BANK.md` | Interview questions per topic of that track |
 | `labs/` | Optional, pluggable real-codebase profiles. `labs/INDEX.md` maps a working directory to a profile; no match means codebase-free mode |
-| `state/PROGRESS.md` | Learner state |
-| `state/SOURCES.md` | Priority checklist: every question in the `sources/` PDFs, mapped to a topic |
+| `state/PROGRESS.md` | Learner state — one `Current` line per track |
+| `state/LEARNER.md` | What the learner already knows, self-reported. Lessons bridge from it and never edit it |
+| `state/SOURCES.md` | Priority checklist: every question in the `sources/` PDFs, mapped to a topic. Gates the `java` track only |
 | `sources/` | Interview-prep PDFs the learner wants finished first |
 | `playground/` | Summary cards per lesson (tracked). `playground/README.md` names where exercise code goes and how to run it |
 | `adapters/` | Thin per-agent entry points — pointers only, never methodology |
@@ -56,7 +58,15 @@ grep -rniE 'claude|opencode|codex|anthropic|8080|namasoft|\bnama\b|dev-docs|\bsk
 ./install.sh               # same, Git Bash / macOS / Linux (--uninstall)
 ```
 
-Re-run the installer after moving the repo — the adapters are absolute pointers back to it.
+Re-run the installer after moving the repo — the adapters are absolute pointers back to it — and
+after editing an adapter's description, since the installed copy is what an agent reads.
+
+## Adding a track
+
+Create `core/<name>/CURRICULUM.md` (declare an ID prefix no other track uses, and link the official
+documentation each topic is taught from) and `core/<name>/INTERVIEW-BANK.md`, add a `Current` line
+to `state/PROGRESS.md`, a run section to `playground/README.md`, and the technology's name to the
+three adapter descriptions. Nothing in the shared `core/` files changes.
 
 ## Arabic text output
 

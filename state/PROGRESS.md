@@ -17,7 +17,11 @@ Each lesson's warm-up re-tests one entry; two holds in a row closes it.
 
 ## Current
 
-Topic: 08b — Maps: `HashMap` internals, `LinkedHashMap`, `TreeMap`, `Hashtable` (SOURCES rows 9, 10). Step: not started. (06b — `final`, nested classes — has no source rows and waits behind the PDFs.)
+One line per track; a lesson changes only its own track's line.
+
+**java** — Topic: 08b — Maps: `HashMap` internals, `LinkedHashMap`, `TreeMap`, `Hashtable` (SOURCES rows 9, 10). Step: not started. (06b — `final`, nested classes — has no source rows and waits behind the PDFs.)
+
+**react** — Topic: R01 — JSX. Step: not started.
 
 Last review: 2026-09-06 (topic 01).
 

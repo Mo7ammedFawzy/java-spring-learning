@@ -1,6 +1,7 @@
 ---
 lab: nama-erp
 applies-to: C:\Projects\8080
+track: java
 stack: Java 21, Spring Boot 3.5.8, Spring 6.2.14, Hibernate 6.6.38, Maven multi-module monorepo
 ---
 

@@ -1,7 +1,8 @@
 # Learning System
 
-A Java + Spring Boot mentoring and interview-coaching system, shared across coding agents. One
-methodology, one curriculum, one progress file — usable from Claude Code, OpenCode and Codex, with
+A mentoring and interview-coaching system, shared across coding agents, with one track per
+technology: **Java + Spring Boot** and **React** (taught by contrast with Vue, from the official
+docs). One methodology, one curriculum per track, one progress file — usable from Claude Code, OpenCode and Codex, with
 real codebases plugged in as optional "labs".
 
 Independent of any company codebase: delete `labs/` and the system still works.
@@ -9,8 +10,10 @@ Independent of any company codebase: delete `labs/` and the system still works.
 ## Using it
 
 ```
-/learn                 resume where you left off, or start topic 01
-/learn generics        jump to a topic by name or number
+/learn                 show where you are in each track, and resume the latest
+/learn generics        jump to a topic by name or ID
+/learn react           resume the React track (any track: its folder name under core/)
+/learn react hooks     jump to a topic inside a named track
 /learn next            advance to the next uncompleted topic
 /learn review          re-test only the things you were shaky on
 ```
@@ -38,7 +41,7 @@ In the terminal. A step is delivered in the console and answered in the console 
 snippets and small ASCII sketches rather than paragraphs, because a step cannot be scrolled back to.
 
 Two things are files rather than messages: step 3's exercise code in the directory
-`playground/README.md` names, because it compiles and runs, and the step-4 summary card in
+`playground/README.md` names, because it runs, and the step-4 summary card in
 `SUMMARY.md`, because it is what you revise from offline.
 
 Two rules keep the budget honest. A wrong answer is re-taught and re-tested **once**; if it fails
@@ -53,10 +56,15 @@ core/            the shared source of truth — agent-neutral, codebase-neutral
   BOOTSTRAP.md     session-start protocol and dispatch (the entry point)
   MODE-BOUNDARY.md Work Mode vs Learning Mode
   METHODOLOGY.md   the five steps, their gates and budget, the hint ladder
-  CURRICULUM.md    43 topics, Java-heavy first
-  INTERVIEW-BANK.md questions with shallow / passing / follow-up answers
+  java/            the Java + Spring Boot track
+    CURRICULUM.md    46 topics, Java before any framework
+    INTERVIEW-BANK.md questions with shallow / passing / follow-up answers
+  react/           the React track — topic IDs R01…, each linked to its official docs page
+    CURRICULUM.md    41 topics: core, hooks, TypeScript, patterns, libraries, Next.js, build
+    INTERVIEW-BANK.md
 labs/            optional pluggable codebase profiles (INDEX, TEMPLATE, one file per codebase)
-state/PROGRESS.md your progress, weak spots, and what to revisit
+state/PROGRESS.md your progress per track, weak spots, and what to revisit
+state/LEARNER.md  what you already know — lessons build on it instead of re-teaching it
 playground/      your summary cards; its README names where exercise code goes
 adapters/        thin per-agent entry points — pointers only
 ```
@@ -88,12 +96,12 @@ Get this repo onto the machine, then run the installer from inside it:
 ```
 
 It detects where the repo lives, writes the adapters into the global agent config directories with
-that path substituted, verifies they resolve, and reports whether `java`, `claude`, `opencode`
+that path substituted, verifies they resolve, and reports whether `java`, `node`, `claude`, `opencode`
 and `codex` are present. Re-run it any time you move the repo. `--uninstall` / `-Uninstall` removes the
 adapters and touches nothing else.
 
-**Requirements:** Claude Code, OpenCode and/or Codex, plus a JDK 21+ if you want to run the exercises
-(`java`, `javac`, `jshell`). Nothing else — the system is plain markdown.
+**Requirements:** Claude Code, OpenCode and/or Codex, plus a JDK 21+ for the Java exercises
+(`java`, `javac`, `jshell`) and Node.js 20+ for the React ones. Nothing else — the system is plain markdown.
 
 The adapters are pointers back to this repo, so keep the repo where you installed it from.
 Details and manual steps: `adapters/README.md`.
@@ -104,7 +112,8 @@ A lab is a real codebase a lesson can draw on for its optional real-world detour
 maps a working directory to a profile; if none matches, lessons run in **codebase-free mode** with
 self-contained examples, and say so. Add one by copying `labs/TEMPLATE.md`.
 
-Currently: `nama-erp` (Java 21 / Spring Boot 3.5 / Hibernate 6 ERP monorepo at `C:\Projects\8080`).
+Currently: `nama-erp` (Java 21 / Spring Boot 3.5 / Hibernate 6 ERP monorepo at `C:\Projects\8080`),
+serving the Java track. The React track has no lab and runs codebase-free.
 
 ## Maintenance
 

@@ -68,7 +68,12 @@ echo "Environment:"
 if command -v java >/dev/null 2>&1; then
   echo "  java     $(java -version 2>&1 | head -1)"
 else
-  echo "  java     NOT FOUND - install a JDK (21+) or exercises cannot be run"
+  echo "  java     NOT FOUND - install a JDK (21+) or Java exercises cannot be run"
+fi
+if command -v node >/dev/null 2>&1; then
+  echo "  node     $(node --version)"
+else
+  echo "  node     NOT FOUND - install Node.js (20+) or React exercises cannot be run"
 fi
 command -v claude   >/dev/null 2>&1 && echo "  claude   found"   || echo "  claude   not on PATH"
 command -v opencode >/dev/null 2>&1 && echo "  opencode found"   || echo "  opencode not on PATH"

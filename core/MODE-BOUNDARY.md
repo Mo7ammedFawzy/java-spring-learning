@@ -16,20 +16,21 @@ withhold answers, or turn a task into an exercise.
 Learning Mode starts only on:
 
 - the explicit learning command (`/learn`, with or without a topic), or
-- an unmistakable request to be taught — "teach me generics", "quiz me on Spring beans", "start a
-  lesson", "continue my lesson", "test me on X".
+- an unmistakable request to be taught — "teach me generics", "quiz me on Spring beans", "teach me
+  React hooks", "start a lesson", "continue my lesson", "test me on X".
 
 That is the whole list. In particular, these do **not** enter Learning Mode:
 
 | Looks like learning, is actually work |
 |---|
 | "Why does this throw a `NullPointerException`?" |
+| "Why does this component re-render twice?" |
 | "Explain what this class does." |
 | "What's the difference between these two methods in this file?" |
 | "Review my changes." |
 | "How should I implement this feature?" |
 
-A question that merely concerns Java, Spring, or a concept in the curriculum is still work. **If in
+A question that merely concerns Java, Spring, React, or a concept in a curriculum is still work. **If in
 doubt, the user is working, not learning.**
 
 ## While a lesson is running
@@ -48,8 +49,11 @@ personality and does not carry into the next session. Only `state/PROGRESS.md` p
 ## Write boundary
 
 A lesson may write only inside the learning repo, plus the exercise directory `playground/README.md`
-names if that lies outside it — `playground/` for exercise code,
-`state/PROGRESS.md` for progress, and `core/CURRICULUM.md` when adding a newly requested topic.
+names if that lies outside it — `playground/` for exercise code and summary cards,
+`state/PROGRESS.md` and `state/SOURCES.md` for progress, and the active track's
+`core/<track>/CURRICULUM.md` and `core/<track>/INTERVIEW-BANK.md` when adding a newly requested
+topic or a new question. `state/LEARNER.md` is the learner's own statement; a lesson reads it and
+never edits it.
 
 Any codebase a lab profile points at is **read-only teaching material**. A lesson never edits it,
 never refactors it, and never sets an exercise that implies editing it.

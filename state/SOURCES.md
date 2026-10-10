@@ -1,10 +1,11 @@
 # Sources — priority checklist
 
-The PDFs in `sources/`, one row per numbered question, each mapped to a curriculum topic.
+The PDFs in `sources/`, one row per numbered question, each mapped to a curriculum topic. Every row
+here maps to the **java** track, so this file gates the next topic in that track only.
 
 How this file sets the next topic and when a row is ticked is defined in `core/BOOTSTRAP.md`
 (§3 *The next topic*, §5 *Close*). A new question goes in as a row with the topic it belongs to;
-if no topic fits, add one to `core/CURRICULUM.md` first. The PDF answers are shallow definitions —
+if no topic fits, add one to that track's `CURRICULUM.md` first. The PDF answers are shallow definitions —
 the lesson teaches the mechanism, the PDF supplies the question.
 
 ## Java interview Question and Answers.pdf

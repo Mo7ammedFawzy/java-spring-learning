@@ -80,10 +80,15 @@ Write-Host "verified: all adapters resolve to $repoFwd/core/BOOTSTRAP.md" -Foreg
 Write-Host "`nEnvironment:"
 $java = Get-Command java -ErrorAction SilentlyContinue
 if ($java) {
-    $v = (& java -version 2>&1 | Select-Object -First 1)
+    $v = (cmd /c "java -version 2>&1" | Select-Object -First 1)
     Write-Host "  java     $v"
 } else {
-    Write-Host "  java     NOT FOUND - install a JDK (21+) or exercises cannot be run" -ForegroundColor Yellow
+    Write-Host "  java     NOT FOUND - install a JDK (21+) or Java exercises cannot be run" -ForegroundColor Yellow
+}
+if (Get-Command node -ErrorAction SilentlyContinue) {
+    Write-Host "  node     $(& node --version)"
+} else {
+    Write-Host "  node     NOT FOUND - install Node.js (20+) or React exercises cannot be run" -ForegroundColor Yellow
 }
 if (Get-Command claude   -ErrorAction SilentlyContinue) { Write-Host "  claude   found" } else { Write-Host "  claude   not on PATH" -ForegroundColor Yellow }
 if (Get-Command opencode -ErrorAction SilentlyContinue) { Write-Host "  opencode found" } else { Write-Host "  opencode not on PATH" -ForegroundColor Yellow }

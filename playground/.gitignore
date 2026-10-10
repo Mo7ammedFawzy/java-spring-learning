@@ -3,3 +3,5 @@
 !*/
 !SUMMARY.md
 !README.md
+# A sandbox holds node_modules, whose README.md files the rule above would otherwise re-include.
+/*-sandbox/

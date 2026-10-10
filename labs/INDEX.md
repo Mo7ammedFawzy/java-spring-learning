@@ -4,12 +4,12 @@ A **lab** is a real codebase a lesson can draw on for its optional real-world de
 optional and pluggable: the core methodology and curriculum know nothing about any of them.
 
 At session start the agent matches the user's current working directory against the `applies-to`
-values below — but it loads the matching profile only if it actually takes the detour, which most
+values below, and the lesson's track against `Track` — a lab serves one track — but it loads the matching profile only if it actually takes the detour, which most
 lessons do not.
 
-| Profile | applies-to (working directory) | Language / stack |
-|---|---|---|
-| `nama-erp.md` | `C:\Projects\8080` | Java 21, Spring Boot 3.5, Hibernate 6, Maven monorepo |
+| Profile | applies-to (working directory) | Track | Language / stack |
+|---|---|---|---|
+| `nama-erp.md` | `C:\Projects\8080` | `java` | Java 21, Spring Boot 3.5, Hibernate 6, Maven monorepo |
 
 ## No match?
 
