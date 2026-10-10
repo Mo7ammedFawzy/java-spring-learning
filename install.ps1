@@ -15,7 +15,10 @@
 #>
 [CmdletBinding()]
 param(
-    [switch]$Uninstall
+    [switch]$Uninstall,
+    # Installs nothing: only runs the environment report, so check.sh can prove the script still
+    # runs to the end.
+    [switch]$Check
 )
 
 $ErrorActionPreference = 'Stop'
@@ -57,24 +60,29 @@ function Install-Adapter {
 Write-Host "Learning System" -ForegroundColor Cyan
 Write-Host "repo: $repoFwd`n"
 
-Install-Adapter -Source (Join-Path $repo 'adapters\claude\SKILL.md')   -Dest $claudeDst
-Install-Adapter -Source (Join-Path $repo 'adapters\codex\SKILL.md')    -Dest $codexDst
-foreach ($d in $openDsts) {
-    Install-Adapter -Source (Join-Path $repo 'adapters\opencode\learn.md') -Dest $d
-}
+if (-not $Check) {
+    Install-Adapter -Source (Join-Path $repo 'adapters\claude\SKILL.md')   -Dest $claudeDst
+    Install-Adapter -Source (Join-Path $repo 'adapters\codex\SKILL.md')    -Dest $codexDst
+    foreach ($d in $openDsts) {
+        Install-Adapter -Source (Join-Path $repo 'adapters\opencode\learn.md') -Dest $d
+    }
 
-# --- verify the installed copies actually point back here ---
-Write-Host ""
-$bad = @()
-foreach ($f in @($claudeDst, $codexDst) + $openDsts) {
-    if (-not (Select-String -Path $f -SimpleMatch "$repoFwd/core/BOOTSTRAP.md" -Quiet)) { $bad += $f }
+    # --- verify the installed copies actually point back here ---
+    Write-Host ""
+    $bad = @()
+    foreach ($f in @($claudeDst, $codexDst) + $openDsts) {
+        if (-not (Select-String -Path $f -SimpleMatch "$repoFwd/core/BOOTSTRAP.md" -Quiet)) { $bad += $f }
+    }
+    if ($bad) {
+        Write-Host "FAILED - these do not point at this repo:" -ForegroundColor Red
+        $bad | ForEach-Object { Write-Host "  $_" }
+        exit 1
+    }
+    Write-Host "verified: all adapters resolve to $repoFwd/core/BOOTSTRAP.md" -ForegroundColor Green
+
+    # check.sh runs on every commit from here on
+    if (Get-Command git -ErrorAction SilentlyContinue) { git -C $repo config core.hooksPath .githooks }
 }
-if ($bad) {
-    Write-Host "FAILED - these do not point at this repo:" -ForegroundColor Red
-    $bad | ForEach-Object { Write-Host "  $_" }
-    exit 1
-}
-Write-Host "verified: all adapters resolve to $repoFwd/core/BOOTSTRAP.md" -ForegroundColor Green
 
 # --- environment report (informational, never fatal) ---
 Write-Host "`nEnvironment:"

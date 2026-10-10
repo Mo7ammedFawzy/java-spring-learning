@@ -5,7 +5,9 @@
 # global config directories, substituting the detected path. Nothing in this repo is
 # modified, so the same checkout installs correctly on any machine at any path.
 #
-# Safe to re-run.  Usage:  ./install.sh  [--uninstall]
+# Safe to re-run.  Usage:  ./install.sh  [--uninstall | --check]
+# --check installs nothing: it only runs the environment report, so check.sh can prove the script
+# still runs to the end.
 #
 # The adapters are pointers back to this repo — learning content is never copied — so the
 # repo must stay where it is after installing. Move it, and just re-run this script.
@@ -47,20 +49,25 @@ echo "Learning System"
 echo "repo: $REPO"
 echo
 
-install_adapter "$REPO/adapters/claude/SKILL.md" "$CLAUDE_DST"
-install_adapter "$REPO/adapters/codex/SKILL.md"  "$CODEX_DST"
-for d in "${OPEN_DSTS[@]}"; do
-  install_adapter "$REPO/adapters/opencode/learn.md" "$d"
-done
+if [ "${1:-}" != "--check" ]; then
+  install_adapter "$REPO/adapters/claude/SKILL.md" "$CLAUDE_DST"
+  install_adapter "$REPO/adapters/codex/SKILL.md"  "$CODEX_DST"
+  for d in "${OPEN_DSTS[@]}"; do
+    install_adapter "$REPO/adapters/opencode/learn.md" "$d"
+  done
 
-# --- verify the installed copies actually point back here ---
-echo
-fail=0
-for f in "$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"; do
-  grep -qF "$REPO/core/BOOTSTRAP.md" "$f" || { echo "FAILED - does not point at this repo: $f" >&2; fail=1; }
-done
-[ "$fail" -eq 0 ] || exit 1
-echo "verified: all adapters resolve to $REPO/core/BOOTSTRAP.md"
+  # --- verify the installed copies actually point back here ---
+  echo
+  fail=0
+  for f in "$CLAUDE_DST" "$CODEX_DST" "${OPEN_DSTS[@]}"; do
+    grep -qF "$REPO/core/BOOTSTRAP.md" "$f" || { echo "FAILED - does not point at this repo: $f" >&2; fail=1; }
+  done
+  [ "$fail" -eq 0 ] || exit 1
+  echo "verified: all adapters resolve to $REPO/core/BOOTSTRAP.md"
+
+  # check.sh runs on every commit from here on
+  git -C "$REPO" config core.hooksPath .githooks
+fi
 
 # --- environment report (informational, never fatal) ---
 echo

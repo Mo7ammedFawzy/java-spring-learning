@@ -6,6 +6,9 @@ Scratch space for Learning Mode exercises. One directory per lesson, named by to
 Only `SUMMARY.md` cards and this file are committed — the `.gitignore` here ignores everything
 else, so scratch code can be deleted freely.
 
+Anything that is not a lesson (a comparison page, a diagram, a one-off experiment) goes in
+`playground/_scratch/`. It is not tracked, so tell the learner that when you create a file there.
+
 ## Where exercise code goes — Java
 
 **Step-3 exercise code goes in the IDE's scratches, not here** (asked for on 2026-10-01), so it

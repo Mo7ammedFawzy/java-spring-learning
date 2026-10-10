@@ -37,7 +37,7 @@ Read `core/BOOTSTRAP.md` and follow it exactly. `<learning-home>` is this reposi
 1. **`core/` names no agent and no company codebase.** Not "Claude", not "OpenCode", not "Codex",
    not a skill or a slash command, and no path into a real project. Everything specific to a
    codebase belongs in a `labs/` profile; everything specific to an agent belongs in `adapters/`.
-   The grep test for this is under *Commands* below — run it after editing `core/`.
+   `./check.sh` enforces this.
 2. **Methodology exists in exactly one place.** If you find yourself copying a rule from `core/`
    into an adapter, stop: the adapter is supposed to be a pointer, and duplication is how two agents
    start behaving differently.
@@ -47,8 +47,8 @@ Read `core/BOOTSTRAP.md` and follow it exactly. `<learning-home>` is this reposi
 There is no build, no test suite and no application code — the system is plain markdown.
 
 ```bash
-# Invariant check: core/ must name no agent and no company codebase. Must return nothing.
-grep -rniE 'claude|opencode|codex|anthropic|8080|namasoft|\bnama\b|dev-docs|\bskill\b' core/
+./check.sh                 # invariant 1, stale paths, topic IDs vs interview banks, installers. Runs on every commit
+./check.sh --links         # the same, plus every documentation link resolves. Run after editing a curriculum
 ```
 
 ```powershell

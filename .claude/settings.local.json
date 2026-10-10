@@ -15,7 +15,12 @@
     "to-questionnaire": "off",
     "triage": "off",
     "wait-what": "off",
-    "wayfinder": "off"
+    "wayfinder": "off",
+    "ag-dev": "off",
+    "ag-update": "off",
+    "nuxt-ui": "off",
+    "design-taste-frontend": "off",
+    "ui-ux-pro-max": "off"
   },
   "enabledPlugins": {
     "ui-ux-pro-max@ui-ux-pro-max-skill": false

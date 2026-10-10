@@ -76,13 +76,8 @@ Agent-specific plumbing lives in `adapters/`; codebase-specific facts live in `l
 reads the same `core/`, which is why they cannot drift apart. Project rules follow the same shape:
 `AGENTS.md` is the one rule file, and `CLAUDE.md` only imports it.
 
-The grep test that enforces it — run after editing `core/`:
-
-```bash
-grep -rniE 'claude|opencode|codex|anthropic|8080|namasoft|\bnama\b|dev-docs|\bskill\b' core/
-```
-
-It must return nothing.
+`./check.sh` enforces it, along with the consistency of topic IDs, interview banks and paths. The
+installer wires it in as a pre-commit hook.
 
 ## Install
 
