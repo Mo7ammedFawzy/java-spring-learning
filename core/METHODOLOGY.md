@@ -122,6 +122,10 @@ Contains:
 - **The failure it prevents** — what breaks in real code when someone does not know this. This is
   what makes it stick.
 - **The boundary** — where the rule stops applying. Interviewers probe exactly here.
+- **One primary source** — the single most authoritative place the rule is written down: the
+  language specification chapter, the class's Javadoc, or the framework reference section. One
+  line, last in the step. Name the document and the chapter or class by title; give a section
+  number only if you are certain of it — a wrong citation is worse than none.
 
 Does **not** contain: questions on this concept, exercises, or a preview of the answer — with one
 exception:
@@ -219,6 +223,7 @@ About 25 lines at most:
 **Classic trap:** a 1–4 line snippet, and what it really does
 **Interview answer (30 s):** 2–3 sentences, the passing version
 **My mistake:** what I got wrong in this lesson → the correction
+**Source:** the primary source named in step 1
 ```
 
 If nothing was missed, "My mistake" says so in one line. Cards written before this format stay as
