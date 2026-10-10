@@ -1,5 +1,4 @@
 {
-  "outputStyle": "Learning",
   "skillOverrides": {
     "codebase-design": "off",
     "diagnosing-bugs": "off",
@@ -24,5 +23,12 @@
   },
   "enabledPlugins": {
     "ui-ux-pro-max@ui-ux-pro-max-skill": false
+  },
+  "outputStyle": "Learning",
+  "permissions": {
+    "allow": [
+      "Bash(./check.sh)",
+      "Bash(rtk git *)"
+    ]
   }
 }
